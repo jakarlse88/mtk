@@ -14,8 +14,7 @@ export default class Footer extends Component {
               <Card
                 darkStyle={true}
                 cardTitle="Kontakt oss"
-                cardLead="Moss Taekwondo Klubb"
-                cardText="Rabekkgata 5
+                cardText="Rabekkgata 5 
                 N-1523, Moss
                 Telefon: xx xx xx xx (leder)
                 Epost: leder(@)moss-tkd.no
@@ -25,20 +24,14 @@ export default class Footer extends Component {
             <div className="col-12 col-sm-6 col-lg-4">
               <Card
                 darkStyle={true}
-                cardTitle="Kontakt oss"
-                cardLead="Moss Taekwondo Klubb"
-                cardText="Rabekkgata 5
-                N-1523, Moss
-                Telefon: xx xx xx xx (leder)
-                Epost: leder(@)moss-tkd.no
-                Kasserer: kasserer(@)moss-tkd.no"
+                cardTitle="Begynne å trene?"
+                cardText="Vi har løpende inntak av nye medlemmer! Se våre treningstider, eller kontakt oss om du har spørsmål."
               />
             </div>
             <div className="col-12 col-sm-6 col-lg-4">
               <Card
                 darkStyle={true}
-                cardTitle="Kontakt oss"
-                cardLead="Moss Taekwondo Klubb"
+                cardTitle="Begynne å trene?"
                 cardText="Rabekkgata 5
                 N-1523, Moss
                 Telefon: xx xx xx xx (leder)

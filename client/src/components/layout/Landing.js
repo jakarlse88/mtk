@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import CardDeck from '../common/CardDeck';
 import Jumbotron from '../common/Jumbotron';
@@ -6,7 +6,7 @@ import Jumbotron from '../common/Jumbotron';
 export default class Landing extends Component {
   render() {
     return (
-      <Fragment>
+      <div className="container">
         <div className="row mt-4">
           <div className="col-xs-10">
             <Jumbotron />
@@ -17,7 +17,7 @@ export default class Landing extends Component {
             <CardDeck />
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }
