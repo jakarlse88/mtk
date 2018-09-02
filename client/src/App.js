@@ -7,7 +7,7 @@ import Navbar from './components/layout/Navbar';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <Navbar />
         <Landing />
       </div>
