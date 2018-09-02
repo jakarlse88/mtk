@@ -9,7 +9,7 @@ const Card = ({
   readMoreHref
 }) => {
   return (
-    <div className="card">
+    <div className="card w-100">
       <img
         src={imgSrc}
         alt={imgAlt}
@@ -37,6 +37,3 @@ Card.propTypes = {
 };
 
 export default Card;
-
-// TODO: Good morning! Keep looking into nested
-// grid layouts.

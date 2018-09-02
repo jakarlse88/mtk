@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// TODO: take up 100% of width?
+// TODO: clean up unnecessary columns
+
 export default class Navbar extends Component {
   render() {
     return (
