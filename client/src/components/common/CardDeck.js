@@ -30,7 +30,7 @@ CardDeck.defaultProps = {
     {
       imgSrc: 'https://via.placeholder.com/350x185',
       imgAlt: 'card image header',
-      cardTitle: 'Lorem, ipsum dolor!',
+      cardTitle: 'Taekwondo',
       cardText:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos unde sunt reprehenderit iusto quis, quod laudantium quam nam sequi. Unde.',
       readMoreHref: '#!'
@@ -38,7 +38,7 @@ CardDeck.defaultProps = {
     {
       imgSrc: 'https://via.placeholder.com/350x185',
       imgAlt: 'card image header',
-      cardTitle: 'Lorem, ipsum dolor!',
+      cardTitle: 'Hapkido',
       cardText:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos unde sunt reprehenderit iusto quis, quod laudantium quam nam sequi. Unde.',
       readMoreHref: '#!'
@@ -46,7 +46,7 @@ CardDeck.defaultProps = {
     {
       imgSrc: 'https://via.placeholder.com/350x185',
       imgAlt: 'card image header',
-      cardTitle: 'Lorem, ipsum dolor!',
+      cardTitle: 'Brasiliansk Jujutsu',
       cardText:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos unde sunt reprehenderit iusto quis, quod laudantium quam nam sequi. Unde.',
       readMoreHref: '#!'
@@ -54,7 +54,7 @@ CardDeck.defaultProps = {
     {
       imgSrc: 'https://via.placeholder.com/350x185',
       imgAlt: 'card image header',
-      cardTitle: 'Lorem, ipsum dolor!',
+      cardTitle: 'Muay Thai',
       cardText:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos unde sunt reprehenderit iusto quis, quod laudantium quam nam sequi. Unde.',
       readMoreHref: '#!'
@@ -62,7 +62,7 @@ CardDeck.defaultProps = {
     {
       imgSrc: 'https://via.placeholder.com/350x185',
       imgAlt: 'card image header',
-      cardTitle: 'Lorem, ipsum dolor!',
+      cardTitle: 'Selvforsvar for kvinner',
       cardText:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos unde sunt reprehenderit iusto quis, quod laudantium quam nam sequi. Unde.',
       readMoreHref: '#!'

@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
 
+import AboutClub from './components/information/AboutClub';
 import Contact from './components/contact/Contact';
 import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
@@ -33,6 +34,11 @@ class App extends Component {
             component={Information}
           />
           <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/about-club"
+            component={AboutClub}
+          />
           <Route path="/" component={Footer} />
         </Fragment>
       </Router>

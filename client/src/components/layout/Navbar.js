@@ -43,14 +43,39 @@ export default class Navbar extends Component {
               <div
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink">
-                <Link to="/test" className="dropdown-item">
-                  Test
+                <Link
+                  to="/about-club"
+                  className="dropdown-item">
+                  Om klubben
+                  {/* TODO: implement */}
                 </Link>
                 <Link to="/test" className="dropdown-item">
-                  Test
+                  Taekwondo
+                  {/* TODO: implement */}
                 </Link>
                 <Link to="/test" className="dropdown-item">
-                  Test
+                  Hapkido
+                  {/* TODO: implement */}
+                </Link>
+                <Link to="/test" className="dropdown-item">
+                  Brasiliansk Jujutsu
+                  {/* TODO: implement */}
+                </Link>
+                <Link to="/test" className="dropdown-item">
+                  Muay Thai
+                  {/* TODO: implement */}
+                </Link>
+                <Link to="/test" className="dropdown-item">
+                  Selvforsvar for kvinner
+                  {/* TODO: implement */}
+                </Link>
+                <Link to="/test" className="dropdown-item">
+                  Treningstider
+                  {/* TODO: implement */}
+                </Link>
+                <Link to="/test" className="dropdown-item">
+                  Medlemskap og priser
+                  {/* TODO: implement */}
                 </Link>
               </div>
             </div>

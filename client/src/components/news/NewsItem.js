@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -11,11 +12,11 @@ const NewsItem = ({
   text
 }) => {
   return (
-    <div className="w-100">
+    <div>
       <hr />
       <h3>{headline}</h3>
       <p>
-        <small>
+        <small className="text-muted">
           <Moment
             date={date}
             format="dddd DD/MM/YYYY, HH:MM"
@@ -24,8 +25,11 @@ const NewsItem = ({
         </small>
       </p>
       <p>{text}</p>
-      <p>
-        <small>Category: {category}</small>
+      <Link to="#">Les mer...</Link>
+      <p className="mt-2">
+        <small className="text-muted">
+          Category: {category}
+        </small>
       </p>
     </div>
   );

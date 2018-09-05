@@ -18,7 +18,7 @@ export default class Jumbotron extends Component {
 // Temporary variables for testing
 // TODO: remove these
 Jumbotron.defaultProps = {
-  title: 'Lorem, ipsum dolor!',
+  title: "Treningstider høsten '18",
   lead:
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, minus.',
   content:
