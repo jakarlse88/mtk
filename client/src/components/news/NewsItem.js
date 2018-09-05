@@ -12,6 +12,7 @@ const NewsItem = ({
 }) => {
   return (
     <div>
+      <hr />
       <h3>{headline}</h3>
       <p>
         <small>
