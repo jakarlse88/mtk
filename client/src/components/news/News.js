@@ -14,8 +14,8 @@ export default class News extends Component {
           <div className="col-12 col-lg-9 d-flex justify-content-center justify-content-lg-start">
             <div className="row">
               <div className="col-12">
-                {newsItems.map(item => (
-                  <NewsItem />
+                {newsItems.map((item, index) => (
+                  <NewsItem key={index} />
                 ))}
               </div>
             </div>

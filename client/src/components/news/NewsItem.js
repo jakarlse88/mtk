@@ -47,7 +47,7 @@ NewsItem.defaultProps = {
 NewsItem.propTypes = {
   author: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  date: PropTypes.number.isRequired,
   headline: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired
 };
