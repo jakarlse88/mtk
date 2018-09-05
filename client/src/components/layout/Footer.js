@@ -7,12 +7,12 @@ import Card from '../common/Card';
 export default class Footer extends Component {
   render() {
     return (
-      <div className="container-fluid bg-dark">
+      <div className="container-fluid bg-primary">
         <div className="container">
-          <div className="row bg-dark text-light">
+          <div className="row bg-primary text-light">
             <div className="col-12 col-sm-6 col-lg-4">
               <Card
-                darkStyle={true}
+                primaryStyle={true}
                 cardTitle="Kontakt oss"
                 cardText="Rabekkgata 5 
                 N-1523, Moss
@@ -23,14 +23,14 @@ export default class Footer extends Component {
             </div>
             <div className="col-12 col-sm-6 col-lg-4">
               <Card
-                darkStyle={true}
+                primaryStyle={true}
                 cardTitle="Begynne å trene?"
                 cardText="Vi har løpende inntak av nye medlemmer! Se våre treningstider, eller kontakt oss om du har spørsmål."
               />
             </div>
             <div className="col-12 col-sm-6 col-lg-4">
               <Card
-                darkStyle={true}
+                primaryStyle={true}
                 cardTitle="Begynne å trene?"
                 cardText="Rabekkgata 5
                 N-1523, Moss
@@ -40,9 +40,12 @@ export default class Footer extends Component {
               />
             </div>
             <div className="col-12">
-              <p className="text-muted text-center">
-                Copyright &copy; {new Date().getFullYear()}{' '}
-                Moss Taekwondo Klubb
+              <p className="text-center">
+                <small>
+                  Copyright &copy;{' '}
+                  {new Date().getFullYear()} Moss Taekwondo
+                  Klubb
+                </small>
               </p>
             </div>
           </div>

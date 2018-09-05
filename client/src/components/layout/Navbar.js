@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 export default class Navbar extends Component {
   render() {
     return (
-      <div className="row align-items-center navbar-dark bg-dark navbar sticky-top">
+      <div className="row align-items-center navbar-primary bg-primary navbar sticky-top">
         <div className="col-12 col-l-4 col-lg-4 d-flex justify-content-center justify-content-lg-start">
           <Link to="/">
             <h1 className="h4 mt-2 ml-2 text-light">
