@@ -8,13 +8,13 @@ const Card = ({
   cardTitle,
   cardLead,
   cardText,
-  primaryStyle,
+  darkStyle,
   readMoreHref
 }) => {
   return (
     <div
       className={classnames('card w-100', {
-        'bg-primary text-light border-primary': primaryStyle
+        'bg-dark text-light border-dark': darkStyle
       })}>
       {imgSrc ? (
         <img
@@ -32,7 +32,7 @@ const Card = ({
         {readMoreHref ? (
           <a
             href={readMoreHref}
-            className="btn btn-primary text-light">
+            className="btn btn-dark text-light">
             Les mer
           </a>
         ) : null}
@@ -42,14 +42,14 @@ const Card = ({
 };
 
 Card.defaultProps = {
-  primaryStyle: false
+  darkStyle: false
 };
 
 Card.propTypes = {
   cardLead: PropTypes.string,
   cardText: PropTypes.string.isRequired,
   cardTitle: PropTypes.string.isRequired,
-  primaryStyle: PropTypes.bool.isRequired,
+  darkStyle: PropTypes.bool.isRequired,
   imgAlt: PropTypes.string,
   imgSrc: PropTypes.string,
   readMoreHref: PropTypes.string

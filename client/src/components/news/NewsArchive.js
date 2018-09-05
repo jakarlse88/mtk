@@ -6,8 +6,8 @@ export default () => {
   return (
     <div>
       <hr />
-      <h4 className="text-center">Archives</h4>
-      <ul className="list-unstyled text-center">
+      <h4 className="text-center text-lg-left">Archives</h4>
+      <ul className="list-unstyled text-center text-lg-left">
         {listItems.map(item => (
           <li className="text-secondary">Month year</li>
         ))}
