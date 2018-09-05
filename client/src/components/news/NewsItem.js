@@ -11,7 +11,7 @@ const NewsItem = ({
   text
 }) => {
   return (
-    <div>
+    <div className="w-100">
       <hr />
       <h3>{headline}</h3>
       <p>

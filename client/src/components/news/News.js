@@ -13,19 +13,17 @@ export default class News extends Component {
         <div className="row mt-4">
           <div className="col-12 col-lg-9 d-flex justify-content-center justify-content-lg-start">
             <div className="row">
-              {newsItems.map(item => (
-                <div className="col-12">
+              <div className="col-12">
+                {newsItems.map(item => (
                   <NewsItem />
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           <div className="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
-            <div className="row align-items-start">
-              <div className="col-12 d-flex justify-content-center justify-content-lg-end">
+            <div className="row">
+              <div className="col-12">
                 <NewsSearch />
-              </div>
-              <div className="col-12 d-flex justify-content-center justify-content-lg-end">
                 <NewsArchive />
               </div>
             </div>
