@@ -7,6 +7,13 @@ import {
 import React, { Component, Fragment } from 'react';
 
 import AboutClub from './components/information/AboutClub';
+import AboutHapkido from './components/information/AboutHapkido';
+import AboutJujutsu from './components/information/AboutJujutsu';
+import AboutPricing from './components/information/AboutPricing';
+import AboutSchedule from './components/information/AboutSchedule';
+import AboutSelfDefense from './components/information/AboutSelfDefense';
+import AboutTaekwondo from './components/information/AboutTaekwondo';
+import AboutThai from './components/information/AboutThai';
 import Contact from './components/contact/Contact';
 import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
@@ -39,6 +46,37 @@ class App extends Component {
             path="/about-club"
             component={AboutClub}
           />
+          <Route
+            exact
+            path="/taekwondo"
+            component={AboutTaekwondo}
+          />
+          <Route
+            exact
+            path="/hapkido"
+            component={AboutHapkido}
+          />
+          <Route
+            exact
+            path="/self-defense"
+            component={AboutSelfDefense}
+          />
+          <Route
+            exact
+            path="/jujutsu"
+            component={AboutJujutsu}
+          />
+          <Route
+            exact
+            path="/schedule"
+            component={AboutSchedule}
+          />
+          <Route
+            exact
+            path="/pricing"
+            component={AboutPricing}
+          />
+          <Route exact path="/thai" component={AboutThai} />
           <Route path="/" component={Footer} />
         </Fragment>
       </Router>

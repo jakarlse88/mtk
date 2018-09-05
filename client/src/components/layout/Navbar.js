@@ -47,35 +47,39 @@ export default class Navbar extends Component {
                   to="/about-club"
                   className="dropdown-item">
                   Om klubben
-                  {/* TODO: implement */}
                 </Link>
-                <Link to="/test" className="dropdown-item">
+                <Link
+                  to="/taekwondo"
+                  className="dropdown-item">
                   Taekwondo
-                  {/* TODO: implement */}
                 </Link>
-                <Link to="/test" className="dropdown-item">
+                <Link
+                  to="/hapkido"
+                  className="dropdown-item">
                   Hapkido
-                  {/* TODO: implement */}
                 </Link>
-                <Link to="/test" className="dropdown-item">
+                <Link
+                  to="/jujutsu"
+                  className="dropdown-item">
                   Brasiliansk Jujutsu
-                  {/* TODO: implement */}
                 </Link>
-                <Link to="/test" className="dropdown-item">
+                <Link to="/thai" className="dropdown-item">
                   Muay Thai
-                  {/* TODO: implement */}
                 </Link>
-                <Link to="/test" className="dropdown-item">
+                <Link
+                  to="/self-defense"
+                  className="dropdown-item">
                   Selvforsvar for kvinner
-                  {/* TODO: implement */}
                 </Link>
-                <Link to="/test" className="dropdown-item">
+                <Link
+                  to="/schedule"
+                  className="dropdown-item">
                   Treningstider
-                  {/* TODO: implement */}
                 </Link>
-                <Link to="/test" className="dropdown-item">
+                <Link
+                  to="/pricing"
+                  className="dropdown-item">
                   Medlemskap og priser
-                  {/* TODO: implement */}
                 </Link>
               </div>
             </div>
