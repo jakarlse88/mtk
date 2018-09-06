@@ -1,9 +1,8 @@
-import './App.css';
-
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
 import AboutClub from './components/information/AboutClub';
@@ -22,64 +21,72 @@ import Login from './components/login/Login';
 import Navbar from './components/layout/Navbar';
 import News from './components/news/News';
 
+import store from './store';
+
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Fragment>
-          <Route path="/" component={Navbar} />
-          <Route exact path="/" component={Landing} />
-          <Route
-            exact
-            path="/contact"
-            component={Contact}
-          />
-          <Route exact path="/news" component={News} />
-          <Route
-            exact
-            path="/information"
-            component={Information}
-          />
-          <Route exact path="/login" component={Login} />
-          <Route
-            exact
-            path="/about-club"
-            component={AboutClub}
-          />
-          <Route
-            exact
-            path="/taekwondo"
-            component={AboutTaekwondo}
-          />
-          <Route
-            exact
-            path="/hapkido"
-            component={AboutHapkido}
-          />
-          <Route
-            exact
-            path="/self-defense"
-            component={AboutSelfDefense}
-          />
-          <Route
-            exact
-            path="/jujutsu"
-            component={AboutJujutsu}
-          />
-          <Route
-            exact
-            path="/schedule"
-            component={AboutSchedule}
-          />
-          <Route
-            exact
-            path="/pricing"
-            component={AboutPricing}
-          />
-          <Route exact path="/thai" component={AboutThai} />
-          <Route path="/" component={Footer} />
-        </Fragment>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Fragment>
+            <Route path="/" component={Navbar} />
+            <Route exact path="/" component={Landing} />
+            <Route
+              exact
+              path="/contact"
+              component={Contact}
+            />
+            <Route exact path="/news" component={News} />
+            <Route
+              exact
+              path="/information"
+              component={Information}
+            />
+            <Route exact path="/login" component={Login} />
+            <Route
+              exact
+              path="/about-club"
+              component={AboutClub}
+            />
+            <Route
+              exact
+              path="/taekwondo"
+              component={AboutTaekwondo}
+            />
+            <Route
+              exact
+              path="/hapkido"
+              component={AboutHapkido}
+            />
+            <Route
+              exact
+              path="/self-defense"
+              component={AboutSelfDefense}
+            />
+            <Route
+              exact
+              path="/jujutsu"
+              component={AboutJujutsu}
+            />
+            <Route
+              exact
+              path="/schedule"
+              component={AboutSchedule}
+            />
+            <Route
+              exact
+              path="/pricing"
+              component={AboutPricing}
+            />
+            <Route
+              exact
+              path="/thai"
+              component={AboutThai}
+            />
+            <Route path="/" component={Footer} />
+          </Fragment>
+        </Router>
+      </Provider>
     );
   }
 }
