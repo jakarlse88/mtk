@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 
 /*
@@ -17,5 +16,12 @@ router.get('/test', (req, res) => {
     msg: '/users works'
   });
 });
+
+/*
+ * @route   POST /api/users/register
+ * @desc    Register a new user
+ * @access  Public
+ */
+router.post('/register', (req, res) => {});
 
 module.exports = router;

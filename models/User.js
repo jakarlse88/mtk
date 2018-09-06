@@ -18,10 +18,6 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  grade: {
-    type: String,
-    required: true
-  },
   date: {
     type: Date,
     default: Date.now
