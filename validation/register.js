@@ -1,4 +1,4 @@
-const isEmpty = require('../../validation/is-empty');
+const isEmpty = require('./is-empty');
 const Validator = require('validator');
 
 /*
