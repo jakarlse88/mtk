@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
+import './App.css';
+
 import AboutClub from './components/information/AboutClub';
 import AboutHapkido from './components/information/AboutHapkido';
 import AboutJujutsu from './components/information/AboutJujutsu';
