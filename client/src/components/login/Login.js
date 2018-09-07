@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { loginUser, setCurrentUser } from '../../actions/authActions';
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -30,9 +32,7 @@ export default class Login extends Component {
       <div className="container">
         <div className="row">
           <div className="col-8 m-auto">
-            <h4 className="text-center mt-4">
-              Admin/instruktør login
-            </h4>
+            <h4 className="text-center mt-4">Admin/instruktør login</h4>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <input

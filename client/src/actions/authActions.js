@@ -19,8 +19,9 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 /*
- * TODO: Login user
+ * Login user
  */
+export const loginUser = loginData => dispatch => {};
 
 /*
  * TODO: Set logged-in user
