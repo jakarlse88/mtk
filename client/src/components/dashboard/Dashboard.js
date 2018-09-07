@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
 export default class Dashboard extends Component {
@@ -15,20 +16,20 @@ export default class Dashboard extends Component {
 									className="card-img-top"
 								/>
 								<div className="card-body">
-									<h5 className="card-title">
-										Something Something
-									</h5>
-									<p className="card-text">
-										Lorem ipsum dolor sit amet,
-										consectetur adipisicing elit.
-										Cupiditate, dolor! Maxime ex
-										nostrum quae explicabo vel
-										voluptatum soluta quisquam optio!
+									<Link
+										to={item.linkTo}
+										className="text-center">
+										<h5 className="card-title">
+											{item.cardTitle}
+										</h5>
+									</Link>
+									<p className="card-text text-muted">
+										{item.cardText}
 									</p>
 								</div>
 								<div className="card-footer">
 									<small className="text-muted">
-										Permissions here
+										{item.permissions}
 									</small>
 								</div>
 							</div>
@@ -40,4 +41,23 @@ export default class Dashboard extends Component {
 	}
 }
 
-const items = ['', '', '', '', '', ''];
+const items = [
+	{
+		imgSrc: 'https://via.placeholder.com/350x185',
+		imgAlt: 'Event management',
+		cardTitle: 'Manage events',
+		cardText: 'Seminars, gradings, training camps, etc.',
+		permissions: 'Admin',
+		linkText: 'Events',
+		linkTo: '/manage-events'
+	},
+	{
+		imgSrc: 'https://via.placeholder.com/350x185',
+		imgAlt: 'Event management',
+		cardTitle: 'Edit content',
+		cardText: 'Schedule, news, individual page content, etc.',
+		permissions: 'Admin',
+		linkText: 'Events',
+		linkTo: '/manage-content'
+	}
+];

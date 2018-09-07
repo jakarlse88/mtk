@@ -19,6 +19,8 @@ import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
 import Login from './components/login/Login';
+import ManageContent from './components/content/ManageContent';
+import ManageEvents from './components/events/ManageEvents';
 import Navbar from './components/layout/Navbar';
 import News from './components/news/News';
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -71,6 +73,20 @@ class App extends Component {
 								exact
 								path="/dashboard"
 								component={Dashboard}
+							/>
+						</Switch>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/manage-events"
+								component={ManageEvents}
+							/>
+						</Switch>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/manage-content"
+								component={ManageContent}
 							/>
 						</Switch>
 						<Route
