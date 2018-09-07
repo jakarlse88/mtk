@@ -6,16 +6,8 @@ const Schema = mongoose.Schema;
  */
 
 const EventSchema = new Schema({
-	name: {
+	description: {
 		type: String,
-		required: true
-	},
-	startDate: {
-		type: Date,
-		required: true
-	},
-	startTime: {
-		type: Date,
 		required: true
 	},
 	endDate: {
@@ -30,8 +22,20 @@ const EventSchema = new Schema({
 		type: String,
 		required: true
 	},
+	name: {
+		type: String,
+		required: true
+	},
 	prize: {
 		type: Number
+	},
+	startDate: {
+		type: Date,
+		required: true
+	},
+	startTime: {
+		type: Date,
+		required: true
 	}
 });
 
