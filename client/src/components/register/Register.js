@@ -14,6 +14,7 @@ class Register extends Component {
       name: '',
       password: '',
       password2: '',
+      sauce: '',
       errors: {}
     };
   }
@@ -39,7 +40,8 @@ class Register extends Component {
       email: this.state.email,
       name: this.state.name,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      sauce: this.state.sauce
     };
 
     this.props.registerUser(newUserData, this.props.history);
@@ -127,6 +129,24 @@ class Register extends Component {
                     id="password2Help"
                     className="form-text text-danger">
                     {errors.password2}
+                  </small>
+                ) : null}
+              </div>
+              <div className="form-group">
+                <label htmlFor="sauceInput">Saus:</label>
+                <input
+                  aria-describedby="sauceHelp"
+                  className="form-control"
+                  id="sauceInput"
+                  name="sauce"
+                  onChange={this.onChange}
+                  placeholder="Saus"
+                  type="password"
+                  value={this.state.sauce}
+                />
+                {errors.sauce ? (
+                  <small id="sauceHelp" className="form-text text-danger">
+                    {errors.sauce}
                   </small>
                 ) : null}
               </div>
