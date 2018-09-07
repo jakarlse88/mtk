@@ -22,7 +22,7 @@ export const registerUser = (userData, history) => dispatch => {
 /*
  * Login user
  */
-export const loginUser = loginData => dispatch => {
+export const loginUser = (loginData, history) => dispatch => {
 	axios
 		.post('/api/users/login', loginData)
 		.then(res => {
@@ -38,6 +38,8 @@ export const loginUser = loginData => dispatch => {
 
 			// Set current user
 			dispatch(setCurrentUser(decoded));
+
+			history.push('/dashboard');
 		})
 		.catch(err =>
 			dispatch({

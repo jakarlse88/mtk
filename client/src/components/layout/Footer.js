@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import './Footer.css';
 
-import Card from '../common/Card';
-
 export default class Footer extends Component {
 	render() {
 		return (
@@ -18,7 +16,8 @@ export default class Footer extends Component {
 						Made with &hearts; by{' '}
 						<a
 							href="https://github.com/jakarlse88"
-							target="_blank">
+							target="_blank"
+							rel="noopener noreferrer">
 							Jon Karlsen
 						</a>
 					</small>

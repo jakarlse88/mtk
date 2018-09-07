@@ -4,14 +4,6 @@ import Article from '../common/Article';
 
 export default class AboutSchedule extends Component {
 	render() {
-		const schedule = (
-			<div className="container">
-				<div className="row">
-					<div className="col-8">asd</div>
-				</div>
-			</div>
-		);
-
 		return (
 			<Article
 				author={testProps.author}

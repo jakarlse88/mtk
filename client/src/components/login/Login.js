@@ -48,7 +48,7 @@ class Login extends Component {
 			password: this.state.password
 		};
 
-		this.props.loginUser(loginData);
+		this.props.loginUser(loginData, this.props.history);
 	};
 
 	render() {
@@ -58,9 +58,10 @@ class Login extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col-8 m-auto">
-						<h4 className="text-center mt-4">
-							Admin/instruktør login
-						</h4>
+						<h4 className="text-center mt-4">Login</h4>
+						<p className="text-muted text-center">
+							Admin/instruktør
+						</p>
 						<form onSubmit={this.onSubmit}>
 							<div className="form-group">
 								<input

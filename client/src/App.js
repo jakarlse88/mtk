@@ -11,6 +11,7 @@ import AboutSelfDefense from './components/information/AboutSelfDefense';
 import AboutTaekwondo from './components/information/AboutTaekwondo';
 import AboutThai from './components/information/AboutThai';
 import Contact from './components/contact/Contact';
+import Dashboard from './components/dashboard/Dashboard';
 import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
@@ -23,41 +24,78 @@ import RegisterSuccess from './components/register/RegisterSuccess';
 import store from './store';
 
 class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Fragment>
-            <Route path="/" component={Navbar} />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/about-club" component={AboutClub} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/hapkido" component={AboutHapkido} />
-            <Route exact path="/information" component={Information} />
-            <Route exact path="/jujutsu" component={AboutJujutsu} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/news" component={News} />
-            <Route exact path="/pricing" component={AboutPricing} />
-            <Route exact path="/register" component={Register} />
-            <Route
-              exact
-              path="/register-success"
-              component={RegisterSuccess}
-            />
-            <Route exact path="/schedule" component={AboutSchedule} />
-            <Route
-              exact
-              path="/self-defense"
-              component={AboutSelfDefense}
-            />
-            <Route exact path="/taekwondo" component={AboutTaekwondo} />
-            <Route exact path="/thai" component={AboutThai} />
-            <Route path="/" component={Footer} />
-          </Fragment>
-        </Router>
-      </Provider>
-    );
-  }
+	render() {
+		return (
+			<Provider store={store}>
+				<Router>
+					<Fragment>
+						<Route path="/" component={Navbar} />
+						<Route exact path="/" component={Landing} />
+						<Route
+							exact
+							path="/about-club"
+							component={AboutClub}
+						/>
+						<Route exact path="/contact" component={Contact} />
+						<Route
+							exact
+							path="/dashboard"
+							component={Dashboard}
+						/>
+						<Route
+							exact
+							path="/hapkido"
+							component={AboutHapkido}
+						/>
+						<Route
+							exact
+							path="/information"
+							component={Information}
+						/>
+						<Route
+							exact
+							path="/jujutsu"
+							component={AboutJujutsu}
+						/>
+						<Route exact path="/login" component={Login} />
+						<Route exact path="/news" component={News} />
+						<Route
+							exact
+							path="/pricing"
+							component={AboutPricing}
+						/>
+						<Route
+							exact
+							path="/register"
+							component={Register}
+						/>
+						<Route
+							exact
+							path="/register-success"
+							component={RegisterSuccess}
+						/>
+						<Route
+							exact
+							path="/schedule"
+							component={AboutSchedule}
+						/>
+						<Route
+							exact
+							path="/self-defense"
+							component={AboutSelfDefense}
+						/>
+						<Route
+							exact
+							path="/taekwondo"
+							component={AboutTaekwondo}
+						/>
+						<Route exact path="/thai" component={AboutThai} />
+						<Route path="/" component={Footer} />
+					</Fragment>
+				</Router>
+			</Provider>
+		);
+	}
 }
 
 export default App;
