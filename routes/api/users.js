@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const keys = require('../../config/keys');
+const jwt = require('jsonwebtoken');
+
 const router = express.Router();
 
 /*
@@ -72,7 +74,9 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
 	const { errors, isValid } = validateLoginInput(req.body);
 
-	if (!isValid) return res.status(400).json(errors);
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
 
 	const { email, password } = req.body;
 
