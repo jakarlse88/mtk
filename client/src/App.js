@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
@@ -24,7 +25,32 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import Register from './components/register/Register';
 import RegisterSuccess from './components/register/RegisterSuccess';
 
+import { setCurrentUser, logoutUser } from './actions/authActions';
 import store from './store';
+
+import setAuthToken from './utils/setAuthToken';
+
+// Check for token
+if (localStorage.jwtToken) {
+	// Set auth token header auth
+	// FIXME: this fucking comment
+	setAuthToken(localStorage.jwtToken);
+
+	// Decode token, get user info
+	const decoded = jwt_decode(localStorage.jwtToken);
+
+	// Set user, isAuthenticated
+	store.dispatch(setCurrentUser(decoded));
+
+	// Check for expired token
+	const currentTime = Date.now() / 1000;
+	if (decoded.exp < currentTime) {
+		store.dispatch(logoutUser());
+
+		// Redirect to front page
+		window.location.href = '/';
+	}
+}
 
 class App extends Component {
 	render() {
