@@ -5,7 +5,7 @@ const Validator = require('validator');
  * Validates new event input
  */
 
-module.exports = validateNewEventInput = data => {
+module.exports = validateNewEventInput = (data, owner) => {
 	// Hold onto any error(s) encountered
 	const errors = {};
 
@@ -15,6 +15,7 @@ module.exports = validateNewEventInput = data => {
 	data.endDate = !isEmpty(data.endDate) ? data.endDate : '';
 	data.endTime = !isEmpty(data.endTime) ? data.endTime : '';
 	data.eventType = !isEmpty(data.eventType) ? data.eventType : '';
+	owner = !isEmpty(owner) ? owner : '';
 	data.name = !isEmpty(data.name) ? data.name : '';
 	data.prize = !isEmpty(data.prize) ? data.prize : '';
 	data.startDate = !isEmpty(data.startDate) ? data.startDate : '';
@@ -34,6 +35,10 @@ module.exports = validateNewEventInput = data => {
 		errors.eventType = 'Event type field is required';
 	}
 
+	if (Validator.isEmpty(owner)) {
+		errors.owner = 'Owner field is required;';
+	}
+
 	if (Validator.isEmpty(data.name)) {
 		errors.name = 'Name field is required;';
 	}
@@ -42,7 +47,7 @@ module.exports = validateNewEventInput = data => {
 		errors.prize = 'Prize field is required';
 	}
 
-	if (typeof data.prize !== 'number') {
+	if (!data.prize instanceof Number) {
 		errors.prize = 'Not a valid number';
 	}
 
@@ -60,6 +65,13 @@ module.exports = validateNewEventInput = data => {
 
 	if (!data.startTime instanceof Date) {
 		errors.startTime = 'Not a valid time';
+	}
+
+	const newStartDate = new Date(data.startDate);
+	const newEndDate = new Date(data.endaDate);
+
+	if (!newEndDate >= newStartDate) {
+		errors.startTime = 'Start date must precede end date';
 	}
 
 	return {

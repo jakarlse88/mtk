@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 /*
  * Event schema
  */
-
 const EventSchema = new Schema({
 	description: {
 		type: String,
@@ -21,6 +20,10 @@ const EventSchema = new Schema({
 	eventType: {
 		type: String,
 		required: true
+	},
+	owner: {
+		type: String,
+		isRequired: true
 	},
 	name: {
 		type: String,
