@@ -1,7 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
@@ -20,6 +17,8 @@ import Landing from './components/layout/Landing';
 import Login from './components/login/Login';
 import Navbar from './components/layout/Navbar';
 import News from './components/news/News';
+import Register from './components/register/Register';
+import RegisterSuccess from './components/register/RegisterSuccess';
 
 import store from './store';
 
@@ -31,58 +30,28 @@ class App extends Component {
           <Fragment>
             <Route path="/" component={Navbar} />
             <Route exact path="/" component={Landing} />
-            <Route
-              exact
-              path="/contact"
-              component={Contact}
-            />
-            <Route exact path="/news" component={News} />
-            <Route
-              exact
-              path="/information"
-              component={Information}
-            />
+            <Route exact path="/about-club" component={AboutClub} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/hapkido" component={AboutHapkido} />
+            <Route exact path="/information" component={Information} />
+            <Route exact path="/jujutsu" component={AboutJujutsu} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/news" component={News} />
+            <Route exact path="/pricing" component={AboutPricing} />
+            <Route exact path="/register" component={Register} />
             <Route
               exact
-              path="/about-club"
-              component={AboutClub}
+              path="/register-success"
+              component={RegisterSuccess}
             />
-            <Route
-              exact
-              path="/taekwondo"
-              component={AboutTaekwondo}
-            />
-            <Route
-              exact
-              path="/hapkido"
-              component={AboutHapkido}
-            />
+            <Route exact path="/schedule" component={AboutSchedule} />
             <Route
               exact
               path="/self-defense"
               component={AboutSelfDefense}
             />
-            <Route
-              exact
-              path="/jujutsu"
-              component={AboutJujutsu}
-            />
-            <Route
-              exact
-              path="/schedule"
-              component={AboutSchedule}
-            />
-            <Route
-              exact
-              path="/pricing"
-              component={AboutPricing}
-            />
-            <Route
-              exact
-              path="/thai"
-              component={AboutThai}
-            />
+            <Route exact path="/taekwondo" component={AboutTaekwondo} />
+            <Route exact path="/thai" component={AboutThai} />
             <Route path="/" component={Footer} />
           </Fragment>
         </Router>

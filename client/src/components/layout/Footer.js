@@ -28,16 +28,13 @@ export default class Footer extends Component {
               />
             </div>
             <div className="col-12 col-sm-6 col-lg-4">
-              <p className="lead mt-3">
-                Følg oss på sosiale medier!
-              </p>
+              <p className="lead mt-3">Følg oss på sosiale medier!</p>
             </div>
             <div className="col-12">
               <p className="text-center">
                 <small>
-                  Copyright &copy;{' '}
-                  {new Date().getFullYear()} Moss Taekwondo
-                  Klubb
+                  Copyright &copy; {new Date().getFullYear()} Moss
+                  Taekwondo Klubb
                 </small>
               </p>
             </div>
