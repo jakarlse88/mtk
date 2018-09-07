@@ -40,7 +40,18 @@ router.post(
 			return res.status(400).json(errors);
 		}
 
-		// TODO: Ensure no duplicate events
+		// FIXME: This is spectacularly un-robust. Research better.
+		Event.findOne({
+			name: req.body.name
+		})
+			.then(event => {
+				if (event) {
+					return res.status(400).json({
+						error: 'An event with that name already exists'
+					});
+				}
+			})
+			.catch(err => console.log(err));
 
 		const newEvent = new Event({
 			description: req.body.description,
