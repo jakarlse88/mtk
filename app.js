@@ -1,11 +1,16 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 /*
  * Init app
  */
 const app = express();
+
+// Don't crash the server
+// FIXME: I don't understand why this is necessary
+const User = require('./models/User');
 
 /*
  * Body parser middleware
@@ -27,11 +32,10 @@ mongoose
   .catch(err => console.log(err));
 
 /*
- * Test route
+ * Passport
  */
-app.get('/', (req, res) => {
-  return res.json({ msg: 'Hello, world!' });
-});
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 /*
  * Routes
@@ -45,7 +49,5 @@ app.use('/api/users', users);
 const port = process.env.PORT || 5000;
 
 app.listen(port, () =>
-  console.log(
-    `Express.js app now listening on port ${port}`
-  )
+  console.log(`Express.js app now listening on port ${port}`)
 );
