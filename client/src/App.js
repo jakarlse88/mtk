@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
@@ -18,6 +18,7 @@ import Landing from './components/layout/Landing';
 import Login from './components/login/Login';
 import Navbar from './components/layout/Navbar';
 import News from './components/news/News';
+import ProtectedRoute from './components/common/ProtectedRoute';
 import Register from './components/register/Register';
 import RegisterSuccess from './components/register/RegisterSuccess';
 
@@ -37,11 +38,13 @@ class App extends Component {
 							component={AboutClub}
 						/>
 						<Route exact path="/contact" component={Contact} />
-						<Route
-							exact
-							path="/dashboard"
-							component={Dashboard}
-						/>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/dashboard"
+								component={Dashboard}
+							/>
+						</Switch>
 						<Route
 							exact
 							path="/hapkido"
