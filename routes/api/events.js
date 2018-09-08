@@ -37,6 +37,19 @@ router.get('/', (req, res) => {
 });
 
 /*
+ * @route   GET /api/events/:id
+ * @desc    Get specific event by id
+ * @access  Public
+ */
+router.get('/:id', (req, res) => {
+	Event.findById(req.params.id)
+		.then(event => res.json(event))
+		.catch(err =>
+			res.status(404).json({ noEventFound: 'No event found' })
+		);
+});
+
+/*
  * @route   POST /api/events/new
  * @desc    Create a new event
  * @access  Private
