@@ -142,22 +142,20 @@ class CreateEvent extends Component {
 							/>
 						</form>
 						<div className="col-10 m-auto text-center">
+							<Link to="/manage-events">
+								<button className="btn btn-danger mb-4 mt-2">
+									<span className="badge">
+										<i className="fas fa-angle-left fa-lg" />
+									</span>{' '}
+									Back
+								</button>
+							</Link>
 							<button
-								className="btn btn-dark"
+								className="btn btn-success mb-4 mt-2 ml-2"
 								onClick={this.onSubmit}>
 								Create Event
 							</button>
 						</div>
-					</div>
-					<div className="col-12 text-center">
-						<Link to="/manage-events">
-							<button className="btn btn-light mt-2">
-								<span className="badge">
-									<i className="fas fa-angle-left fa-lg" />
-								</span>{' '}
-								Back
-							</button>
-						</Link>
 					</div>
 				</div>
 			</div>

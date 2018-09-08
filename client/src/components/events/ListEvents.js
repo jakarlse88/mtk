@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -67,13 +68,38 @@ class ListEvents extends Component {
 			Object.keys(events).length > 0 &&
 			events.eventsArr instanceof Array
 		) {
-			content = (
-				<ul>
-					{this.state.events.eventsArr.map((event, index) => (
-						<li key={index}>{event.name}</li>
-					))}
-				</ul>
-			);
+			content = events.eventsArr.map((event, index) => (
+				<div key={index} className="card mb-2">
+					<div className="card-body">
+						<h5 className="card-title">{event.name}</h5>
+						<p className="card-text">{event.description}</p>
+						<Link to="#">
+							<span className="badge">
+								<i className="fas fa-cogs fa-xl mt-2" />
+							</span>{' '}
+							Do Stuff
+						</Link>
+					</div>
+					<div className="card-footer">
+						<span className="badge text-muted text-">
+							<i className="fas fa-info-circle fa-lg" />
+						</span>
+						<small className="text-muted">
+							{event.eventType},{' '}
+							<Moment
+								date={event.startDate}
+								format="dddd DD/MM/YYYY"
+							/>{' '}
+							to{' '}
+							<Moment
+								date={event.endDate}
+								format="dddd DD/MM/YYYY"
+							/>{' '}
+							by {event.owner}
+						</small>
+					</div>
+				</div>
+			));
 		}
 
 		return (
@@ -84,6 +110,16 @@ class ListEvents extends Component {
 							Events
 						</h2>
 						{content}
+					</div>
+					<div className="col-10 m-auto text-center">
+						<Link to="/manage-events">
+							<button className="btn btn-danger mt-2 mb-4">
+								<span className="badge">
+									<i className="fas fa-angle-left fa-lg" />
+								</span>{' '}
+								Back
+							</button>
+						</Link>
 					</div>
 				</div>
 			</div>

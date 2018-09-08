@@ -39,7 +39,7 @@ export default class ManageEvents extends Component {
 					))}
 					<div className="col-12 text-center">
 						<Link to="/dashboard">
-							<button className="btn btn-light mt-2">
+							<button className="btn btn-danger mt-2">
 								<span className="badge">
 									<i className="fas fa-angle-left fa-lg" />
 								</span>{' '}
