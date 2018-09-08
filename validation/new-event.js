@@ -43,35 +43,31 @@ module.exports = validateNewEventInput = (data, owner) => {
 		errors.name = 'Name field is required;';
 	}
 
-	if (Validator.isEmpty(data.prize)) {
-		errors.prize = 'Prize field is required';
-	}
-
-	if (!data.prize instanceof Number) {
+	if (!Validator.isNumeric(data.prize, { no_symbols: true })) {
 		errors.prize = 'Not a valid number';
 	}
 
-	if (!data.endDate instanceof Date) {
+	if (!Validator.isISO8601(data.endDate)) {
 		errors.endDate = 'Not a valid date';
 	}
 
-	if (!data.endTime instanceof Date) {
-		errors.endTime = 'Not a valid time';
+	if (Validator.isEmpty(data.endTime)) {
+		errors.endTime = 'End time is required';
 	}
 
-	if (!data.startDate instanceof Date) {
+	if (!Validator.isISO8601(data.startDate)) {
 		errors.startDate = 'Not a valid date';
 	}
 
-	if (!data.startTime instanceof Date) {
-		errors.startTime = 'Not a valid time';
+	if (Validator.isEmpty(data.startTime)) {
+		errors.startTime = 'Start time is required';
 	}
 
 	const newStartDate = new Date(data.startDate);
 	const newEndDate = new Date(data.endaDate);
 
-	if (!newEndDate >= newStartDate) {
-		errors.startTime = 'Start date must precede end date';
+	if (newEndDate < newStartDate) {
+		errors.startDate = 'Start date must precede end date';
 	}
 
 	return {

@@ -47,7 +47,8 @@ router.post(
 			.then(event => {
 				if (event) {
 					return res.status(400).json({
-						error: 'An event with that name already exists'
+						alreadyExists:
+							'An event with that name already exists'
 					});
 				}
 			})

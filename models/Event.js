@@ -14,7 +14,7 @@ const EventSchema = new Schema({
 		required: true
 	},
 	endTime: {
-		type: Date,
+		type: String,
 		required: true
 	},
 	eventType: {
@@ -37,7 +37,7 @@ const EventSchema = new Schema({
 		required: true
 	},
 	startTime: {
-		type: Date,
+		type: String,
 		required: true
 	}
 });

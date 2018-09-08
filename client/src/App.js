@@ -13,6 +13,8 @@ import AboutSchedule from './components/information/AboutSchedule';
 import AboutSelfDefense from './components/information/AboutSelfDefense';
 import AboutTaekwondo from './components/information/AboutTaekwondo';
 import AboutThai from './components/information/AboutThai';
+import CreateEvent from './components/events/CreateEvent';
+import CreateEventSuccess from './components/events/CreateEventSuccess';
 import Contact from './components/contact/Contact';
 import Dashboard from './components/dashboard/Dashboard';
 import Footer from './components/layout/Footer';
@@ -80,6 +82,20 @@ class App extends Component {
 								exact
 								path="/manage-events"
 								component={ManageEvents}
+							/>
+						</Switch>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/create-event"
+								component={CreateEvent}
+							/>
+						</Switch>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/create-event-success"
+								component={CreateEventSuccess}
 							/>
 						</Switch>
 						<Switch>

@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
 							<div className="card mb-4">
 								<img
 									src="https://via.placeholder.com/350x185"
-									alt="Descriptive image"
+									alt="Description"
 									className="card-img-top"
 								/>
 								<div className="card-body">
