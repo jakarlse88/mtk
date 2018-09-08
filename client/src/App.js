@@ -20,6 +20,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
+import ListEvents from './components/events/ListEvents';
 import Login from './components/login/Login';
 import ManageContent from './components/content/ManageContent';
 import ManageEvents from './components/events/ManageEvents';
@@ -96,6 +97,13 @@ class App extends Component {
 								exact
 								path="/create-event-success"
 								component={CreateEventSuccess}
+							/>
+						</Switch>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/list-events"
+								component={ListEvents}
 							/>
 						</Switch>
 						<Switch>

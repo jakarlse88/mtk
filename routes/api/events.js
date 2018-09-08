@@ -21,6 +21,22 @@ const validateNewEventInput = require('../../validation/new-event');
 router.get('/test', (req, res) => res.json({ msg: '/events works' }));
 
 /*
+ * @route   GET /api/events
+ * @desc    Get all events
+ * @access  Public
+ */
+router.get('/', (req, res) => {
+	Event.find()
+		.sort({
+			date: -1
+		})
+		.then(posts => res.json(posts))
+		.catch(err =>
+			res.status(404).json({ noEventsFound: 'No events found' })
+		);
+});
+
+/*
  * @route   POST /api/events/new
  * @desc    Create a new event
  * @access  Private

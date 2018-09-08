@@ -7,8 +7,10 @@ export default class Dashboard extends Component {
 			<div className="container">
 				<h2 className="h3 text-center mt-4">Dashboard</h2>
 				<div className="row mt-4 mb-4">
-					{items.map(item => (
-						<div className="col-12 col-sm-6 col-lg-4 m-auto">
+					{items.map((item, index) => (
+						<div
+							className="col-12 col-sm-6 col-lg-4 m-auto"
+							key={index}>
 							<div className="card mb-4">
 								<img
 									src="https://via.placeholder.com/350x185"
