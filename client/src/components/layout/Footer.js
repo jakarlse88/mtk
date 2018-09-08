@@ -11,7 +11,9 @@ export default class Footer extends Component {
 					</small>
 					<br />
 					<small className="text-muted">
-						Made with &hearts; by{' '}
+						Made with{' '}
+						<i className="fas fa-heart fa-sm text-danger" /> &{' '}
+						<i className="fas fa-coffee fa-sm text-dark" /> by{' '}
 						<a
 							href="https://github.com/jakarlse88"
 							target="_blank"
