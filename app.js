@@ -5,6 +5,7 @@ const passport = require('passport');
 
 const content = require('./routes/api/content');
 const events = require('./routes/api/events');
+const participants = require('./routes/api/participants');
 const users = require('./routes/api/users');
 
 /*
@@ -14,9 +15,10 @@ const app = express();
 
 // Don't crash the server
 // FIXME: I don't (quite) understand why this is necessary
-const UserModel = require('./models/User');
-const EventModel = require('./models/Event');
 const ContentModel = require('./models/Content');
+const EventModel = require('./models/Event');
+const ParticipantModel = require('./models/Participant');
+const UserModel = require('./models/User');
 
 /*
  * Body parser middleware
@@ -48,6 +50,7 @@ require('./config/passport')(passport);
  */
 app.use('/api/content', content);
 app.use('/api/events', events);
+app.use('/api/participants', participants);
 app.use('/api/users', users);
 
 /*
