@@ -18,7 +18,7 @@ class Navbar extends Component {
 				<span className="badge">
 					<i className="fas fa-user fa-md" />
 				</span>
-				Admin login
+				Login
 			</Link>
 		);
 

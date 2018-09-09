@@ -73,11 +73,11 @@ class ListEvents extends Component {
 					<div className="card-body">
 						<h5 className="card-title">{event.name}</h5>
 						<p className="card-text">{event.description}</p>
-						<Link to="#">
+						<Link to={`/single-event/${event._id}`}>
 							<span className="badge">
 								<i className="fas fa-cogs fa-xl mt-2" />
 							</span>{' '}
-							Do Stuff
+							View event
 						</Link>
 					</div>
 					<div className="card-footer">

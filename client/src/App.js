@@ -29,6 +29,7 @@ import News from './components/news/News';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Register from './components/register/Register';
 import RegisterSuccess from './components/register/RegisterSuccess';
+import SingleEvent from './components/events/SingleEvent';
 
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import store from './store';
@@ -104,6 +105,13 @@ class App extends Component {
 								exact
 								path="/list-events"
 								component={ListEvents}
+							/>
+						</Switch>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/single-event/:id"
+								component={SingleEvent}
 							/>
 						</Switch>
 						<Switch>

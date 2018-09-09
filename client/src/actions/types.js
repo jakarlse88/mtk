@@ -14,4 +14,5 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
  * Events
  */
 export const GET_EVENTS_ARR = 'GET_EVENTS_ARR';
+export const GET_EVENT = 'GET_EVENT';
 export const SET_EVENT_LOADING = 'SET_EVENT_LOADING';
