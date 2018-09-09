@@ -117,6 +117,11 @@ class Navbar extends Component {
 									Treningstider
 								</Link>
 								<Link
+									to="/list-events"
+									className="dropdown-item">
+									Arrangementer
+								</Link>
+								<Link
 									to="/pricing"
 									className="dropdown-item">
 									Medlemskap og priser

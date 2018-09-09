@@ -7,6 +7,9 @@ import Moment from 'react-moment';
 
 import { getEvent } from '../../actions/eventActions';
 
+// TODO: change "Back" link depending on whether user is
+// logged-in or a guest
+
 class SingleEvent extends Component {
 	componentDidMount = () => {
 		this.props.getEvent(this.props.match.params.id);

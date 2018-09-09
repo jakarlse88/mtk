@@ -100,20 +100,16 @@ class App extends Component {
 								component={CreateEventSuccess}
 							/>
 						</Switch>
-						<Switch>
-							<ProtectedRoute
-								exact
-								path="/list-events"
-								component={ListEvents}
-							/>
-						</Switch>
-						<Switch>
-							<ProtectedRoute
-								exact
-								path="/single-event/:id"
-								component={SingleEvent}
-							/>
-						</Switch>
+						<Route
+							exact
+							path="/list-events"
+							component={ListEvents}
+						/>
+						<Route
+							exact
+							path="/single-event/:id"
+							component={SingleEvent}
+						/>
 						<Switch>
 							<ProtectedRoute
 								exact

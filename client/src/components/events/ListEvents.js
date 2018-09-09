@@ -111,16 +111,29 @@ class ListEvents extends Component {
 						</h2>
 						{content}
 					</div>
-					<div className="col-10 m-auto text-center">
-						<Link to="/manage-events">
-							<button className="btn btn-danger mt-2 mb-4">
-								<span className="badge">
-									<i className="fas fa-angle-left fa-lg" />
-								</span>{' '}
-								Back
-							</button>
-						</Link>
-					</div>
+					{this.props.auth.isAuthenticated ? (
+						<div className="col-10 m-auto text-center">
+							<Link to="/manage-events">
+								<button className="btn btn-danger mt-2 mb-4">
+									<span className="badge">
+										<i className="fas fa-angle-left fa-lg" />
+									</span>{' '}
+									Back
+								</button>
+							</Link>
+						</div>
+					) : (
+						<div className="col-10 m-auto text-center">
+							<Link to="/">
+								<button className="btn btn-danger mt-2 mb-4">
+									<span className="badge">
+										<i className="fas fa-angle-left fa-lg" />
+									</span>{' '}
+									Home
+								</button>
+							</Link>
+						</div>
+					)}
 				</div>
 			</div>
 		);
@@ -129,12 +142,14 @@ class ListEvents extends Component {
 
 ListEvents.propTypes = {
 	events: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
+	errors: PropTypes.object.isRequired,
+	auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
 	events: state.events,
-	errors: state.errors
+	errors: state.errors,
+	auth: state.auth
 });
 
 export default connect(
