@@ -39,7 +39,15 @@ const EventSchema = new Schema({
 	startTime: {
 		type: String,
 		required: true
-	}
+	},
+	participants: [
+		{
+			participant: {
+				type: Schema.Types.ObjectId,
+				ref: 'participants'
+			}
+		}
+	]
 });
 
 module.exports = Event = mongoose.model('events', EventSchema);
