@@ -69,9 +69,9 @@ router.post(
 			return res.status(400).json(errors);
 		}
 
-		// FIXME: This is spectacularly un-robust. Research better.
 		Event.findOne({
-			name: req.body.name
+			name: req.body.name,
+			description: req.body.description
 		})
 			.then(event => {
 				if (event) {

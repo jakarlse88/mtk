@@ -19,13 +19,11 @@ const ParticipantSchema = new Schema({
 	},
 	geupGrade: {
 		type: Number,
-		required: true,
 		max: 9,
 		min: 1
 	},
 	danGrade: {
 		type: Number,
-		required: true,
 		max: 9,
 		min: 1
 	},
