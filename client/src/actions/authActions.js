@@ -62,7 +62,7 @@ export const setCurrentUser = decoded => {
 /*
  * Logout user
  */
-export const logoutUser = () => dispatch => {
+export const logoutUser = history => dispatch => {
 	// Remove token from localStorage
 	localStorage.removeItem('jwtToken');
 
@@ -72,4 +72,7 @@ export const logoutUser = () => dispatch => {
 	// Set current user to empty object,
 	// isAuthenticated will automatically be set to false
 	dispatch(setCurrentUser({}));
+
+	// Redirect to landing
+	history.push('/');
 };

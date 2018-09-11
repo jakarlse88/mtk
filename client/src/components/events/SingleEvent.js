@@ -13,8 +13,18 @@ class SingleEvent extends Component {
 	};
 
 	render() {
-		const { event } = this.props.events;
+		const { eventLoading, event } = this.props.events;
 		let content;
+
+		if (eventLoading) {
+			content = (
+				<p className="lead text-center">
+					<span className="badge">
+						<i className="fa fa-spinner fa-spin fa-3x" />
+					</span>
+				</p>
+			);
+		}
 
 		if (Object.keys(this.props.errors).length > 0) {
 			content = (
@@ -101,6 +111,21 @@ class SingleEvent extends Component {
 							{event.description}
 						</p>
 					</div>
+					{/*  TODO: implement the below */}
+					{event.participants > 0 ? (
+						<div className="col-12">
+							<p>
+								<strong>Participants:</strong>
+								<ul>
+									{event.participants.map(
+										participant => (
+											<li>{participant.name}</li>
+										)
+									)}
+								</ul>
+							</p>
+						</div>
+					) : null}
 					<div className="col-12 text-center">
 						<Link to="/list-events">
 							<button className="btn btn-danger mt-2">
