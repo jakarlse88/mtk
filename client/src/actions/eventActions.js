@@ -14,7 +14,7 @@ import {
 export const createEvent = (eventData, history) => dispatch => {
 	axios
 		.post('/api/events/new', eventData)
-		.then(res => history.push('/create-event-success'))
+		.then(res => history.push(`/create-event-success/${res.data._id}`))
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,

@@ -96,7 +96,7 @@ class App extends Component {
 						<Switch>
 							<ProtectedRoute
 								exact
-								path="/create-event-success"
+								path="/create-event-success/:id"
 								component={CreateEventSuccess}
 							/>
 						</Switch>
