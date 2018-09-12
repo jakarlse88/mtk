@@ -35,6 +35,7 @@ class ListEvents extends Component {
 	};
 
 	render() {
+		const { auth } = this.props;
 		const { events, errors } = this.state;
 
 		let content;
@@ -75,10 +76,21 @@ class ListEvents extends Component {
 						<p className="card-text">{event.description}</p>
 						<Link to={`/single-event/${event._id}`}>
 							<span className="badge">
-								<i className="fas fa-cogs fa-xl mt-2" />
+								<i className="fas fa-search fa-xl mt-2" />
 							</span>{' '}
 							View event
 						</Link>
+						<br />
+						{auth.user.role === 'admin' && (
+							<Link
+								to={`/admin-event/${event._id}`}
+								className="text-warning">
+								<span className="badge">
+									<i className="fas fa-cogs fa-xl mt-2" />
+								</span>{' '}
+								Administrate event
+							</Link>
+						)}
 					</div>
 					<div className="card-footer">
 						<span className="badge text-muted text-">
@@ -109,6 +121,7 @@ class ListEvents extends Component {
 						<h2 className="display-4 text-center mt-4">
 							Events
 						</h2>
+						<hr />
 						{content}
 					</div>
 					{this.props.auth.isAuthenticated ? (

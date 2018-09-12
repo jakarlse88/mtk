@@ -13,6 +13,7 @@ import AboutSchedule from './components/information/AboutSchedule';
 import AboutSelfDefense from './components/information/AboutSelfDefense';
 import AboutTaekwondo from './components/information/AboutTaekwondo';
 import AboutThai from './components/information/AboutThai';
+import AdministrateEvent from './components/events/AdministrateEvent';
 import CreateEvent from './components/events/CreateEvent';
 import CreateEventSuccess from './components/events/CreateEventSuccess';
 import Contact from './components/contact/Contact';
@@ -39,8 +40,7 @@ import setAuthToken from './utils/setAuthToken';
 
 // Check for token
 if (localStorage.jwtToken) {
-	// Set auth token header auth
-	// FIXME: this fucking comment
+	// Set Authorization header to auth token
 	setAuthToken(localStorage.jwtToken);
 
 	// Decode token, get user info
@@ -111,6 +111,13 @@ class App extends Component {
 							path="/single-event/:id"
 							component={SingleEvent}
 						/>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/admin-event/:id"
+								component={AdministrateEvent}
+							/>
+						</Switch>
 						<Switch>
 							<ProtectedRoute
 								exact

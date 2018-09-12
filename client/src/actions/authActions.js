@@ -80,5 +80,7 @@ export const logoutUser = history => dispatch => {
 	dispatch(setCurrentUser({}));
 
 	// Redirect to landing
-	history.push('/');
+	if (history) {
+		history.push('/');
+	}
 };
