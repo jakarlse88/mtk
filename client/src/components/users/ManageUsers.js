@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
-export default class Dashboard extends Component {
+export default class ManageUsers extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h2 className="h3 text-center mt-4">Dashboard</h2>
+				<h2 className="h3 text-center mt-4">Manage Users</h2>
 				<div className="row mt-4 mb-4">
 					{items.map((item, index) => (
 						<div
@@ -37,6 +37,16 @@ export default class Dashboard extends Component {
 							</div>
 						</div>
 					))}
+					<div className="col-12 text-center">
+						<Link to="/dashboard">
+							<button className="btn btn-danger mt-2">
+								<span className="badge">
+									<i className="fas fa-angle-left fa-lg" />
+								</span>{' '}
+								Back
+							</button>
+						</Link>
+					</div>
 				</div>
 			</div>
 		);
@@ -46,29 +56,10 @@ export default class Dashboard extends Component {
 const items = [
 	{
 		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Manage events',
-		cardTitle: 'Manage Events',
-		cardText: 'Seminars, gradings, training camps, etc.',
-		permissions: 'Admin, instructor',
-		linkText: 'Events',
-		linkTo: '/manage-events'
-	},
-	{
-		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Manage content',
-		cardTitle: 'Manage Content',
-		cardText: 'Schedule, news, individual page content, etc.',
-		permissions: 'Admin, instructor',
-		linkText: 'Content',
-		linkTo: '/manage-content'
-	},
-	{
-		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Manage users',
-		cardTitle: 'Manage Users',
-		cardText: 'Register new users, edit/update/delete existing users',
+		imgAlt: 'User',
+		cardTitle: 'Register User',
+		cardText: 'Create a new, unique user.',
 		permissions: 'Admin',
-		linkText: 'Users',
-		linkTo: '/manage-users'
+		linkTo: '/register-user'
 	}
 ];

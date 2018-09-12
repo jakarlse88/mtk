@@ -24,6 +24,7 @@ import ListEvents from './components/events/ListEvents';
 import Login from './components/login/Login';
 import ManageContent from './components/content/ManageContent';
 import ManageEvents from './components/events/ManageEvents';
+import ManageUsers from './components/users/ManageUsers';
 import Navbar from './components/layout/Navbar';
 import News from './components/news/News';
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -141,9 +142,16 @@ class App extends Component {
 						/>
 						<Route
 							exact
-							path="/register"
+							path="/register-user"
 							component={Register}
 						/>
+						<Switch>
+							<ProtectedRoute
+								exact
+								path="/manage-users"
+								component={ManageUsers}
+							/>
+						</Switch>
 						<Route
 							exact
 							path="/register-success"

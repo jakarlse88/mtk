@@ -23,7 +23,7 @@ const UserSchema = new Schema({
 	},
 	role: {
 		type: String,
-		default: 'public'
+		default: 'mod'
 	}
 });
 

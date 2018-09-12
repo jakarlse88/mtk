@@ -96,6 +96,10 @@ router.put(
 	(req, res) => {
 		const { errors, isValid } = validateUpdateUserInput(req.body);
 
+		if (req.user.role !== 'admin') {
+			errors.role = "'Admin' role required";
+			return res.status(400).json(errors);
+		}
 		// Invalid input
 		if (!isValid) {
 			return res.status(400).json(errors);
@@ -220,7 +224,8 @@ router.post('/login', (req, res) => {
 				// Create JWT payload
 				const payload = {
 					id: user.id,
-					name: user.name
+					name: user.name,
+					role: user.role
 				};
 
 				// Sign token
