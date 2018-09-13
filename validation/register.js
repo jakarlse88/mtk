@@ -59,7 +59,7 @@ module.exports = validateRegisterInput = data => {
 		errors.sauce = 'Sauce field is required';
 	}
 
-	if (!['admin', 'mod'].indexOf(data.role.toLowerCase()) > -1) {
+	if (['admin', 'mod'].indexOf(data.role.toLowerCase()) === -1) {
 		errors.role = 'Invalid role';
 	}
 

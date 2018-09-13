@@ -12,6 +12,10 @@ import {
  * Create new event
  */
 export const createEvent = (eventData, history) => dispatch => {
+	dispatch({
+		type: CLEAR_ERRORS
+	});
+
 	axios
 		.post('/api/events/new', eventData)
 		.then(res => history.push(`/create-event-success/${res.data._id}`))

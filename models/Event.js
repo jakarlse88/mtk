@@ -13,7 +13,7 @@ const EventSchema = new Schema({
 		type: Date,
 		required: true
 	},
-	endTime: {
+	eventGroup: {
 		type: String,
 		required: true
 	},
@@ -34,10 +34,6 @@ const EventSchema = new Schema({
 	},
 	startDate: {
 		type: Date,
-		required: true
-	},
-	startTime: {
-		type: String,
 		required: true
 	},
 	participants: [

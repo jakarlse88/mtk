@@ -197,13 +197,13 @@ class Register extends Component {
 								</small>
 							) : null}
 						</div>
+						<button
+							className="btn btn-dark mb-4"
+							type="submit"
+							onClick={this.onSubmit}>
+							Register
+						</button>
 					</form>
-					<button
-						className="btn btn-dark mb-4"
-						type="submit"
-						onClick={this.onSubmit}>
-						Send registrering
-					</button>
 				</div>
 			);
 		}

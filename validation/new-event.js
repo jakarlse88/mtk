@@ -13,13 +13,12 @@ module.exports = validateNewEventInput = (data, owner) => {
 	// a string, so pre-validate and default to an empty string
 	data.description = !isEmpty(data.description) ? data.description : '';
 	data.endDate = !isEmpty(data.endDate) ? data.endDate : '';
-	data.endTime = !isEmpty(data.endTime) ? data.endTime : '';
+	data.eventGroup = !isEmpty(data.eventGroup) ? data.eventGroup : '';
 	data.eventType = !isEmpty(data.eventType) ? data.eventType : '';
 	owner = !isEmpty(owner) ? owner : '';
 	data.name = !isEmpty(data.name) ? data.name : '';
 	data.prize = !isEmpty(data.prize) ? data.prize : '';
 	data.startDate = !isEmpty(data.startDate) ? data.startDate : '';
-	data.startTime = !isEmpty(data.startTime) ? data.startTime : '';
 
 	// Validate inputs
 	if (!Validator.isLength(data.description, { min: 5, max: 140 })) {
@@ -33,6 +32,31 @@ module.exports = validateNewEventInput = (data, owner) => {
 
 	if (Validator.isEmpty(data.eventType)) {
 		errors.eventType = 'Event type field is required';
+	}
+
+	if (
+		['grading', 'seminar', 'social'].indexOf(
+			data.eventType.toLowerCase()
+		) === -1
+	) {
+		errors.eventType = 'Invalid event type';
+	}
+
+	if (Validator.isEmpty(data.eventGroup)) {
+		errors.eventGroup = 'Event group field is required';
+	}
+
+	if (
+		[
+			'taekwondo',
+			'hapkido',
+			'jujutsu',
+			'muay thai',
+			'self defense'
+		].indexOf(data.eventGroup.toLowerCase()) === -1
+	) {
+		errors.eventGroup =
+			'Invalid event type: must be taekwondo, hapkido, jujutsu, muay thai, or self defense';
 	}
 
 	if (Validator.isEmpty(owner)) {
@@ -51,16 +75,8 @@ module.exports = validateNewEventInput = (data, owner) => {
 		errors.endDate = 'Not a valid date';
 	}
 
-	if (Validator.isEmpty(data.endTime)) {
-		errors.endTime = 'End time is required';
-	}
-
 	if (!Validator.isISO8601(data.startDate)) {
 		errors.startDate = 'Not a valid date';
-	}
-
-	if (Validator.isEmpty(data.startTime)) {
-		errors.startTime = 'Start time is required';
 	}
 
 	const newStartDate = new Date(data.startDate);

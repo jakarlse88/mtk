@@ -15,13 +15,12 @@ class CreateEvent extends Component {
 			errors: {},
 			description: '',
 			endDate: '',
-			endTime: '',
+			eventGroup: '',
 			eventType: '',
 			owner: '',
 			name: '',
 			prize: '',
-			startDate: '',
-			startTime: ''
+			startDate: ''
 		};
 	}
 
@@ -44,14 +43,13 @@ class CreateEvent extends Component {
 
 		const newEventData = {
 			description: this.state.description,
+			eventGroup: this.state.eventGroup,
 			endDate: this.state.endDate,
-			endTime: this.state.endTime,
 			eventType: this.state.eventType,
 			owner: this.props.auth.user.name,
 			name: this.state.name,
 			prize: this.state.prize,
-			startDate: this.state.startDate,
-			startTime: this.state.startTime
+			startDate: this.state.startDate
 		};
 
 		this.props.createEvent(newEventData, this.props.history);
@@ -81,19 +79,20 @@ class CreateEvent extends Component {
 								error={errors.name}
 							/>
 							<InputField
-								inputId="descriptionInput"
-								labelText="Description"
-								name="description"
-								placeholder="f.eks. 'Gradering for TKD'"
-								value={this.state.description}
+								inputId="eventGroupInput"
+								labelText="Event group"
+								name="eventGroup"
+								placeholder="Taekwondo, hapkido, jujutsu, muay thai, or self defense"
+								value={this.state.eventGroup}
 								onChange={this.onChange}
-								error={errors.description}
+								error={errors.eventGroup}
 							/>
+
 							<InputField
 								inputId="typeInput"
 								labelText="Event type"
 								name="eventType"
-								placeholder="f.eks. 'Gradering'"
+								placeholder="Grading, seminar, or social"
 								value={this.state.eventType}
 								onChange={this.onChange}
 								error={errors.eventType}
@@ -108,14 +107,6 @@ class CreateEvent extends Component {
 								error={errors.startDate}
 							/>
 							<InputField
-								inputId="startTimeInput"
-								labelText="Start time"
-								name="startTime"
-								value={this.state.startTime}
-								onChange={this.onChange}
-								error={errors.startTime}
-							/>
-							<InputField
 								inputId="endDateInput"
 								labelText="End date"
 								name="endDate"
@@ -125,14 +116,6 @@ class CreateEvent extends Component {
 								error={errors.endDate}
 							/>
 							<InputField
-								inputId="endTimeInput"
-								labelText="End time"
-								name="endTime"
-								value={this.state.endTime}
-								onChange={this.onChange}
-								error={errors.endTime}
-							/>
-							<InputField
 								inputId="prizeInput"
 								labelText="Prize"
 								name="prize"
@@ -140,6 +123,33 @@ class CreateEvent extends Component {
 								onChange={this.onChange}
 								error={errors.prize}
 							/>
+							<div className="form-group">
+								<label htmlFor="descriptionInput">
+									Description:
+								</label>
+								<textarea
+									className="form-control"
+									name="description"
+									placeholder="f.eks. 'Gradering for TKD'"
+									id="descriptionInput"
+									value={this.state.description}
+									onChange={this.onChange}
+								/>
+								{errors.description && (
+									<div className="text-danger">
+										{errors.description}
+									</div>
+								)}
+							</div>
+							<div className="col-12 m-auto">
+								<p className="text-center">
+									<button
+										className="btn btn-success mb-4 mt-2"
+										onClick={this.onSubmit}>
+										Create Event
+									</button>
+								</p>
+							</div>
 						</form>
 						<div className="col-10 m-auto text-center">
 							<Link to="/manage-events">
@@ -150,11 +160,6 @@ class CreateEvent extends Component {
 									Back
 								</button>
 							</Link>
-							<button
-								className="btn btn-success mb-4 mt-2 ml-2"
-								onClick={this.onSubmit}>
-								Create Event
-							</button>
 						</div>
 					</div>
 				</div>

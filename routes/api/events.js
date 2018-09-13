@@ -85,14 +85,14 @@ router.post(
 
 		const newEvent = new Event({
 			description: req.body.description,
+			eventGroup: req.body.eventGroup,
+			eventType: req.body.eventType,
 			endDate: req.body.endDate,
-			endTime: req.body.endTime,
 			eventType: req.body.eventType,
 			owner: req.user.name,
 			name: req.body.name,
 			prize: req.body.prize,
-			startDate: req.body.startDate,
-			startTime: req.body.startTime
+			startDate: req.body.startDate
 		});
 
 		newEvent

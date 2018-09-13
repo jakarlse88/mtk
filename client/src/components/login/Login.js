@@ -42,7 +42,9 @@ class Login extends Component {
 		});
 	};
 
-	onSubmit = () => {
+	onSubmit = e => {
+		e.preventDefault();
+
 		const loginData = {
 			email: this.state.email,
 			password: this.state.password
@@ -99,13 +101,13 @@ class Login extends Component {
 									</small>
 								) : null}
 							</div>
+							<button
+								className="btn btn-dark mb-4"
+								type="submit"
+								onClick={this.onSubmit}>
+								Login
+							</button>
 						</form>
-						<button
-							className="btn btn-dark mb-4"
-							type="submit"
-							onClick={this.onSubmit}>
-							Login
-						</button>
 					</div>
 				</div>
 			</div>
