@@ -60,7 +60,10 @@ class CreateEvent extends Component {
 	onScheduleItemAdd = e => {
 		e.preventDefault();
 
-		if (isEmpty(this.state.scheduleDateBuffer)) {
+		const { scheduleContentBuffer, scheduleDateBuffer } = this.state;
+
+		// Date and content fields are required
+		if (isEmpty(scheduleDateBuffer)) {
 			this.setState({
 				errors: {
 					schedule: 'Schedule date is required'
@@ -70,7 +73,7 @@ class CreateEvent extends Component {
 			return;
 		}
 
-		if (isEmpty(this.state.scheduleContentBuffer)) {
+		if (isEmpty(scheduleContentBuffer)) {
 			this.setState({
 				errors: {
 					schedule: 'Schedule content is required'
@@ -80,23 +83,23 @@ class CreateEvent extends Component {
 			return;
 		}
 
+		// Clear errors
 		this.setState({
 			errors: {
 				schedule: ''
 			}
 		});
 
-		const newScheduleItem = {
-			date: this.state.scheduleDateBuffer,
-			content: this.state.scheduleContentBuffer
+		// On submit, clear content field and update local schedule state
+
+		const newItem = {
+			date: scheduleDateBuffer,
+			content: scheduleContentBuffer
 		};
 
-		this.setState(prevState => {
-			return {
-				scheduleDateBuffer: '',
-				scheduleContentBuffer: '',
-				schedule: [...prevState.schedule, newScheduleItem]
-			};
+		this.setState({
+			schedule: [...this.state.schedule, newItem],
+			dateContentBuffer: ''
 		});
 	};
 
@@ -224,9 +227,10 @@ class CreateEvent extends Component {
 											<p className="text-muted">
 												Schedule preview: <br />
 												<ul>
-													{this.state.schedule.map(item => (
-														<li>
-															{item.date}: {item.content}
+													{this.state.schedule.map((item, index) => (
+														<li key={index}>
+															{Object.keys(item)[0]}:{' '}
+															{item[Object.keys(item)[0]]}
 														</li>
 													))}
 												</ul>

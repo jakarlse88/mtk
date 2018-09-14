@@ -14,6 +14,7 @@ class SingleEvent extends Component {
 
 	render() {
 		const { eventLoading, event } = this.props.events;
+
 		let content;
 
 		if (eventLoading) {
@@ -88,27 +89,22 @@ class SingleEvent extends Component {
 							{event.description}
 						</p>
 					</div>
-
+					{/* TODO: don't repeat dates */}
 					<div className="col-12">
 						<h2 className="text-center mt-4">Schedule</h2>
 						<hr />
-						<p>
-							{/* TODO: local parsing so as to not list the same date more than once */}
-							{event.schedule && event.schedule.length ? (
-								<ul>
-									{event.schedule.map(scheduleItem => (
-										<li>
-											<strong>{scheduleItem.date}:</strong>
-											{scheduleItem.content}
-										</li>
-									))}
-								</ul>
-							) : (
-								<p className="text-muted">
-									No schedule information found.
-								</p>
-							)}
-						</p>
+						{event.schedule && event.schedule.length ? (
+							<ul>
+								{event.schedule.map((scheduleItem, index) => (
+									<li key={index}>
+										<strong>{scheduleItem.date}: </strong>
+										{scheduleItem.content}
+									</li>
+								))}
+							</ul>
+						) : (
+							<p className="text-muted">No schedule information found.</p>
+						)}
 					</div>
 
 					{/*  TODO: implement the below */}
