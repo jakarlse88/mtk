@@ -7,20 +7,23 @@ import InputField from '../common/InputField';
 
 import { createEvent } from '../../actions/eventActions';
 
+import isEmpty from '../../utils/is-empty';
+
 class CreateEvent extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			errors: {},
 			description: '',
-			endDate: '',
+			errors: {},
 			eventGroup: '',
 			eventType: '',
-			owner: '',
 			name: '',
+			owner: '',
 			prize: '',
-			startDate: ''
+			scheduleContentBuffer: '',
+			scheduleDateBuffer: '',
+			schedule: []
 		};
 	}
 
@@ -44,15 +47,57 @@ class CreateEvent extends Component {
 		const newEventData = {
 			description: this.state.description,
 			eventGroup: this.state.eventGroup,
-			endDate: this.state.endDate,
 			eventType: this.state.eventType,
-			owner: this.props.auth.user.name,
 			name: this.state.name,
+			owner: this.props.auth.user.name,
 			prize: this.state.prize,
-			startDate: this.state.startDate
+			schedule: this.state.schedule
 		};
 
 		this.props.createEvent(newEventData, this.props.history);
+	};
+
+	onScheduleItemAdd = e => {
+		e.preventDefault();
+
+		if (isEmpty(this.state.scheduleDateBuffer)) {
+			this.setState({
+				errors: {
+					schedule: 'Schedule date is required'
+				}
+			});
+
+			return;
+		}
+
+		if (isEmpty(this.state.scheduleContentBuffer)) {
+			this.setState({
+				errors: {
+					schedule: 'Schedule content is required'
+				}
+			});
+
+			return;
+		}
+
+		this.setState({
+			errors: {
+				schedule: ''
+			}
+		});
+
+		const newScheduleItem = {
+			date: this.state.scheduleDateBuffer,
+			content: this.state.scheduleContentBuffer
+		};
+
+		this.setState(prevState => {
+			return {
+				scheduleDateBuffer: '',
+				scheduleContentBuffer: '',
+				schedule: [...prevState.schedule, newScheduleItem]
+			};
+		});
 	};
 
 	render() {
@@ -63,11 +108,16 @@ class CreateEvent extends Component {
 				<div className="row justify-content-center">
 					<div className="col-10 m-auto">
 						<h2 className="mt-4 text-center">Create Event</h2>
+						<hr />
 						{errors.alreadyExists && (
-							<p className="text-danger">
-								{errors.alreadyExists}
-							</p>
+							<p className="text-danger">{errors.alreadyExists}</p>
 						)}
+						<div className="form-row">
+							<div className="col-12">
+								<p className="lead">General information</p>
+							</div>
+						</div>
+
 						<form onSubmit={this.onSubmit} noValidate>
 							<InputField
 								inputId="nameInput"
@@ -78,6 +128,7 @@ class CreateEvent extends Component {
 								onChange={this.onChange}
 								error={errors.name}
 							/>
+
 							<InputField
 								inputId="eventGroupInput"
 								labelText="Event group"
@@ -88,45 +139,31 @@ class CreateEvent extends Component {
 								error={errors.eventGroup}
 							/>
 
-							<InputField
-								inputId="typeInput"
-								labelText="Event type"
-								name="eventType"
-								placeholder="Grading, seminar, or social"
-								value={this.state.eventType}
-								onChange={this.onChange}
-								error={errors.eventType}
-							/>
-							<InputField
-								inputId="startDateInput"
-								labelText="Start date"
-								name="startDate"
-								type="date"
-								value={this.state.startDate}
-								onChange={this.onChange}
-								error={errors.startDate}
-							/>
-							<InputField
-								inputId="endDateInput"
-								labelText="End date"
-								name="endDate"
-								type="date"
-								value={this.state.endDate}
-								onChange={this.onChange}
-								error={errors.endDate}
-							/>
-							<InputField
-								inputId="prizeInput"
-								labelText="Prize"
-								name="prize"
-								value={this.state.prize}
-								onChange={this.onChange}
-								error={errors.prize}
-							/>
+							<div className="form-row">
+								<div className="col-8">
+									<InputField
+										inputId="typeInput"
+										labelText="Event type"
+										name="eventType"
+										placeholder="Grading, seminar, or social"
+										value={this.state.eventType}
+										onChange={this.onChange}
+										error={errors.eventType}
+									/>
+								</div>
+								<div className="col-4">
+									<InputField
+										inputId="prizeInput"
+										labelText="Prize"
+										name="prize"
+										value={this.state.prize}
+										onChange={this.onChange}
+										error={errors.prize}
+									/>
+								</div>
+							</div>
 							<div className="form-group">
-								<label htmlFor="descriptionInput">
-									Description:
-								</label>
+								<label htmlFor="descriptionInput">Description:</label>
 								<textarea
 									className="form-control"
 									name="description"
@@ -136,11 +173,69 @@ class CreateEvent extends Component {
 									onChange={this.onChange}
 								/>
 								{errors.description && (
-									<div className="text-danger">
-										{errors.description}
-									</div>
+									<div className="text-danger">{errors.description}</div>
 								)}
 							</div>
+							<div className="row">
+								<div className="col-12">
+									<p className="lead">Schedule</p>
+								</div>
+							</div>
+							<div className="form-group">
+								<div className="form-row">
+									<div className="col-12 col-md-2">
+										<label htmlFor="scheduleDateInput">Date:</label>
+										<input
+											name="scheduleDateBuffer"
+											type="date"
+											className="form-control mb-2"
+											id="scheduleDateInput"
+											value={this.state.scheduleDateBuffer}
+											onChange={this.onChange}
+										/>
+									</div>
+									<div className="col-11 col-md-9">
+										<label htmlFor="scheduleContentInput">Content: </label>
+										<input
+											placeholder="10:00-11:30 -- Gibon jase"
+											type="text"
+											className="form-control mb-2"
+											id="scheduleContentInput"
+											value={this.state.scheduleContentBuffer}
+											onChange={this.onChange}
+											name="scheduleContentBuffer"
+										/>
+									</div>
+									<div className="col-1 d-flex">
+										<button
+											type="button"
+											className="btn btn-success align-self-end mb-2"
+											onClick={this.onScheduleItemAdd}>
+											<i className="fas fa-plus" />
+										</button>
+									</div>
+									{errors.schedule && (
+										<div className="text-danger col-12">
+											{errors.schedule}
+										</div>
+									)}
+									{this.state.schedule.length > 0 && (
+										<div className="col-12">
+											<p className="text-muted">
+												Schedule preview: <br />
+												<ul>
+													{this.state.schedule.map(item => (
+														<li>
+															{item.date}: {item.content}
+														</li>
+													))}
+												</ul>
+											</p>
+										</div>
+									)}
+								</div>
+							</div>
+
 							<div className="col-12 m-auto">
 								<p className="text-center">
 									<button

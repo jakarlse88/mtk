@@ -12,13 +12,11 @@ module.exports = validateNewEventInput = (data, owner) => {
 	// Validator will throw if passed anything that isn't
 	// a string, so pre-validate and default to an empty string
 	data.description = !isEmpty(data.description) ? data.description : '';
-	data.endDate = !isEmpty(data.endDate) ? data.endDate : '';
 	data.eventGroup = !isEmpty(data.eventGroup) ? data.eventGroup : '';
 	data.eventType = !isEmpty(data.eventType) ? data.eventType : '';
 	owner = !isEmpty(owner) ? owner : '';
 	data.name = !isEmpty(data.name) ? data.name : '';
 	data.prize = !isEmpty(data.prize) ? data.prize : '';
-	data.startDate = !isEmpty(data.startDate) ? data.startDate : '';
 
 	// Validate inputs
 	if (!Validator.isLength(data.description, { min: 5, max: 140 })) {
@@ -71,19 +69,8 @@ module.exports = validateNewEventInput = (data, owner) => {
 		errors.prize = 'Not a valid number';
 	}
 
-	if (!Validator.isISO8601(data.endDate)) {
-		errors.endDate = 'Not a valid date';
-	}
-
-	if (!Validator.isISO8601(data.startDate)) {
-		errors.startDate = 'Not a valid date';
-	}
-
-	const newStartDate = new Date(data.startDate);
-	const newEndDate = new Date(data.endaDate);
-
-	if (newEndDate < newStartDate) {
-		errors.startDate = 'Start date must precede end date';
+	if (!Array.isArray(data.schedule)) {
+		errors.schedule = 'Invalid schedule format';
 	}
 
 	return {

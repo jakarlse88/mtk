@@ -31,12 +31,10 @@ class SingleEvent extends Component {
 				<Fragment>
 					<p className="lead text-center text-danger">
 						<span className="badge">
-							<i className="fas fa-exclamation-triangle fa-3x" />{' '}
+							<i className="fas fa-exclamation-triangle fa-3x" /> <br />
 							<br />
 							<br />
-							<br />
-							Oops! Something went wrong. Try again, or
-							contact an admin.
+							Oops! Something went wrong. Try again, or contact an admin.
 						</span>
 					</p>
 					<div className="col-12 text-center">
@@ -59,51 +57,30 @@ class SingleEvent extends Component {
 					<div className="col-12">
 						<h2 className="text-center mt-4">{event.name}</h2>
 						{event.owner && (
-							<small className="text-muted text-center">
-								Made by {event.owner}
-							</small>
+							<p className="text-center">
+								<small className="text-muted">Made by {event.owner}</small>
+							</p>
 						)}
 						<hr />
-					</div>
-					<div className="col-12">
 						<p>
 							<strong>From:</strong>
 							<br />
-							<Moment
-								date={event.startTime}
-								format="HH:MM"
-							/>
-							,{' '}
-							<Moment
-								date={event.startDate}
-								format="MMMM DD YYYY"
-							/>
+							<Moment date={event.startTime} format="HH:MM" />,{' '}
+							<Moment date={event.startDate} format="MMMM DD YYYY" />
 						</p>
-					</div>
-					<div className="col-12">
 						<p>
 							<strong>To:</strong>
 							<br />
-							<Moment
-								date={event.endTime}
-								format="HH:MM"
-							/>,{' '}
-							<Moment
-								date={event.endDate}
-								format="MMMM DD YYYY"
-							/>
+							<Moment date={event.endTime} format="HH:MM" />,{' '}
+							<Moment date={event.endDate} format="MMMM DD YYYY" />
 						</p>
-					</div>
-					<div className="col-12">
 						<p>
 							<strong>Prize:</strong>
 							<br />
 							{event.prize}
 							,-
 						</p>
-					</div>
 
-					<div className="col-12">
 						<p>
 							<strong>
 								Description: <br />
@@ -111,17 +88,38 @@ class SingleEvent extends Component {
 							{event.description}
 						</p>
 					</div>
+
+					<div className="col-12">
+						<h2 className="text-center mt-4">Schedule</h2>
+						<hr />
+						<p>
+							{/* TODO: local parsing so as to not list the same date more than once */}
+							{event.schedule && event.schedule.length ? (
+								<ul>
+									{event.schedule.map(scheduleItem => (
+										<li>
+											<strong>{scheduleItem.date}:</strong>
+											{scheduleItem.content}
+										</li>
+									))}
+								</ul>
+							) : (
+								<p className="text-muted">
+									No schedule information found.
+								</p>
+							)}
+						</p>
+					</div>
+
 					{/*  TODO: implement the below */}
 					{event.participants > 0 ? (
 						<div className="col-12">
 							<p>
 								<strong>Participants:</strong>
 								<ul>
-									{event.participants.map(
-										participant => (
-											<li>{participant.name}</li>
-										)
-									)}
+									{event.participants.map(participant => (
+										<li>{participant.name}</li>
+									))}
 								</ul>
 							</p>
 						</div>

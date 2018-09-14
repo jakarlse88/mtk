@@ -9,10 +9,6 @@ const EventSchema = new Schema({
 		type: String,
 		required: true
 	},
-	endDate: {
-		type: Date,
-		required: true
-	},
 	eventGroup: {
 		type: String,
 		required: true
@@ -21,26 +17,34 @@ const EventSchema = new Schema({
 		type: String,
 		required: true
 	},
-	owner: {
-		type: String,
-		isRequired: true
-	},
 	name: {
 		type: String,
 		required: true
 	},
-	prize: {
-		type: Number
-	},
-	startDate: {
-		type: Date,
-		required: true
+	owner: {
+		type: String,
+		isRequired: true
 	},
 	participants: [
 		{
 			participant: {
 				type: Schema.Types.ObjectId,
 				ref: 'participants'
+			}
+		}
+	],
+	prize: {
+		type: Number
+	},
+	schedule: [
+		{
+			date: {
+				type: String,
+				required: true
+			},
+			content: {
+				type: String,
+				required: true
 			}
 		}
 	]

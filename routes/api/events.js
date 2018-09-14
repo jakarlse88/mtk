@@ -76,8 +76,7 @@ router.post(
 			.then(event => {
 				if (event) {
 					return res.status(400).json({
-						alreadyExists:
-							'An event with that name already exists'
+						alreadyExists: 'An event with that name already exists'
 					});
 				}
 			})
@@ -87,12 +86,11 @@ router.post(
 			description: req.body.description,
 			eventGroup: req.body.eventGroup,
 			eventType: req.body.eventType,
-			endDate: req.body.endDate,
 			eventType: req.body.eventType,
 			owner: req.user.name,
 			name: req.body.name,
 			prize: req.body.prize,
-			startDate: req.body.startDate
+			schedule: req.body.schedule
 		});
 
 		newEvent

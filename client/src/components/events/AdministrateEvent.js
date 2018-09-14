@@ -26,7 +26,7 @@ class AdministrateEvent extends Component {
 						<hr />
 					</div>
 
-					<div className="col-12 col-lg-6">
+					<div className="col-12 col-lg-4">
 						<h4 className="mb-2">Details</h4>
 						<p>
 							<strong>From:</strong> <br />
@@ -49,7 +49,7 @@ class AdministrateEvent extends Component {
 						</p>
 					</div>
 
-					<div className="col-12 col-lg-6">
+					<div className="col-12 col-lg-8">
 						<h4>Schedule</h4>
 						<p>
 							Lorem ipsum dolor sit amet consectetur
