@@ -15,7 +15,8 @@ const app = express();
 
 // Don't crash the server
 // FIXME: I don't (quite) understand why this is necessary
-const ContentModel = require('./models/Content');
+const ArticleContentModel = require('./models/ArticleContent');
+const InformationContentModel = require('./models/InformationContent');
 const EventModel = require('./models/Event');
 const ParticipantModel = require('./models/Participant');
 const UserModel = require('./models/User');

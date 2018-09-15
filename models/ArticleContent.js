@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /*
- * Content schema
+ * Article content schema
  */
-
-const ContentSchema = new Schema({
+const ArticleContentSchema = new Schema({
 	author: {
 		type: String,
 		required: true
@@ -22,7 +21,14 @@ const ContentSchema = new Schema({
 	headline: {
 		type: String,
 		required: true
+	},
+	category: {
+		type: String,
+		required: true
 	}
 });
 
-module.exports = Content = mongoose.model('content', ContentSchema);
+module.exports = ArticleContent = mongoose.model(
+	'articleContent',
+	ArticleContentSchema
+);
