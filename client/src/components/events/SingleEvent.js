@@ -92,7 +92,7 @@ class SingleEvent extends Component {
 						{event.owner && (
 							<p className="text-center">
 								<small className="text-muted">
-									TYPE: {event.eventType} - GROUP: {event.eventGroup} -
+									TYPE: {event.eventType} | GROUP: {event.eventGroup} |
 									OWNER: {event.owner}
 								</small>
 							</p>

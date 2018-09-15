@@ -18,15 +18,13 @@ class Login extends Component {
 
 	componentDidMount = () => {
 		if (this.props.auth.isAuthenticated) {
-			this.props.history.push('/');
-			// TODO: dashboard
+			this.props.history.push('/dashboard');
 		}
 	};
 
 	componentWillReceiveProps = nextProps => {
 		if (nextProps.auth.isAuthenticated) {
-			this.props.history.push('/');
-			// TODO: dashboard
+			this.props.history.push('/dashboard');
 		}
 
 		if (nextProps.errors) {
@@ -60,10 +58,9 @@ class Login extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col-8 m-auto">
-						<h4 className="text-center mt-4">Login</h4>
-						<p className="text-muted text-center">
-							Admin/instruktør
-						</p>
+						<h2 className="display-4 text-center mt-4">Login</h2>
+						<p className="text-muted text-center">Admin/instruktør</p>
+						<hr />
 						<form onSubmit={this.onSubmit}>
 							<div className="form-group">
 								<input
@@ -76,9 +73,7 @@ class Login extends Component {
 									className="form-control"
 								/>
 								{errors.email ? (
-									<small
-										id="emailHelp"
-										className="form-text text-danger">
+									<small id="emailHelp" className="form-text text-danger">
 										{errors.email}
 									</small>
 								) : null}
@@ -101,12 +96,14 @@ class Login extends Component {
 									</small>
 								) : null}
 							</div>
-							<button
-								className="btn btn-dark mb-4"
-								type="submit"
-								onClick={this.onSubmit}>
-								Login
-							</button>
+							<p className="text-center">
+								<button
+									className="btn btn-dark mb-4"
+									type="submit"
+									onClick={this.onSubmit}>
+									Login
+								</button>
+							</p>
 						</form>
 					</div>
 				</div>

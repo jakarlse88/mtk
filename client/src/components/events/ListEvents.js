@@ -54,12 +54,10 @@ class ListEvents extends Component {
 			content = (
 				<p className="lead text-center text-danger">
 					<span className="badge">
-						<i className="fas fa-exclamation-triangle fa-3x" />{' '}
+						<i className="fas fa-exclamation-triangle fa-3x" /> <br />
 						<br />
 						<br />
-						<br />
-						Oops! Something went wrong. Try again, or contact
-						an admin.
+						Oops! Something went wrong. Try again, or contact an admin.
 					</span>
 				</p>
 			);
@@ -98,16 +96,9 @@ class ListEvents extends Component {
 						</span>
 						<small className="text-muted">
 							{event.eventType},{' '}
-							<Moment
-								date={event.startDate}
-								format="dddd DD/MM/YYYY"
-							/>{' '}
-							to{' '}
-							<Moment
-								date={event.endDate}
-								format="dddd DD/MM/YYYY"
-							/>{' '}
-							by {event.owner}
+							<Moment date={event.startDate} format="dddd DD/MM/YYYY" /> to{' '}
+							<Moment date={event.endDate} format="dddd DD/MM/YYYY" /> by{' '}
+							{event.owner}
 						</small>
 					</div>
 				</div>
@@ -117,30 +108,28 @@ class ListEvents extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<div className="col-10 m-auto">
-						<h2 className="display-4 text-center mt-4">
-							Events
-						</h2>
+					<div className="col-12 m-auto">
+						<h2 className="display-4 text-center mt-4">Events</h2>
 						<hr />
-						{content}
 					</div>
+					<div className="col-10 m-auto">{content}</div>
 					{this.props.auth.isAuthenticated ? (
-						<div className="col-10 m-auto text-center">
+						<div className="col-8 m-auto text-center">
 							<Link to="/manage-events">
-								<button className="btn btn-danger mt-2 mb-4">
+								<button className="btn btn-secondary mt-2 mb-4">
 									<span className="badge">
-										<i className="fas fa-angle-left fa-lg" />
+										<i className="fas fa-arrow-left" />
 									</span>{' '}
 									Back
 								</button>
 							</Link>
 						</div>
 					) : (
-						<div className="col-10 m-auto text-center">
+						<div className="col-8 m-auto text-center">
 							<Link to="/">
-								<button className="btn btn-danger mt-2 mb-4">
+								<button className="btn btn-secondary mt-2 mb-4">
 									<span className="badge">
-										<i className="fas fa-angle-left fa-lg" />
+										<i className="fas fa-arrow-left" />
 									</span>{' '}
 									Home
 								</button>
