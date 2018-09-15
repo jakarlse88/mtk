@@ -12,6 +12,7 @@ const InformationContent = require('../../models/InformationContent');
  * Load validators
  */
 const validateNewArticleInput = require('../../validation/new-article');
+const validateNewInformationInput = require('../../validation/new-info');
 
 /*
  * Test route
@@ -76,7 +77,14 @@ router.post(
 	'/information/new',
 	passport.authenticate('jwt', { session: false }),
 	(req, res) => {
-		// TODO: validation
+		const { errors, isValid } = validateNewInformationInput(
+			req.body,
+			req.user.name
+		);
+
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
 
 		InformationContent.findOne({
 			author: req.user.name,
