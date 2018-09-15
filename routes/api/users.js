@@ -125,44 +125,31 @@ router.put(
 									.genSalt(10)
 									.then(salt => {
 										bcrypt
-											.hash(
-												req.body.newPassword,
-												salt
-											)
+											.hash(req.body.newPassword, salt)
 											.then(hash => {
 												// Update user info
 												user.name = req.body.name;
-												user.email =
-													req.body.email;
+												user.email = req.body.email;
 												user.role = req.body.role;
 												user.password = hash;
 
 												// Save updated user info
-												user.save()
-													.then(user =>
-														res.json(user)
-													)
+												user
+													.save()
+													.then(user => res.json(user))
 													.catch(err => {
-														errors.save =
-															'Could not save user data';
-														return res
-															.status(500)
-															.json(errors);
+														errors.save = 'Could not save user data';
+														return res.status(500).json(errors);
 													});
 											})
 											.catch(err => {
 												errors.hash = err;
-												return res
-													.status(500)
-													.json(errors);
+												return res.status(500).json(errors);
 											});
 									})
 									.catch(err => {
-										errors.salt =
-											'Could not generate salt';
-										return res
-											.status(500)
-											.json(errors);
+										errors.salt = 'Could not generate salt';
+										return res.status(500).json(errors);
 									});
 							} else {
 								// Update user info
@@ -171,14 +158,12 @@ router.put(
 								user.role = req.body.role;
 
 								// Save updated user info
-								user.save()
+								user
+									.save()
 									.then(user => res.json(user))
 									.catch(err => {
-										errors.save =
-											'Could not save user data';
-										return res
-											.status(500)
-											.json(errors);
+										errors.save = 'Could not save user data';
+										return res.status(500).json(errors);
 									});
 							}
 						} else {

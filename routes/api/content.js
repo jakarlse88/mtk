@@ -1,5 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const router = express.Router();
 
@@ -12,6 +11,7 @@ const InformationContent = require('../../models/InformationContent');
 /*
  * Load validators
  */
+const validateNewArticleInput = require('../../validation/new-article');
 
 /*
  * Test route
@@ -27,7 +27,14 @@ router.post(
 	'/article/new',
 	passport.authenticate('jwt', { session: false }),
 	(req, res) => {
-		// TODO: validation
+		const { errors, isValid } = validateNewArticleInput(
+			req.body,
+			req.user.name
+		);
+
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
 
 		ArticleContent.findOne({
 			author: req.user.name,
