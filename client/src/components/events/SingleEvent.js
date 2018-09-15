@@ -35,7 +35,6 @@ class SingleEvent extends Component {
 			}
 		}
 
-		console.log(newSchedule);
 		return newSchedule;
 	};
 
@@ -89,65 +88,79 @@ class SingleEvent extends Component {
 				<Fragment>
 					<div className="col-12">
 						<h2 className="text-center mt-4">{event.name}</h2>
+
 						{event.owner && (
 							<p className="text-center">
-								<small className="text-muted">Made by {event.owner}</small>
+								<small className="text-muted">
+									TYPE: {event.eventType} - GROUP: {event.eventGroup} -
+									OWNER: {event.owner}
+								</small>
 							</p>
 						)}
 						<hr />
-						<p>
-							<strong>From:</strong>
-							<br />
-							<Moment date={event.startTime} format="HH:MM" />,{' '}
-							<Moment date={event.startDate} format="MMMM DD YYYY" />
-						</p>
-						<p>
-							<strong>To:</strong>
-							<br />
-							<Moment date={event.endTime} format="HH:MM" />,{' '}
-							<Moment date={event.endDate} format="MMMM DD YYYY" />
-						</p>
-						<p>
-							<strong>Prize:</strong>
-							<br />
-							{event.prize}
-							,-
-						</p>
+						<div className="row">
+							<div className="col-12 col-md-4">
+								<p className="lead">Dates:</p>
+								<p>
+									<Moment date={event.startDate} format="DD MMMM YYYY" />
+									{event.startDate !== event.endDate && (
+										<span>
+											-{' '}
+											<Moment date={event.endDate} format="DD MMMM YYYY" />
+										</span>
+									)}
+								</p>
+							</div>
 
-						<p>
-							<strong>
-								Description: <br />
-							</strong>
-							{event.description}
-						</p>
+							<div className="col-12 col-md-4">
+								<p className="lead">Prize:</p>
+								<p>
+									{event.prize}
+									,-
+								</p>
+							</div>
+
+							<div className="col-12 col-md-4">
+								<p className="lead">Description:</p>
+								<p>{event.description}</p>
+							</div>
+						</div>
 					</div>
 					{/* FIXME: such jank, much wow */}
 					<div className="col-12">
 						<h2 className="text-center mt-4">Schedule</h2>
 						<hr />
 						{schedule ? (
-							<ul className="list-group">
+							<div className="row">
 								{Object.keys(schedule).map((dateItem, dateIndex) => (
-									<ul key={dateIndex} className="list-group">
-										<strong>{dateItem}: </strong>
-										{schedule[dateItem].map(
-											(contentItem, contentIndex) => (
-												<li key={contentIndex} className="list-group-item">
-													{contentItem}
-												</li>
-											)
-										)}
-									</ul>
+									<div key={dateIndex} className="col-12 col-lg-4">
+										<ul className="list-group mb-4">
+											<span className="lead">
+												<Moment date={dateItem} format="dddd DD/MM" />:{' '}
+											</span>
+											{schedule[dateItem].map(
+												(contentItem, contentIndex) => (
+													<li
+														key={contentIndex}
+														className="list-group-item">
+														{contentItem}
+													</li>
+												)
+											)}
+										</ul>
+									</div>
 								))}
-							</ul>
+							</div>
 						) : (
 							<p className="text-muted">No schedule information found.</p>
 						)}
 					</div>
 
 					{/*  TODO: implement the below */}
-					{event.participants > 0 ? (
-						<div className="col-12">
+					<div className="col-12">
+						<h2 className="text-center mt-4">Participants</h2>
+						<hr />
+						{event.participants > 0 ? (
 							<p>
 								<strong>Participants:</strong>
 								<ul>
@@ -156,8 +169,12 @@ class SingleEvent extends Component {
 									))}
 								</ul>
 							</p>
-						</div>
-					) : null}
+						) : (
+							<p className="text-muted">
+								No participant information found.
+							</p>
+						)}
+					</div>
 					<div className="col-12 text-center">
 						<Link to="/list-events">
 							<button className="btn btn-danger mt-2 mb-4">
