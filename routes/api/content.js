@@ -60,4 +60,48 @@ router.post(
 	}
 );
 
+/*
+ * @route   POST /api/content/information/new
+ * @desc    Create a new information item
+ * @access  Private
+ */
+router.post(
+	'/information/new',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		// TODO: validation
+
+		InformationContent.findOne({
+			author: req.user.name,
+			content: req.body.content,
+			date: req.body.date,
+			title: req.body.title,
+			style: req.body.style,
+			category: req.body.category
+		})
+			.then(article => {
+				if (article) {
+					return res.status(400).json({
+						articleAlreadyExists: 'Duplicate articles are not allowed'
+					});
+				}
+			})
+			.catch(err => console.log(err));
+
+		const newArticle = new InformationContent({
+			author: req.user.name,
+			content: req.body.content,
+			date: req.body.date,
+			title: req.body.title,
+			style: req.body.style,
+			category: req.body.category
+		});
+
+		newArticle
+			.save()
+			.then(article => res.json(article))
+			.catch(err => console.log(err));
+	}
+);
+
 module.exports = router;
