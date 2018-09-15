@@ -12,6 +12,33 @@ class SingleEvent extends Component {
 		this.props.getEvent(this.props.match.params.id);
 	};
 
+	parseSchedule = scheduleArray => {
+		const newSchedule = {};
+
+		let previousDate;
+
+		for (let item of scheduleArray) {
+			if (!previousDate) {
+				previousDate = item.date;
+				newSchedule[item.date] = [];
+				newSchedule[item.date].push(item.content);
+			}
+
+			if (previousDate && item.date === previousDate) {
+				newSchedule[item.date].push(item.content);
+			}
+
+			if (previousDate && item.date !== previousDate) {
+				previousDate = item.date;
+				newSchedule[item.date] = [];
+				newSchedule[item.date].push(item.content);
+			}
+		}
+
+		console.log(newSchedule);
+		return newSchedule;
+	};
+
 	render() {
 		const { eventLoading, event } = this.props.events;
 
@@ -53,6 +80,11 @@ class SingleEvent extends Component {
 		}
 
 		if (event) {
+			const schedule =
+				event.schedule && event.schedule.length
+					? this.parseSchedule(event.schedule)
+					: null;
+
 			content = (
 				<Fragment>
 					<div className="col-12">
@@ -89,17 +121,23 @@ class SingleEvent extends Component {
 							{event.description}
 						</p>
 					</div>
-					{/* TODO: don't repeat dates */}
+					{/* FIXME: such jank, much wow */}
 					<div className="col-12">
 						<h2 className="text-center mt-4">Schedule</h2>
 						<hr />
-						{event.schedule && event.schedule.length ? (
-							<ul>
-								{event.schedule.map((scheduleItem, index) => (
-									<li key={index}>
-										<strong>{scheduleItem.date}: </strong>
-										{scheduleItem.content}
-									</li>
+						{schedule ? (
+							<ul className="list-group">
+								{Object.keys(schedule).map((dateItem, dateIndex) => (
+									<ul key={dateIndex} className="list-group">
+										<strong>{dateItem}: </strong>
+										{schedule[dateItem].map(
+											(contentItem, contentIndex) => (
+												<li key={contentIndex} className="list-group-item">
+													{contentItem}
+												</li>
+											)
+										)}
+									</ul>
 								))}
 							</ul>
 						) : (
@@ -122,7 +160,7 @@ class SingleEvent extends Component {
 					) : null}
 					<div className="col-12 text-center">
 						<Link to="/list-events">
-							<button className="btn btn-danger mt-2">
+							<button className="btn btn-danger mt-2 mb-4">
 								<span className="badge">
 									<i className="fas fa-angle-left fa-lg" />
 								</span>{' '}

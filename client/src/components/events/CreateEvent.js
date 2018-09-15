@@ -99,7 +99,7 @@ class CreateEvent extends Component {
 
 		this.setState({
 			schedule: [...this.state.schedule, newItem],
-			dateContentBuffer: ''
+			scheduleContentBuffer: ''
 		});
 	};
 
@@ -224,17 +224,14 @@ class CreateEvent extends Component {
 									)}
 									{this.state.schedule.length > 0 && (
 										<div className="col-12">
-											<p className="text-muted">
-												Schedule preview: <br />
-												<ul>
-													{this.state.schedule.map((item, index) => (
-														<li key={index}>
-															{Object.keys(item)[0]}:{' '}
-															{item[Object.keys(item)[0]]}
-														</li>
-													))}
-												</ul>
-											</p>
+											Schedule preview: <br />
+											<ul className="text-muted">
+												{this.state.schedule.map((item, index) => (
+													<li key={index}>
+														{item.date}: {item.content}
+													</li>
+												))}
+											</ul>
 										</div>
 									)}
 								</div>
