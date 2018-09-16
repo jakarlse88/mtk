@@ -50,15 +50,14 @@ class Register extends Component {
 	};
 
 	render() {
-		const { user } = this.props.auth;
 		const { errors } = this.state;
 
 		let content;
 
-		if (user.role !== 'admin') {
+		if (this.props.auth.user && this.props.auth.user.role !== 'admin') {
 			content = (
 				<div className="col-12 m-auto text-center">
-					<h2 className="mt-4">Hello, {user.name}!</h2>
+					<h2 className="mt-4">Hello, {this.props.auth.user.name}!</h2>
 					<p className="lead text-center">
 						Unfortunately, this functionality requires administrator
 						privileges.
