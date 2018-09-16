@@ -9,14 +9,14 @@ const middleware = [thunk];
 
 const whichCompose = () => {
 	if (process.env.NODE_ENV !== 'production') {
-		compose(
+		return compose(
 			applyMiddleware(...middleware),
 			// Implements the Chrome redux tools extension
 			window.__REDUX_DEVTOOLS_EXTENSION__ &&
 				window.__REDUX_DEVTOOLS_EXTENSION__()
 		);
 	} else {
-		compose(applyMiddleware(...middleware));
+		return compose(applyMiddleware(...middleware));
 	}
 };
 
