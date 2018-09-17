@@ -14,9 +14,9 @@ import AboutSelfDefense from './components/information/AboutSelfDefense';
 import AboutTaekwondo from './components/information/AboutTaekwondo';
 import AboutThai from './components/information/AboutThai';
 import AdministrateEvent from './components/events/AdministrateEvent';
+import Contact from './components/contact/Contact';
 import CreateEvent from './components/events/CreateEvent';
 import CreateEventSuccess from './components/events/CreateEventSuccess';
-import Contact from './components/contact/Contact';
 import Dashboard from './components/dashboard/Dashboard';
 import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
@@ -28,6 +28,7 @@ import ManageEvents from './components/events/ManageEvents';
 import ManageUsers from './components/users/ManageUsers';
 import Navbar from './components/layout/Navbar';
 import News from './components/news/News';
+import NoMatch from './components/common/NoMatch';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Register from './components/register/Register';
 import RegisterSuccess from './components/register/RegisterSuccess';
@@ -66,120 +67,73 @@ class App extends Component {
 				<Router>
 					<Fragment>
 						<Route path="/" component={Navbar} />
-						<Route exact path="/" component={Landing} />
-						<Route
-							exact
-							path="/about-club"
-							component={AboutClub}
-						/>
-						<Route exact path="/contact" component={Contact} />
 						<Switch>
+							<Route exact path="/" component={Landing} />
+							<Route exact path="/about-club" component={AboutClub} />
+							<Route exact path="/contact" component={Contact} />
 							<ProtectedRoute
 								exact
 								path="/dashboard"
 								component={Dashboard}
 							/>
-						</Switch>
-						<Switch>
 							<ProtectedRoute
 								exact
 								path="/manage-events"
 								component={ManageEvents}
 							/>
-						</Switch>
-						<Switch>
 							<ProtectedRoute
 								exact
 								path="/create-event"
 								component={CreateEvent}
 							/>
-						</Switch>
-						<Switch>
 							<ProtectedRoute
 								exact
 								path="/create-event-success/:id"
 								component={CreateEventSuccess}
 							/>
-						</Switch>
-						<Route
-							exact
-							path="/list-events"
-							component={ListEvents}
-						/>
-						<Route
-							exact
-							path="/single-event/:id"
-							component={SingleEvent}
-						/>
-						<Switch>
 							<ProtectedRoute
 								exact
 								path="/admin-event/:id"
 								component={AdministrateEvent}
 							/>
-						</Switch>
-						<Switch>
 							<ProtectedRoute
 								exact
 								path="/manage-content"
 								component={ManageContent}
 							/>
-						</Switch>
-						<Route
-							exact
-							path="/hapkido"
-							component={AboutHapkido}
-						/>
-						<Route
-							exact
-							path="/information"
-							component={Information}
-						/>
-						<Route
-							exact
-							path="/jujutsu"
-							component={AboutJujutsu}
-						/>
-						<Route exact path="/login" component={Login} />
-						<Route exact path="/news" component={News} />
-						<Route
-							exact
-							path="/pricing"
-							component={AboutPricing}
-						/>
-						<Route
-							exact
-							path="/register-user"
-							component={Register}
-						/>
-						<Switch>
 							<ProtectedRoute
 								exact
 								path="/manage-users"
 								component={ManageUsers}
 							/>
+							<Route exact path="/list-events" component={ListEvents} />
+							<Route
+								exact
+								path="/single-event/:id"
+								component={SingleEvent}
+							/>
+							<Route exact path="/hapkido" component={AboutHapkido} />
+							<Route exact path="/information" component={Information} />
+							<Route exact path="/jujutsu" component={AboutJujutsu} />
+							<Route exact path="/login" component={Login} />
+							<Route exact path="/news" component={News} />
+							<Route exact path="/pricing" component={AboutPricing} />
+							<Route exact path="/register-user" component={Register} />
+							<Route
+								exact
+								path="/register-success"
+								component={RegisterSuccess}
+							/>
+							<Route exact path="/schedule" component={AboutSchedule} />
+							<Route
+								exact
+								path="/self-defense"
+								component={AboutSelfDefense}
+							/>
+							<Route exact path="/taekwondo" component={AboutTaekwondo} />
+							<Route exact path="/thai" component={AboutThai} />
+							<Route component={NoMatch} />
 						</Switch>
-						<Route
-							exact
-							path="/register-success"
-							component={RegisterSuccess}
-						/>
-						<Route
-							exact
-							path="/schedule"
-							component={AboutSchedule}
-						/>
-						<Route
-							exact
-							path="/self-defense"
-							component={AboutSelfDefense}
-						/>
-						<Route
-							exact
-							path="/taekwondo"
-							component={AboutTaekwondo}
-						/>
-						<Route exact path="/thai" component={AboutThai} />
 						<Route path="/" component={Footer} />
 					</Fragment>
 				</Router>
