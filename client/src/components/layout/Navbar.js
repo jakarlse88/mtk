@@ -66,7 +66,7 @@ class Navbar extends Component {
 					className="collapse navbar-collapse justify-content-end"
 					id="navbarNavAltMarkup">
 					<div className="navbar-nav">
-						<Link to="/news" className=" nav-item nav-link">
+						<Link to="/articles" className=" nav-item nav-link">
 							Nyheter
 						</Link>
 						<div className="nav-item dropdown">
@@ -83,47 +83,31 @@ class Navbar extends Component {
 							<div
 								className="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<Link
-									to="/about-club"
-									className="dropdown-item">
+								<Link to="/about-club" className="dropdown-item">
 									Om klubben
 								</Link>
-								<Link
-									to="/taekwondo"
-									className="dropdown-item">
+								<Link to="/taekwondo" className="dropdown-item">
 									Taekwondo
 								</Link>
-								<Link
-									to="/hapkido"
-									className="dropdown-item">
+								<Link to="/hapkido" className="dropdown-item">
 									Hapkido
 								</Link>
-								<Link
-									to="/jujutsu"
-									className="dropdown-item">
+								<Link to="/jujutsu" className="dropdown-item">
 									Brasiliansk Jujutsu
 								</Link>
 								<Link to="/thai" className="dropdown-item">
 									Muay Thai
 								</Link>
-								<Link
-									to="/self-defense"
-									className="dropdown-item">
+								<Link to="/self-defense" className="dropdown-item">
 									Selvforsvar for kvinner
 								</Link>
-								<Link
-									to="/schedule"
-									className="dropdown-item">
+								<Link to="/schedule" className="dropdown-item">
 									Treningstider
 								</Link>
-								<Link
-									to="/list-events"
-									className="dropdown-item">
+								<Link to="/list-events" className="dropdown-item">
 									Arrangementer
 								</Link>
-								<Link
-									to="/pricing"
-									className="dropdown-item">
+								<Link to="/pricing" className="dropdown-item">
 									Medlemskap og priser
 								</Link>
 							</div>

@@ -14,6 +14,7 @@ import AboutSelfDefense from './components/information/AboutSelfDefense';
 import AboutTaekwondo from './components/information/AboutTaekwondo';
 import AboutThai from './components/information/AboutThai';
 import AdministrateEvent from './components/events/AdministrateEvent';
+import Articles from './components/articles/Articles';
 import Contact from './components/contact/Contact';
 import CreateEvent from './components/events/CreateEvent';
 import CreateEventSuccess from './components/events/CreateEventSuccess';
@@ -23,11 +24,12 @@ import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
 import ListEvents from './components/events/ListEvents';
 import Login from './components/login/Login';
+import ManageArticles from './components/content/ManageArticles';
 import ManageContent from './components/content/ManageContent';
 import ManageEvents from './components/events/ManageEvents';
+import ManageInformation from './components/content/ManageInformation';
 import ManageUsers from './components/users/ManageUsers';
 import Navbar from './components/layout/Navbar';
-import News from './components/news/News';
 import NoMatch from './components/common/NoMatch';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Register from './components/register/Register';
@@ -103,6 +105,16 @@ class App extends Component {
 							/>
 							<ProtectedRoute
 								exact
+								path="/manage-articles"
+								component={ManageArticles}
+							/>
+							<ProtectedRoute
+								exact
+								path="/manage-information"
+								component={ManageInformation}
+							/>
+							<ProtectedRoute
+								exact
 								path="/manage-users"
 								component={ManageUsers}
 							/>
@@ -116,7 +128,7 @@ class App extends Component {
 							<Route exact path="/information" component={Information} />
 							<Route exact path="/jujutsu" component={AboutJujutsu} />
 							<Route exact path="/login" component={Login} />
-							<Route exact path="/news" component={News} />
+							<Route exact path="/articles" component={Articles} />
 							<Route exact path="/pricing" component={AboutPricing} />
 							<Route exact path="/register-user" component={Register} />
 							<Route

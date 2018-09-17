@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
-export default class ManageContent extends Component {
+export default class ManageArticles extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h2 className="display-4 text-center mt-4">Manage Content</h2>
-				<hr />
-				<div className="row mt-4 mb-4">
+				<div className="row">
+					<div className="col-12 m-auto">
+						<h2 className="display-4 mt-4 text-center">Manage Articles</h2>
+						<hr />
+					</div>
 					{items.map((item, index) => (
 						<div className="col-12 col-sm-6 col-lg-4 m-auto" key={index}>
 							<div className="card mb-4">
@@ -28,9 +30,9 @@ export default class ManageContent extends Component {
 							</div>
 						</div>
 					))}
-					<div className="col-12 text-center">
-						<Link to="/dashboard">
-							<button className="btn btn-secondary mt-2">
+					<div className="col-12 m-auto">
+						<Link to="/manage-content" className="d-block text-center">
+							<button className="btn btn-secondary">
 								<span className="badge">
 									<i className="fas fa-arrow-left" />
 								</span>{' '}
@@ -47,18 +49,18 @@ export default class ManageContent extends Component {
 const items = [
 	{
 		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Content',
-		cardTitle: 'Articles',
-		cardText: 'Write a new article, or manage already existing articles',
-		permissions: 'Admin',
-		linkTo: '/manage-articles'
+		imgAlt: 'Event',
+		cardTitle: 'Create Article',
+		cardText: 'Create a new, unique article.',
+		permissions: 'Admin, moderator',
+		linkTo: '/create-article'
 	},
 	{
 		imgSrc: 'https://via.placeholder.com/350x185',
 		imgAlt: 'Event',
-		cardTitle: 'Information',
-		cardText: '"About" pages, schedule, etc.',
-		permissions: 'Admin, instructor, public',
-		linkTo: '/manage-information'
+		cardTitle: 'View Articles',
+		cardText: 'List all articles in database.',
+		permissions: 'Admin, moderator, public',
+		linkTo: '/articles'
 	}
 ];

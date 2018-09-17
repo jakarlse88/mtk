@@ -20,12 +20,24 @@ const validateNewInformationInput = require('../../validation/new-info');
 router.get('/test', (req, res) => res.json({ msg: '/content works' }));
 
 /*
- * @route   POST /api/content/article/new
+ * @route   GET /api/content/articles
+ * @desc    Get all articles
+ * @access  Public
+ */
+router.get('/articles', (req, res) => {
+	ArticleContent.find()
+		.sort({ date: -1 })
+		.then(posts => res.json(posts))
+		.catch(err => console.log(err));
+});
+
+/*
+ * @route   POST /api/content/articles/new
  * @desc    Create a new article
  * @access  Private
  */
 router.post(
-	'/article/new',
+	'/articles/new',
 	passport.authenticate('jwt', { session: false }),
 	(req, res) => {
 		const { errors, isValid } = validateNewArticleInput(
