@@ -1,45 +1,39 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export default class NewsSearch extends Component {
-  constructor(props) {
-    super(props);
+export default class ArticleSearch extends Component {
+	onSearchFieldChange = e => {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	};
 
-    this.state = {
-      query: ''
-    };
-  }
+	render() {
+		return (
+			<div>
+				<hr />
+				<label htmlFor="articleQuery">
+					<p className="lead"> Article search:</p>
+				</label>
 
-  onSearchFieldChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <hr />
-        <label htmlFor="articleQuery">
-          Article search:
-        </label>
-
-        <input
-          id="articleQuery"
-          className="form-control"
-          type="text"
-          name="query"
-          value={this.state.query}
-          onChange={this.onSearchFieldChange}
-        />
-        <small
-          id="queryBlockHelp"
-          className="form-text text-muted">
-          Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Vitae voluptatum maiores fugit
-          necessitatibus sed, repellendus officia laudantium
-          architecto consequatur! Nesciunt?
-        </small>
-      </div>
-    );
-  }
+				<input
+					id="articleQuery"
+					className="form-control mb-4"
+					type="text"
+					value={this.props.value}
+					name="query"
+					placeholder="Query"
+					onChange={this.props.onFilterChange}
+				/>
+				<small id="queryBlockHelp" className="form-text text-muted">
+					Filter posts by author, category, and/or title.
+				</small>
+			</div>
+		);
+	}
 }
+
+ArticleSearch.propTypes = {
+	onFilterChange: PropTypes.func.isRequired,
+	value: PropTypes.string.isRequired
+};

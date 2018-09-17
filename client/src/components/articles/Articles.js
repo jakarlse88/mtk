@@ -8,13 +8,17 @@ import ArticleSearch from './ArticleSearch';
 
 import { getArticlesArr } from '../../actions/contentActions';
 
+import escapeRegExp from 'escape-string-regexp';
+
 class Articles extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			content: {},
-			errors: {}
+			errors: {},
+			filter: '',
+			filteredArticleArr: []
 		};
 	}
 
@@ -36,23 +40,52 @@ class Articles extends Component {
 		}
 	};
 
+	onFilterChange = e => {
+		this.setState({
+			filter: e.target.value
+		});
+
+		this.updateFilter();
+	};
+
+	updateFilter = () => {
+		const { content, filter } = this.state;
+		const query = new RegExp(escapeRegExp(filter), 'i');
+
+		this.setState({
+			filteredArticleArr:
+				content.articlesArr.length > 0 && filter !== ''
+					? content.articlesArr.filter(
+							article =>
+								query.test(article.title) ||
+								query.test(article.category) ||
+								query.test(article.author)
+					  )
+					: content.articlesArr
+		});
+	};
+
 	render() {
-		const { content, errors } = this.state;
+		const { content, errors, filteredArticleArr } = this.state;
 
 		let articleContent;
 
-		// FIXME: centre spinner
-		if (content.articleLoading) {
+		if (filteredArticleArr && filteredArticleArr.length) {
 			articleContent = (
-				<p className="lead text-center">
-					<span className="badge">
-						<i className="fa fa-spinner fa-spin fa-3x" />
-					</span>
-				</p>
+				<Fragment>
+					{filteredArticleArr.map((article, index) => (
+						<ArticleItem
+							key={index}
+							author={article.author}
+							category={article.category}
+							date={article.date}
+							headline={article.headline}
+							text={article.text}
+						/>
+					))}
+				</Fragment>
 			);
-		}
-
-		if (content.articlesArr && content.articlesArr.length) {
+		} else if (content.articlesArr && content.articlesArr.length) {
 			articleContent = (
 				<Fragment>
 					{content.articlesArr.map((article, index) => (
@@ -69,7 +102,7 @@ class Articles extends Component {
 			);
 		}
 
-		if (!this.state.content.articlesArr) {
+		if (!filteredArticleArr) {
 			articleContent = <p className="text-muted">No articles found.</p>;
 		}
 
@@ -78,6 +111,13 @@ class Articles extends Component {
 				<div className="row mt-4">
 					<div className="col-12 m-auto">
 						<h2 className="display-4 text-center">News</h2>
+						{content.articleLoading && (
+							<p className="text-center">
+								<span className="badge">
+									<i className="fa fa-spinner fa-spin fa-3x" />
+								</span>
+							</p>
+						)}
 						<hr />
 					</div>
 					<div className="col-12 col-lg-9 d-flex justify-content-center justify-content-lg-start">
@@ -88,7 +128,10 @@ class Articles extends Component {
 					<div className="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
 						<div className="row">
 							<div className="col-12">
-								<ArticleSearch />
+								<ArticleSearch
+									value={this.state.filter}
+									onFilterChange={this.onFilterChange}
+								/>
 								<ArticleArchive />
 							</div>
 						</div>
