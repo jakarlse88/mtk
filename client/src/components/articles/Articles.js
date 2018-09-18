@@ -2,13 +2,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
-import ArticleArchive from './ArticleArchive';
 import ArticleItem from './ArticleItem';
 import ArticleSearch from './ArticleSearch';
 
 import { getArticlesArr } from '../../actions/contentActions';
 
 import escapeRegExp from 'escape-string-regexp';
+
+/*
+ * TODO: Implement "X results / page"
+ */
 
 class Articles extends Component {
 	constructor(props) {
@@ -132,7 +135,6 @@ class Articles extends Component {
 									value={this.state.filter}
 									onFilterChange={this.onFilterChange}
 								/>
-								<ArticleArchive />
 							</div>
 						</div>
 					</div>
@@ -141,6 +143,13 @@ class Articles extends Component {
 		);
 	}
 }
+
+Articles.propTypes = {
+	auth: PropTypes.object.isRequired,
+	content: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired,
+	getArticlesArr: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth,
