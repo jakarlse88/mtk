@@ -4,7 +4,7 @@ import React from 'react';
 
 import Moment from 'react-moment';
 
-const ArticleItem = ({ author, category, date, headline, text }) => {
+const ArticleItem = ({ author, category, date, headline, id, text }) => {
 	return (
 		<div>
 			<hr />
@@ -16,7 +16,7 @@ const ArticleItem = ({ author, category, date, headline, text }) => {
 				</small>
 			</p>
 			<p>{text}</p>
-			<Link to="#">Les mer...</Link>
+			<Link to={`/articles/${id}`}>Les mer...</Link>
 			<p className="mt-2">
 				<small className="text-muted">Category: {category}</small>
 			</p>
@@ -38,6 +38,7 @@ ArticleItem.propTypes = {
 	category: PropTypes.string.isRequired,
 	date: PropTypes.string.isRequired,
 	headline: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
 	text: PropTypes.string.isRequired
 };
 

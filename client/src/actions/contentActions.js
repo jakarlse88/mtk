@@ -31,6 +31,29 @@ export const getArticlesArr = () => dispatch => {
 };
 
 /*
+ * Get a single content of type article
+ */
+export const getArticle = id => dispatch => {
+	dispatch(clearErrors());
+	dispatch(setArticleLoading());
+
+	axios
+		.get(`/api/content/articles/${id}`)
+		.then(res =>
+			dispatch({
+				type: GET_ARTICLE,
+				payload: res.data
+			})
+		)
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
+};
+
+/*
  * Set article loading state
  */
 export const setArticleLoading = () => {

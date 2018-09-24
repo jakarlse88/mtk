@@ -32,6 +32,31 @@ router.get('/articles', (req, res) => {
 });
 
 /*
+ * @route   GET /api/content/articles/:id
+ * @desc    Get a single article
+ * @access  Public
+ */
+router.get('/articles/:id', (req, res) => {
+	// Hold onto any error(s) encountered
+	const errors = {};
+
+	ArticleContent.findById(req.params.id)
+		.then(post => {
+			if (post) {
+				return res.json(post);
+			} else {
+				errors.article = 'Article not found';
+
+				return res.status(404).json(errors);
+			}
+		})
+		.catch(err => {
+			errors.find = err.message;
+			res.status(400).json(errors);
+		});
+});
+
+/*
  * @route   POST /api/content/articles/new
  * @desc    Create a new article
  * @access  Private

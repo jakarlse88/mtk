@@ -14,6 +14,7 @@ import AboutSelfDefense from './components/information/AboutSelfDefense';
 import AboutTaekwondo from './components/information/AboutTaekwondo';
 import AboutThai from './components/information/AboutThai';
 import AdministrateEvent from './components/events/AdministrateEvent';
+import Article from './components/articles/Article';
 import Articles from './components/articles/Articles';
 import Contact from './components/contact/Contact';
 import CreateEvent from './components/events/CreateEvent';
@@ -129,6 +130,7 @@ class App extends Component {
 							<Route exact path="/jujutsu" component={AboutJujutsu} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/articles" component={Articles} />
+							<Route exact path="/articles/:id" component={Article} />
 							<Route exact path="/pricing" component={AboutPricing} />
 							<Route exact path="/register-user" component={Register} />
 							<Route

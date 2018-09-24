@@ -78,6 +78,7 @@ class Articles extends Component {
 				<Fragment>
 					{filteredArticleArr.map((article, index) => (
 						<ArticleItem
+							id={article._id}
 							key={index}
 							author={article.author}
 							category={article.category}
@@ -93,6 +94,7 @@ class Articles extends Component {
 				<Fragment>
 					{content.articlesArr.map((article, index) => (
 						<ArticleItem
+							id={article._id}
 							key={index}
 							author={article.author}
 							category={article.category}
