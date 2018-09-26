@@ -1,7 +1,7 @@
 // Load article from param id
 // Set form fields' initial value to current article values
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -64,7 +64,11 @@ class EditArticle extends Component {
 			headline: this.state.articleHeadline
 		};
 
-		this.props.updateArticle(this.props.match.params.id, updateData);
+		this.props.updateArticle(
+			this.props.match.params.id,
+			updateData,
+			this.props.history
+		);
 	};
 
 	render() {
@@ -183,4 +187,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{ getArticle, updateArticle }
-)(EditArticle);
+)(withRouter(EditArticle));

@@ -57,18 +57,20 @@ export const getArticle = id => dispatch => {
 /*
  * Update/edit an article
  */
-export const updateArticle = (id, updateData) => dispatch => {
+export const updateArticle = (id, updateData, history) => dispatch => {
 	dispatch(clearErrors());
 	dispatch(setArticleLoading());
 
 	axios
 		.put(`/api/content/articles/${id}`, updateData)
-		.then(res =>
+		.then(res => {
 			dispatch({
 				type: UPDATE_ARTICLE,
 				payload: res.data
-			})
-		)
+			});
+
+			history.push(`/articles/${id}`);
+		})
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,
