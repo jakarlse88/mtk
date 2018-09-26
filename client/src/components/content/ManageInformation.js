@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import CardDeck from '../common/CardDeck';
-
 export default class ManageInformation extends Component {
 	render() {
 		return (

@@ -61,7 +61,7 @@ class Article extends Component {
 						</small>
 					</p>
 					<hr />
-					<p>{content.article.text}</p>
+					<p>{content.article.content}</p>
 				</div>
 			);
 		}
@@ -77,7 +77,7 @@ class Article extends Component {
 						</p>
 					) : (
 						<Fragment>
-							<div className="col-12 m-auto"> {localContent}</div>
+							<div className="col-12 m-auto">{localContent}</div>
 							<div className="col-8 m-auto text-center">
 								<Link to="/articles">
 									<button className="btn btn-secondary mt-2 mb-4">
@@ -87,6 +87,16 @@ class Article extends Component {
 										Back
 									</button>
 								</Link>
+								{auth.isAuthenticated && auth.user.role === 'admin' ? (
+									<Link to={`/edit-article/${content.article._id}`}>
+										<button className="btn btn-info mt-2 mb-4 ml-2">
+											<span className="badge">
+												<i className="fas fa-cogs" />
+											</span>{' '}
+											Edit article
+										</button>
+									</Link>
+								) : null}
 							</div>
 						</Fragment>
 					)}

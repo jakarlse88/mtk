@@ -20,6 +20,7 @@ import Contact from './components/contact/Contact';
 import CreateEvent from './components/events/CreateEvent';
 import CreateEventSuccess from './components/events/CreateEventSuccess';
 import Dashboard from './components/dashboard/Dashboard';
+import EditArticle from './components/articles/EditArticle';
 import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
@@ -118,6 +119,11 @@ class App extends Component {
 								exact
 								path="/manage-users"
 								component={ManageUsers}
+							/>
+							<ProtectedRoute
+								exact
+								path="/edit-article/:id"
+								component={EditArticle}
 							/>
 							<Route exact path="/list-events" component={ListEvents} />
 							<Route

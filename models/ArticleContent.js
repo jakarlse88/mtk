@@ -9,6 +9,9 @@ const ArticleContentSchema = new Schema({
 		type: String,
 		required: true
 	},
+	editedBy: {
+		type: String
+	},
 	content: {
 		type: String,
 		required: true

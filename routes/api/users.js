@@ -97,7 +97,7 @@ router.put(
 		const { errors, isValid } = validateUpdateUserInput(req.body);
 
 		if (req.user.role !== 'admin') {
-			errors.role = "'Admin' role required";
+			errors.role = "'Admin' role required for this functionality";
 			return res.status(400).json(errors);
 		}
 		// Invalid input

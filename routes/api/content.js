@@ -11,6 +11,7 @@ const InformationContent = require('../../models/InformationContent');
 /*
  * Load validators
  */
+const validateArticleEditInput = require('../../validation/update-article');
 const validateNewArticleInput = require('../../validation/new-article');
 const validateNewInformationInput = require('../../validation/new-info');
 
@@ -153,6 +154,56 @@ router.post(
 			.save()
 			.then(article => res.json(article))
 			.catch(err => console.log(err));
+	}
+);
+
+/*
+ * @route   PUT /api/content/article/:id
+ * @desc    Update an article item
+ * @access  Private
+ */
+router.put(
+	'/articles/:id',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		const { errors, isValid } = validateArticleEditInput(req.body);
+
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
+
+		if (req.user.role !== 'admin') {
+			errors.role = "'Admin' role required for this functionality";
+			return res.status(400).json(errors);
+		}
+
+		// Valid input, user auth'd and is admin
+		ArticleContent.findById(req.params.id)
+			.then(article => {
+				// Article not found
+				if (!article) {
+					errors.article = 'Article not found';
+					return res.status(404).json(errors);
+				}
+
+				// Article found
+				article.content = req.body.content;
+				article.date = req.body.date;
+				article.editedBy = req.body.editor;
+				article.headline = req.body.headline;
+
+				article
+					.save()
+					.then(article => res.json(article))
+					.catch(err => {
+						errors.internal = err.response;
+						return res.status(500).json(errors);
+					});
+			})
+			.catch(err => {
+				errors.internal = err.response;
+				return res.status(500).json(errors);
+			});
 	}
 );
 

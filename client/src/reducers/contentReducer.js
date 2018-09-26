@@ -1,7 +1,8 @@
 import {
 	GET_ARTICLE,
 	GET_ARTICLES_ARR,
-	SET_ARTICLE_LOADING
+	SET_ARTICLE_LOADING,
+	UPDATE_ARTICLE
 } from '../actions/types';
 
 const initialState = {
@@ -28,6 +29,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				articleLoading: true
+			};
+		case UPDATE_ARTICLE:
+			return {
+				...state,
+				articleLoading: false,
+				article: action.payload
 			};
 		default:
 			return state;

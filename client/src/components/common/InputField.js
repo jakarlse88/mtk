@@ -9,7 +9,8 @@ const InputField = ({
 	placeholder,
 	value,
 	onChange,
-	error
+	error,
+	readOnly
 }) => {
 	return (
 		<div className="form-group">
@@ -22,6 +23,7 @@ const InputField = ({
 				id={inputId}
 				value={value}
 				onChange={onChange}
+				readOnly={readOnly}
 			/>
 			{error && <div className="text-danger">{error}</div>}
 		</div>
@@ -29,7 +31,8 @@ const InputField = ({
 };
 
 InputField.defaultProps = {
-	type: 'text'
+	type: 'text',
+	readOnly: false
 };
 
 InputField.propTypes = {
@@ -39,8 +42,9 @@ InputField.propTypes = {
 	name: PropTypes.string.isRequired,
 	placeholder: PropTypes.string,
 	value: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
-	error: PropTypes.string
+	onChange: PropTypes.func,
+	error: PropTypes.string,
+	readOnly: PropTypes.bool
 };
 
 export default InputField;

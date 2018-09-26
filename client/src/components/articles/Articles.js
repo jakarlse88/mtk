@@ -69,7 +69,7 @@ class Articles extends Component {
 	};
 
 	render() {
-		const { content, errors, filteredArticleArr } = this.state;
+		const { content, filteredArticleArr } = this.state;
 
 		let articleContent;
 
