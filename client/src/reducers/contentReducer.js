@@ -2,6 +2,7 @@ import {
 	GET_ARTICLE,
 	GET_ARTICLES_ARR,
 	SET_ARTICLE_LOADING,
+	SET_ARTICLE_NOT_LOADING,
 	UPDATE_ARTICLE
 } from '../actions/types';
 
@@ -30,6 +31,12 @@ export default (state = initialState, action) => {
 				...state,
 				articleLoading: true
 			};
+		case SET_ARTICLE_NOT_LOADING: {
+			return {
+				...state,
+				articleLoading: false
+			};
+		}
 		case UPDATE_ARTICLE:
 			return {
 				...state,

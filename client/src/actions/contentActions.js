@@ -6,6 +6,7 @@ import {
 	GET_ARTICLE,
 	GET_ARTICLES_ARR,
 	SET_ARTICLE_LOADING,
+	SET_ARTICLE_NOT_LOADING,
 	UPDATE_ARTICLE
 } from './types';
 
@@ -71,12 +72,14 @@ export const updateArticle = (id, updateData, history) => dispatch => {
 
 			history.push(`/articles/${id}`);
 		})
-		.catch(err =>
+		.catch(err => {
+			dispatch({ type: SET_ARTICLE_NOT_LOADING });
+
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data
-			})
-		);
+			});
+		});
 };
 
 /*
