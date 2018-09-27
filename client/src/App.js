@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
-import './App.css';
+import './styles/index.css';
 
 import AboutClub from './components/information/AboutClub';
 import AboutHapkido from './components/information/AboutHapkido';
