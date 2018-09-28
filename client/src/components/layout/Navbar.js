@@ -40,7 +40,7 @@ class Navbar extends Component {
 
 		const visitorLinks = (
 			<li>
-				<Link to="/login">
+				<Link className="waves-effect waves-dark" to="/login">
 					Login
 					<i className="right material-icons">person</i>
 				</Link>
@@ -50,13 +50,16 @@ class Navbar extends Component {
 		const adminLinks = (
 			<Fragment>
 				<li>
-					<Link to="/dashboard">
+					<Link className="waves-effect waves-dark" to="/dashboard">
 						Dashboard
 						<i className="right material-icons">dashboard</i>
 					</Link>
 				</li>
 				<li>
-					<a href="#!" onClick={this.onLogoutClick}>
+					<a
+						href="#!"
+						onClick={this.onLogoutClick}
+						className="waves-effect waves-dark">
 						Logout
 						<i className="right material-icons">clear</i>
 					</a>
@@ -132,7 +135,7 @@ class Navbar extends Component {
 							<li>
 								<Link to="/about-club">
 									Om klubben
-									<i className="left material-icons">arrow_right</i>
+									<i className="left material-icons">arrow_right </i>
 								</Link>
 							</li>
 							<li>
@@ -205,7 +208,7 @@ class Navbar extends Component {
 						<li>
 							<a
 								href="#!"
-								className="collapsible-header"
+								className="collapsible-header waves-effect waves-dark"
 								onClick={this.onSidenavLogoutClick}>
 								Logout
 								<i className="left material-icons">clear</i>
@@ -218,53 +221,63 @@ class Navbar extends Component {
 
 		return (
 			<Fragment>
-				<div className="navbar-fixed">
-					<nav>
-						{infoDropdownContent}
+				<div className="navbar-fixed row">
+					<nav className="red darken-2">
 						<div className="nav-wrapper">
-							<Link className="brand-logo" to="/">
-								Moss Taekwondo Klubb
-							</Link>
-							<a
-								href="#"
-								className="sidenav-trigger"
-								data-target="mobile-menu">
-								<i className="material-icons">menu</i>
-							</a>
-							<ul className="right hide-on-med-and-down">
-								<li>
-									<Link to="/articles">
-										Nyheter
-										<i className="right material-icons">subject</i>
-									</Link>
-								</li>
-								<li>
-									<Link to="/events">
-										Arrangementer
-										<i className="right material-icons">event</i>
-									</Link>
-								</li>
-								<li>
-									<Link to="/contact">
-										Kontakt oss
-										<i className="right material-icons">mail_outline</i>
-									</Link>
-								</li>
-								<li>
-									<a
-										href="#"
-										className="dropdown-trigger"
-										data-target="info-menu-dropdown">
-										Informasjon
-										<i className="material-icons right">arrow_drop_down</i>
-									</a>
-								</li>
-								{!isAuthenticated && visitorLinks}
-								{isAuthenticated && adminLinks}
-							</ul>
+							<div className="col s12">
+								<Link
+									className="waves-effect waves-dark brand-logo"
+									to="/">
+									Moss Taekwondo Klubb
+								</Link>
+								<a
+									href="#"
+									className="sidenav-trigger"
+									data-target="mobile-menu">
+									<i className="material-icons">menu</i>
+								</a>
+								<ul id="nav-mobile" className="right hide-on-med-and-down">
+									<li>
+										<Link
+											to="/articles"
+											className="waves-effect waves-dark">
+											Nyheter
+											<i className="right material-icons">subject</i>
+										</Link>
+									</li>
+									<li>
+										<Link to="/events" className="waves-effect waves-dark">
+											Arrangementer
+											<i className="right material-icons">event</i>
+										</Link>
+									</li>
+									<li>
+										<Link
+											to="/contact"
+											className="waves-effect waves-dark">
+											Kontakt oss
+											<i className="right material-icons">mail_outline</i>
+										</Link>
+									</li>
+									<li>
+										<a
+											href="#"
+											className="dropdown-trigger"
+											data-target="info-menu-dropdown">
+											Informasjon
+											<i className="material-icons right">
+												arrow_drop_down
+											</i>
+										</a>
+									</li>
+									{!isAuthenticated && visitorLinks}
+									{isAuthenticated && adminLinks}
+								</ul>
+							</div>
 						</div>
 					</nav>
 				</div>
+				{infoDropdownContent}
 				{sidenavContent}
 			</Fragment>
 		);
