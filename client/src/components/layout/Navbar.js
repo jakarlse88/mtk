@@ -94,38 +94,98 @@ class Navbar extends Component {
 		);
 
 		const sidenavContent = (
-			<ul className="sidenav" id="mobile-menu">
+			<ul className="sidenav collapsible" id="mobile-menu">
 				<li>
-					<Link to="/articles" onClick={this.onSidenavLinkClick}>
+					<Link
+						to="/articles"
+						className="collapsible-header"
+						onClick={this.onSidenavLinkClick}>
 						Nyheter
 						<i className="left material-icons">subject</i>
 					</Link>
 				</li>
 				<li>
-					<Link to="/events" onClick={this.onSidenavLinkClick}>
+					<Link
+						to="/events"
+						className="collapsible-header"
+						onClick={this.onSidenavLinkClick}>
 						Arrangementer
 						<i className="left material-icons">event</i>
 					</Link>
 				</li>
 				<li>
-					<Link to="/contact" onClick={this.onSidenavLinkClick}>
+					<Link
+						className="collapsible-header"
+						to="/contact"
+						onClick={this.onSidenavLinkClick}>
 						Kontakt oss
 						<i className="left material-icons">mail_outline</i>
 					</Link>
 				</li>
 				<li>
-					<a
-						href="#"
-						onClick={this.onSidenavLinkClick}
-						className="dropdown-trigger"
-						data-target="info-menu-dropdown">
+					<a href="#" className="collapsible-header">
 						Informasjon
 						<i className="material-icons left">arrow_drop_down</i>
 					</a>
+					<div className="collapsible-body">
+						<ul>
+							<li>
+								<Link to="/about-club">
+									Om klubben
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+							<li>
+								<Link to="/taekwondo">
+									Taekwondo
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+							<li>
+								<Link to="/hapkido">
+									Hapkido
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+							<li>
+								<Link to="/jujutsu">
+									Brasiliansk Jujutsu
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+							<li>
+								<Link to="/thai">
+									Muay Thai
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+							<li>
+								<Link to="/self-defense">
+									Selvforsvar for kvinner
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+							<li>
+								<Link to="/schedule">
+									Treningstider
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+							<li>
+								<Link to="/pricing">
+									Medlemskap & priser
+									<i className="left material-icons">arrow_right</i>
+								</Link>
+							</li>
+						</ul>
+					</div>
 				</li>
 				{!isAuthenticated && (
 					<li>
-						<Link to="/login" onClick={this.onSidenavLinkClick}>
+						<Link
+							className="collapsible-header"
+							to="/login"
+							onClick={this.onSidenavLinkClick}>
 							Login
 							<i className="left material-icons">person</i>
 						</Link>
@@ -134,13 +194,19 @@ class Navbar extends Component {
 				{isAuthenticated && (
 					<Fragment>
 						<li>
-							<Link to="/dashboard" onClick={this.onSidenavLinkClick}>
+							<Link
+								className="collapsible-header"
+								to="/dashboard"
+								onClick={this.onSidenavLinkClick}>
 								Dashboard
 								<i className="left material-icons">dashboard</i>
 							</Link>
 						</li>
 						<li>
-							<a href="#!" onClick={this.onSidenavLogoutClick}>
+							<a
+								href="#!"
+								className="collapsible-header"
+								onClick={this.onSidenavLogoutClick}>
 								Logout
 								<i className="left material-icons">clear</i>
 							</a>
