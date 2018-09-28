@@ -13,6 +13,10 @@ export default class Footer extends Component {
 							rel="noopener noreferrer">
 							Jon Karlsen
 						</a>
+						<br />
+						Fuelled by
+						{'  '}
+						<i className="fas fa-coffee fa-sm" />
 					</p>
 				</div>
 			</footer>

@@ -42,7 +42,7 @@ class Navbar extends Component {
 			<li>
 				<Link className="waves-effect waves-dark" to="/login">
 					Login
-					<i className="right material-icons">person</i>
+					<i className="right fas fa-user fa-sm" />
 				</Link>
 			</li>
 		);
@@ -52,7 +52,7 @@ class Navbar extends Component {
 				<li>
 					<Link className="waves-effect waves-dark" to="/dashboard">
 						Dashboard
-						<i className="right material-icons">dashboard</i>
+						<i className="right fas fa-columns fa-1x" />
 					</Link>
 				</li>
 				<li>
@@ -61,7 +61,7 @@ class Navbar extends Component {
 						onClick={this.onLogoutClick}
 						className="waves-effect waves-dark">
 						Logout
-						<i className="right material-icons">clear</i>
+						<i className="right fas fa-user-slash fa-1x" />
 					</a>
 				</li>
 			</Fragment>
@@ -104,7 +104,7 @@ class Navbar extends Component {
 						className="collapsible-header"
 						onClick={this.onSidenavLinkClick}>
 						Nyheter
-						<i className="left material-icons">subject</i>
+						<i className="left fas fa-newspaper fa-1x" />
 					</Link>
 				</li>
 				<li>
@@ -113,7 +113,7 @@ class Navbar extends Component {
 						className="collapsible-header"
 						onClick={this.onSidenavLinkClick}>
 						Arrangementer
-						<i className="left material-icons">event</i>
+						<i className="left fas fa-calendar fa-1x" />
 					</Link>
 				</li>
 				<li>
@@ -122,62 +122,62 @@ class Navbar extends Component {
 						to="/contact"
 						onClick={this.onSidenavLinkClick}>
 						Kontakt oss
-						<i className="left material-icons">mail_outline</i>
+						<i className="left fas fa-envelope fa-1x" />
 					</Link>
 				</li>
 				<li>
 					<a href="#" className="collapsible-header">
 						Informasjon
-						<i className="material-icons left">arrow_drop_down</i>
+						<i className="left fas fa-info-circle fa-1x" />
 					</a>
 					<div className="collapsible-body">
 						<ul>
 							<li>
 								<Link to="/about-club">
 									Om klubben
-									<i className="left material-icons">arrow_right </i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li>
 								<Link to="/taekwondo">
 									Taekwondo
-									<i className="left material-icons">arrow_right</i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li>
 								<Link to="/hapkido">
 									Hapkido
-									<i className="left material-icons">arrow_right</i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li>
 								<Link to="/jujutsu">
 									Brasiliansk Jujutsu
-									<i className="left material-icons">arrow_right</i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li>
 								<Link to="/thai">
 									Muay Thai
-									<i className="left material-icons">arrow_right</i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li>
 								<Link to="/self-defense">
 									Selvforsvar for kvinner
-									<i className="left material-icons">arrow_right</i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li>
 								<Link to="/schedule">
 									Treningstider
-									<i className="left material-icons">arrow_right</i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li>
 								<Link to="/pricing">
 									Medlemskap & priser
-									<i className="left material-icons">arrow_right</i>
+									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 						</ul>
@@ -190,7 +190,7 @@ class Navbar extends Component {
 							to="/login"
 							onClick={this.onSidenavLinkClick}>
 							Login
-							<i className="left material-icons">person</i>
+							<i className="left fas fa-user fa-1x" />
 						</Link>
 					</li>
 				)}
@@ -202,7 +202,7 @@ class Navbar extends Component {
 								to="/dashboard"
 								onClick={this.onSidenavLinkClick}>
 								Dashboard
-								<i className="left material-icons">dashboard</i>
+								<i className="left fas fa-columns fa-1x" />
 							</Link>
 						</li>
 						<li>
@@ -211,7 +211,7 @@ class Navbar extends Component {
 								className="collapsible-header waves-effect waves-dark"
 								onClick={this.onSidenavLogoutClick}>
 								Logout
-								<i className="left material-icons">clear</i>
+								<i className="left fas fa-user-slash fa-1x" />
 							</a>
 						</li>
 					</Fragment>
@@ -228,13 +228,14 @@ class Navbar extends Component {
 								<Link
 									className="waves-effect waves-dark brand-logo"
 									to="/">
+									<i className="fas fa-yin-yang fa-1x" />
 									Moss Taekwondo Klubb
 								</Link>
 								<a
 									href="#"
 									className="sidenav-trigger"
 									data-target="mobile-menu">
-									<i className="material-icons">menu</i>
+									<i className="fas fa-bars fa-2x" />
 								</a>
 								<ul id="nav-mobile" className="right hide-on-med-and-down">
 									<li>
@@ -242,13 +243,13 @@ class Navbar extends Component {
 											to="/articles"
 											className="waves-effect waves-dark">
 											Nyheter
-											<i className="right material-icons">subject</i>
+											<i className="right fas fa-newspaper fa-1x" />
 										</Link>
 									</li>
 									<li>
 										<Link to="/events" className="waves-effect waves-dark">
 											Arrangementer
-											<i className="right material-icons">event</i>
+											<i className="right fas fa-calendar-alt fa-1x" />
 										</Link>
 									</li>
 									<li>
@@ -256,7 +257,7 @@ class Navbar extends Component {
 											to="/contact"
 											className="waves-effect waves-dark">
 											Kontakt oss
-											<i className="right material-icons">mail_outline</i>
+											<i className="right fas fa-envelope fa-1x" />
 										</Link>
 									</li>
 									<li>
@@ -265,9 +266,7 @@ class Navbar extends Component {
 											className="dropdown-trigger"
 											data-target="info-menu-dropdown">
 											Informasjon
-											<i className="material-icons right">
-												arrow_drop_down
-											</i>
+											<i className="right fas fa-info-circle fa-1x" />
 										</a>
 									</li>
 									{!isAuthenticated && visitorLinks}
