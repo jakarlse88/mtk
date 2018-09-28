@@ -40,9 +40,10 @@ class Navbar extends Component {
 
 		const visitorLinks = (
 			<li>
-				<Link className="waves-effect waves-dark" to="/login">
+				<Link
+					className="waves-effect waves-dark grey-text text-darken-2"
+					to="/login">
 					Login
-					<i className="right fas fa-user fa-sm" />
 				</Link>
 			</li>
 		);
@@ -50,7 +51,9 @@ class Navbar extends Component {
 		const adminLinks = (
 			<Fragment>
 				<li>
-					<Link className="waves-effect waves-dark" to="/dashboard">
+					<Link
+						className="waves-effect waves-dark grey-text text-darken-2"
+						to="/dashboard">
 						Dashboard
 						<i className="right fas fa-columns fa-1x" />
 					</Link>
@@ -59,7 +62,7 @@ class Navbar extends Component {
 					<a
 						href="#!"
 						onClick={this.onLogoutClick}
-						className="waves-effect waves-dark">
+						className="waves-effect waves-dark grey-text text-darken-2">
 						Logout
 						<i className="right fas fa-user-slash fa-1x" />
 					</a>
@@ -70,28 +73,44 @@ class Navbar extends Component {
 		const infoDropdownContent = (
 			<ul id="info-menu-dropdown" className="dropdown-content">
 				<li>
-					<Link to="/about-club">Om klubben</Link>
+					<Link to="/about-club" className="grey-text text-darken-2">
+						Om klubben
+					</Link>
 				</li>
 				<li>
-					<Link to="/taekwondo">Taekwondo</Link>
+					<Link className="grey-text text-darken-2" to="/taekwondo">
+						Taekwondo
+					</Link>
 				</li>
 				<li>
-					<Link to="/hapkido">Hapkido</Link>
+					<Link className="grey-text text-darken-2" to="/hapkido">
+						Hapkido
+					</Link>
 				</li>
 				<li>
-					<Link to="/jujutsu">Brasiliansk Jujutsu</Link>
+					<Link className="grey-text text-darken-2" to="/jujutsu">
+						Brasiliansk Jujutsu
+					</Link>
 				</li>
 				<li>
-					<Link to="/thai">Muay Thai</Link>
+					<Link className="grey-text text-darken-2" to="/thai">
+						Muay Thai
+					</Link>
 				</li>
 				<li>
-					<Link to="/self-defense">Selvforsvar for kvinner</Link>
+					<Link className="grey-text text-darken-2" to="/self-defense">
+						Selvforsvar for kvinner
+					</Link>
 				</li>
 				<li>
-					<Link to="/schedule">Treningstider</Link>
+					<Link className="grey-text text-darken-2" to="/schedule">
+						Treningstider
+					</Link>
 				</li>
 				<li>
-					<Link to="/pricing">Medlemskap & priser</Link>
+					<Link className="grey-text text-darken-2" to="/pricing">
+						Medlemskap & priser
+					</Link>
 				</li>
 			</ul>
 		);
@@ -189,8 +208,8 @@ class Navbar extends Component {
 							className="collapsible-header"
 							to="/login"
 							onClick={this.onSidenavLinkClick}>
+							<i className="left fas fa-user fa-sm" />
 							Login
-							<i className="left fas fa-user fa-1x" />
 						</Link>
 					</li>
 				)}
@@ -202,7 +221,6 @@ class Navbar extends Component {
 								to="/dashboard"
 								onClick={this.onSidenavLinkClick}>
 								Dashboard
-								<i className="left fas fa-columns fa-1x" />
 							</Link>
 						</li>
 						<li>
@@ -211,7 +229,6 @@ class Navbar extends Component {
 								className="collapsible-header waves-effect waves-dark"
 								onClick={this.onSidenavLogoutClick}>
 								Logout
-								<i className="left fas fa-user-slash fa-1x" />
 							</a>
 						</li>
 					</Fragment>
@@ -222,51 +239,54 @@ class Navbar extends Component {
 		return (
 			<header>
 				<div className="navbar-fixed row">
-					<nav className="red darken-2">
+					<nav className="white black-text">
 						<div className="nav-wrapper">
 							<div className="col s12">
 								<Link
-									className="waves-effect waves-dark brand-logo"
+									className="waves-effect grey-text text-darken-3 waves-dark brand-logo"
 									to="/">
-									<i className="fas fa-yin-yang fa-1x" />
-									Moss Taekwondo Klubb
+									<span className="right hide-on-large-only">
+										Moss TKD
+									</span>
+									<span className="hide-on-med-and-down">
+										Moss Taekwondo Klubb
+									</span>
 								</Link>
 								<a
 									href="#"
 									className="sidenav-trigger"
 									data-target="mobile-menu">
-									<i className="fas fa-bars fa-2x" />
+									<i className="fas fa-bars fa-2x grey-text text-darken-2" />
 								</a>
 								<ul id="nav-mobile" className="right hide-on-med-and-down">
 									<li>
 										<Link
 											to="/articles"
-											className="waves-effect waves-dark">
+											className="grey-text text-darken-2 waves-effect waves-dark">
 											Nyheter
-											<i className="right fas fa-newspaper fa-1x" />
 										</Link>
 									</li>
 									<li>
-										<Link to="/events" className="waves-effect waves-dark">
+										<Link
+											to="/events"
+											className="waves-effect waves-dark grey-text text-darken-2">
 											Arrangementer
-											<i className="right fas fa-calendar-alt fa-1x" />
 										</Link>
 									</li>
 									<li>
 										<Link
 											to="/contact"
-											className="waves-effect waves-dark">
+											className="waves-effect waves-dark grey-text text-darken-2">
 											Kontakt oss
-											<i className="right fas fa-envelope fa-1x" />
 										</Link>
 									</li>
 									<li>
 										<a
 											href="#"
-											className="dropdown-trigger"
+											className="dropdown-trigger grey-text text-darken-2"
 											data-target="info-menu-dropdown">
 											Informasjon
-											<i className="right fas fa-info-circle fa-1x" />
+											<i className="right fas fa-caret-down fa-1x" />
 										</a>
 									</li>
 									{!isAuthenticated && visitorLinks}

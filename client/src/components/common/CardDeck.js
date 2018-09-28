@@ -1,24 +1,33 @@
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-import Card from './Card';
 
 export default class CardDeck extends Component {
 	render() {
 		return (
-			<div className="row justify-content-center">
+			<section className="row">
 				{this.props.cards.map((card, index) => (
-					<div key={index} className="col-12 col-sm-6 col-lg-4 mb-4">
-						<Card
-							imgSrc={card.imgSrc}
-							imgAlt={card.imgAlt}
-							cardTitle={card.cardTitle}
-							cardText={card.cardText}
-							readMoreHref={card.readMoreHref}
-						/>
+					<div key={index} className="col s12 m6 l4">
+						<div className="card">
+							<div className="card-image">
+								<img src={card.imgSrc} alt={card.imgAlt} />
+								<span className="card-title">{card.cardTitle}</span>
+							</div>
+							<div className="card-content">
+								<p>{card.cardText}</p>
+							</div>
+							<div className="card-action grey lighten-4">
+								<Link
+									to={card.readMoreHref}
+									className="blue-text waves-effect waves-light">
+									Les mer {'   '}
+									<i className="fas fa-caret-right" />
+								</Link>
+							</div>
+						</div>
 					</div>
 				))}
-			</div>
+			</section>
 		);
 	}
 }

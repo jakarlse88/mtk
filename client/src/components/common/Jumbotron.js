@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import React, { Component } from 'react';
@@ -5,28 +6,28 @@ import React, { Component } from 'react';
 export default class Jumbotron extends Component {
 	render() {
 		return (
-			<div className="jumbotron">
-				<h2 className="h3">{this.props.title}</h2>
-				<p className="lead">{this.props.lead}</p>
-				<hr className="my-4" />
-				<p>{this.props.content}</p>
-			</div>
+			<section className="row">
+				<div className="col s12 center-align">
+					<h2>{this.props.title}</h2>
+				</div>
+				<div className="row">
+					<div className="col s12 center-align">
+						<p className="flow-text">{this.props.content}</p>
+					</div>
+				</div>
+			</section>
 		);
 	}
 }
 
-// Temporary variables for testing purposes
-// TODO: remove these
 Jumbotron.defaultProps = {
-	title: "Treningstider høsten '18",
-	lead:
-		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, minus.',
+	title: 'Velkommen!',
 	content:
-		'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus optio sunt minima, laudantium nesciunt voluptate non laboriosam atque nam amet'
+		'Vi tilbyr trening i tradisjonell Taekwondo, Hapkido, Brasiliansk Jujutsu, og Muay Thai. Vi arrangerer også selvforsvarskurs for kvinner, og vi har løpende inntak av nye medlemmer. '
 };
 
 Jumbotron.propTypes = {
 	title: PropTypes.string.isRequired,
-	lead: PropTypes.string.isRequired,
+	link: PropTypes.string.isRequired,
 	content: PropTypes.string.isRequired
 };
