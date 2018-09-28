@@ -3,123 +3,204 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
+import M from 'materialize-css';
+
 import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
+	componentDidMount = () => {
+		let elem = document.querySelector('.sidenav');
+		let instance = M.Sidenav.init(elem, {
+			edge: 'left'
+		});
+	};
+
 	onLogoutClick = e => {
 		e.preventDefault();
 
 		this.props.logoutUser(this.props.history);
 	};
 
+	onSidenavLinkClick = () => {
+		const elem = document.querySelector('.sidenav');
+		let instance = M.Sidenav.getInstance(elem);
+		instance.close();
+	};
+
+	onSidenavLogoutClick = () => {
+		const elem = document.querySelector('.sidenav');
+		let instance = M.Sidenav.getInstance(elem);
+		instance.close();
+
+		this.props.logoutUser(this.props.history);
+	};
+
 	render() {
+		const { isAuthenticated } = this.props.auth;
+
 		const visitorLinks = (
-			<Link to="/login" className="nav-item nav-link">
-				<span className="badge">
-					<i className="fas fa-user fa-md" />
-				</span>
-				Login
-			</Link>
+			<li>
+				<Link to="/login">
+					Login
+					<i className="right material-icons">person</i>
+				</Link>
+			</li>
 		);
 
 		const adminLinks = (
 			<Fragment>
-				<Link to="/dashboard" className="nav-item nav-link">
-					<span className="badge">
-						<i className="fas fa-file-signature fa-md" />
-					</span>
-					Dashboard
-				</Link>
-				<a
-					href="#!"
-					className="nav-item nav-link"
-					onClick={this.onLogoutClick}>
-					<span className="badge">
-						<i className="fas fa-user-times fa-md" />
-					</span>
-					Logout
-				</a>
+				<li>
+					<Link to="/dashboard">
+						Dashboard
+						<i className="right material-icons">dashboard</i>
+					</Link>
+				</li>
+				<li>
+					<a href="#!" onClick={this.onLogoutClick}>
+						Logout
+						<i className="right material-icons">clear</i>
+					</a>
+				</li>
 			</Fragment>
 		);
 
-		const { isAuthenticated } = this.props.auth;
+		const infoDropdownContent = (
+			<ul id="info-menu-dropdown" className="dropdown-content">
+				<li>
+					<Link to="/about-club">Om klubben</Link>
+				</li>
+				<li>
+					<Link to="/taekwondo">Taekwondo</Link>
+				</li>
+				<li>
+					<Link to="/hapkido">Hapkido</Link>
+				</li>
+				<li>
+					<Link to="/jujutsu">Brasiliansk Jujutsu</Link>
+				</li>
+				<li>
+					<Link to="/thai">Muay Thai</Link>
+				</li>
+				<li>
+					<Link to="/self-defense">Selvforsvar for kvinner</Link>
+				</li>
+				<li>
+					<Link to="/schedule">Treningstider</Link>
+				</li>
+				<li>
+					<Link to="/pricing">Medlemskap & priser</Link>
+				</li>
+			</ul>
+		);
+
+		const sidenavContent = (
+			<ul className="sidenav" id="mobile-menu">
+				<li>
+					<Link to="/articles" onClick={this.onSidenavLinkClick}>
+						Nyheter
+						<i className="left material-icons">subject</i>
+					</Link>
+				</li>
+				<li>
+					<Link to="/events" onClick={this.onSidenavLinkClick}>
+						Arrangementer
+						<i className="left material-icons">event</i>
+					</Link>
+				</li>
+				<li>
+					<Link to="/contact" onClick={this.onSidenavLinkClick}>
+						Kontakt oss
+						<i className="left material-icons">mail_outline</i>
+					</Link>
+				</li>
+				<li>
+					<a
+						href="#"
+						onClick={this.onSidenavLinkClick}
+						className="dropdown-trigger"
+						data-target="info-menu-dropdown">
+						Informasjon
+						<i className="material-icons left">arrow_drop_down</i>
+					</a>
+				</li>
+				{!isAuthenticated && (
+					<li>
+						<Link to="/login" onClick={this.onSidenavLinkClick}>
+							Login
+							<i className="left material-icons">person</i>
+						</Link>
+					</li>
+				)}
+				{isAuthenticated && (
+					<Fragment>
+						<li>
+							<Link to="/dashboard" onClick={this.onSidenavLinkClick}>
+								Dashboard
+								<i className="left material-icons">dashboard</i>
+							</Link>
+						</li>
+						<li>
+							<a href="#!" onClick={this.onSidenavLogoutClick}>
+								Logout
+								<i className="left material-icons">clear</i>
+							</a>
+						</li>
+					</Fragment>
+				)}
+			</ul>
+		);
 
 		return (
-			<nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-				<Link className="navbar-brand text-light" to="/">
-					<span className="badge">
-						<i className="fas fa-yin-yang fa-lg mr-2" />
-					</span>
-					Moss Taekwondo Klubb
-				</Link>
-				<button
-					className="navbar-toggler"
-					type="button"
-					data-toggle="collapse"
-					data-target="#navbarNavAltMarkup"
-					aria-controls="navbarAltMarkup"
-					aria-expanded="false"
-					aria-label="toggle navigation">
-					<span className="navbar-toggler-icon navbar-inverse" />
-				</button>
-				<div
-					className="collapse navbar-collapse justify-content-end"
-					id="navbarNavAltMarkup">
-					<div className="navbar-nav">
-						<Link to="/articles" className=" nav-item nav-link">
-							Nyheter
-						</Link>
-						<div className="nav-item dropdown">
+			<Fragment>
+				<div className="navbar-fixed">
+					<nav>
+						{infoDropdownContent}
+						<div className="nav-wrapper">
+							<Link className="brand-logo" to="/">
+								Moss Taekwondo Klubb
+							</Link>
 							<a
-								href="#!"
-								className="nav-link dropdown-toggle"
-								id="navbarDropdownMenuLink"
-								role="button"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false">
-								Informasjon
+								href="#"
+								className="sidenav-trigger"
+								data-target="mobile-menu">
+								<i className="material-icons">menu</i>
 							</a>
-							<div
-								className="dropdown-menu"
-								aria-labelledby="navbarDropdownMenuLink">
-								<Link to="/about-club" className="dropdown-item">
-									Om klubben
-								</Link>
-								<Link to="/taekwondo" className="dropdown-item">
-									Taekwondo
-								</Link>
-								<Link to="/hapkido" className="dropdown-item">
-									Hapkido
-								</Link>
-								<Link to="/jujutsu" className="dropdown-item">
-									Brasiliansk Jujutsu
-								</Link>
-								<Link to="/thai" className="dropdown-item">
-									Muay Thai
-								</Link>
-								<Link to="/self-defense" className="dropdown-item">
-									Selvforsvar for kvinner
-								</Link>
-								<Link to="/schedule" className="dropdown-item">
-									Treningstider
-								</Link>
-								<Link to="/list-events" className="dropdown-item">
-									Arrangementer
-								</Link>
-								<Link to="/pricing" className="dropdown-item">
-									Medlemskap og priser
-								</Link>
-							</div>
+							<ul className="right hide-on-med-and-down">
+								<li>
+									<Link to="/articles">
+										Nyheter
+										<i className="right material-icons">subject</i>
+									</Link>
+								</li>
+								<li>
+									<Link to="/events">
+										Arrangementer
+										<i className="right material-icons">event</i>
+									</Link>
+								</li>
+								<li>
+									<Link to="/contact">
+										Kontakt oss
+										<i className="right material-icons">mail_outline</i>
+									</Link>
+								</li>
+								<li>
+									<a
+										href="#"
+										className="dropdown-trigger"
+										data-target="info-menu-dropdown">
+										Informasjon
+										<i className="material-icons right">arrow_drop_down</i>
+									</a>
+								</li>
+								{!isAuthenticated && visitorLinks}
+								{isAuthenticated && adminLinks}
+							</ul>
 						</div>
-						<Link to="/contact" className=" nav-item nav-link">
-							Kontakt oss
-						</Link>
-						{!isAuthenticated && visitorLinks}
-						{isAuthenticated && adminLinks}
-					</div>
+					</nav>
 				</div>
-			</nav>
+				{sidenavContent}
+			</Fragment>
 		);
 	}
 }

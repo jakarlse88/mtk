@@ -3,7 +3,9 @@ import jwt_decode from 'jwt-decode';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
-import './styles/index.css';
+import 'materialize-css/dist/css/materialize.min.css';
+
+import M from 'materialize-css';
 
 import AboutClub from './components/information/AboutClub';
 import AboutHapkido from './components/information/AboutHapkido';
@@ -65,6 +67,10 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+	componentDidMount = () => {
+		M.AutoInit();
+	};
+
 	render() {
 		return (
 			<Provider store={store}>

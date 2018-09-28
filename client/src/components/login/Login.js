@@ -98,7 +98,7 @@ class Login extends Component {
 							</div>
 							<p className="text-center">
 								<button
-									className="btn btn-dark mb-4"
+									className="btn btn-t-blue mb-4"
 									type="submit"
 									onClick={this.onSubmit}>
 									Login

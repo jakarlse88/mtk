@@ -111,7 +111,7 @@ class EditArticle extends Component {
 											<br />
 											<p className="mt-1">
 												<Moment
-													format="DD/MM/YYYY - HH:MM"
+													format="DD/MM/YYY - HH:MM"
 													date={this.state.articleDate}
 												/>
 											</p>
@@ -128,13 +128,6 @@ class EditArticle extends Component {
 												value={this.state.articleCategory}
 												onChange={this.onChange}
 											/>
-											{errors.category ? (
-												<small
-													id="categoryHelp"
-													className="form-text text-danger">
-													{errors.category}
-												</small>
-											) : null}
 										</div>
 									</div>
 									<div className="col-12 m-auto">
@@ -148,13 +141,6 @@ class EditArticle extends Component {
 												rows="10"
 												value={this.state.articleContent}
 											/>
-											{errors.content ? (
-												<small
-													id="contentHelp"
-													className="form-text text-danger">
-													{errors.content}
-												</small>
-											) : null}
 										</div>
 									</div>
 								</div>
