@@ -220,7 +220,7 @@ class Navbar extends Component {
 		);
 
 		return (
-			<Fragment>
+			<header>
 				<div className="navbar-fixed row">
 					<nav className="red darken-2">
 						<div className="nav-wrapper">
@@ -279,7 +279,7 @@ class Navbar extends Component {
 				</div>
 				{infoDropdownContent}
 				{sidenavContent}
-			</Fragment>
+			</header>
 		);
 	}
 }
