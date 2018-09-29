@@ -11,6 +11,7 @@ import escapeRegExp from 'escape-string-regexp';
 
 /*
  * TODO: Implement "X results / page"
+ * FIXME: filtering
  */
 
 class Articles extends Component {
@@ -20,8 +21,7 @@ class Articles extends Component {
 		this.state = {
 			content: {},
 			errors: {},
-			filter: '',
-			filteredArticleArr: []
+			filter: ''
 		};
 	}
 
@@ -47,99 +47,81 @@ class Articles extends Component {
 		this.setState({
 			filter: e.target.value
 		});
-
-		this.updateFilter();
-	};
-
-	updateFilter = () => {
-		const { content, filter } = this.state;
-		const query = new RegExp(escapeRegExp(filter), 'i');
-
-		this.setState({
-			filteredArticleArr:
-				content.articlesArr.length > 0 && filter !== ''
-					? content.articlesArr.filter(
-							article =>
-								query.test(article.title) ||
-								query.test(article.category) ||
-								query.test(article.author)
-					  )
-					: content.articlesArr
-		});
 	};
 
 	render() {
-		const { content, filteredArticleArr } = this.state;
+		const { content, filter, filteredArticleArr } = this.state;
+		const query = new RegExp(escapeRegExp(filter), 'i');
 
-		let articleContent;
+		let articlesContent = [];
 
-		if (filteredArticleArr && filteredArticleArr.length) {
-			articleContent = (
-				<Fragment>
-					{filteredArticleArr.map((article, index) => (
-						<ArticleItem
-							id={article._id}
-							key={index}
-							author={article.author}
-							category={article.category}
-							date={article.date}
-							headline={article.headline}
-							text={article.text}
-						/>
-					))}
-				</Fragment>
+		if (content.articlesArr) {
+			articlesContent = content.articlesArr.filter(
+				article =>
+					query.test(article.headline) || query.test(article.author)
 			);
-		} else if (content.articlesArr && content.articlesArr.length) {
-			articleContent = (
-				<Fragment>
-					{content.articlesArr.map((article, index) => (
-						<ArticleItem
-							id={article._id}
-							key={index}
-							author={article.author}
-							category={article.category}
-							date={article.date}
-							headline={article.headline}
-							text={article.text}
-						/>
-					))}
-				</Fragment>
-			);
-		}
-
-		if (!filteredArticleArr) {
-			articleContent = <p className="text-muted">No articles found.</p>;
 		}
 
 		return (
 			<div className="container">
-				<div className="row mt-4">
-					<div className="col-12 m-auto">
-						<h2 className="display-4 text-center">News</h2>
-						{content.articleLoading && (
-							<p className="text-center">
-								<span className="badge">
-									<i className="fa fa-spinner fa-spin fa-3x" />
-								</span>
-							</p>
-						)}
-						<hr />
+				<div className="row">
+					<div className="col s12">
+						<h2 className="center-align">Nyheter</h2>
 					</div>
-					<div className="col-12 col-lg-9 d-flex justify-content-center justify-content-lg-start">
-						<div className="row">
-							<div className="col-12">{articleContent}</div>
-						</div>
-					</div>
-					<div className="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
-						<div className="row">
-							<div className="col-12">
-								<ArticleSearch
-									value={this.state.filter}
-									onFilterChange={this.onFilterChange}
-								/>
+					{content.articleLoading ? (
+						<p className="text-center">
+							<span className="badge">
+								<i className="fa fa-spinner fa-spin fa-3x" />
+							</span>
+						</p>
+					) : (
+						<Fragment>
+							<div className="col s12 l9">
+								<div className="row">
+									<div className="col-12">
+										{articlesContent && articlesContent.length ? (
+											articlesContent.map((article, index) => (
+												<ArticleItem
+													id={article._id}
+													key={index}
+													author={article.author}
+													category={article.category}
+													date={article.date}
+													headline={article.headline}
+													text={article.text}
+												/>
+											))
+										) : content.articlesArr &&
+										content.articlesArr.length ? (
+											content.articlesArr.map((article, index) => (
+												<ArticleItem
+													id={article._id}
+													key={index}
+													author={article.author}
+													category={article.category}
+													date={article.date}
+													headline={article.headline}
+													text={article.text}
+												/>
+											))
+										) : (
+											<p className="text-muted">No articles found.</p>
+										)}
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
+							<div className="col s12 l3">
+								<div className="row">
+									<div className="col-12">
+										<ArticleSearch
+											value={this.state.filter}
+											onFilterChange={this.onFilterChange}
+										/>
+									</div>
+								</div>
+							</div>
+						</Fragment>
+					)}
 				</div>
 			</div>
 		);

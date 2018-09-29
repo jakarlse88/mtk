@@ -26,7 +26,7 @@ export default class ArticleSearch extends Component {
 					onChange={this.props.onFilterChange}
 				/>
 				<small id="queryBlockHelp" className="form-text text-muted">
-					Filter posts by author, category, and/or title.
+					Filter posts by title or author.
 				</small>
 			</div>
 		);
