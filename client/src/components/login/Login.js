@@ -57,51 +57,49 @@ class Login extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<div className="col-8 m-auto">
-						<h2 className="display-4 text-center mt-4">Login</h2>
-						<p className="text-muted text-center">Admin/instruktør</p>
-						<hr />
+					<div className="col s8 offset-s2 center-align">
+						<h2>Login</h2>
+						<p className="grey-text">Admin/instruktør</p>
 						<form onSubmit={this.onSubmit}>
-							<div className="form-group">
+							<div className="input-field left-align">
+								<i className="prefix fas fa-user-circle" />
 								<input
 									value={this.state.email}
 									onChange={this.onChange}
 									id="loginNameInput"
 									type="text"
 									name="email"
-									placeholder="Brukernavn"
-									className="form-control"
 								/>
+								<span className="helper-text">E-post</span>
 								{errors.email ? (
-									<small id="emailHelp" className="form-text text-danger">
+									<span id="emailHelp" className="helper-text red-text">
 										{errors.email}
-									</small>
+									</span>
 								) : null}
 							</div>
-							<div className="form-group">
+							<div className="input-field left-align">
+								<i className="prefix fas fa-key" />
 								<input
 									value={this.state.password}
 									onChange={this.onChange}
 									name="password"
 									id="loginPasswordInput"
 									type="password"
-									placeholder="Passord"
 									className="form-control"
 								/>
+								<span className="helper-text">Passord</span>
 								{errors.password ? (
-									<small
-										id="passwordHelp"
-										className="form-text text-danger">
+									<span id="passwordHelp" className="helper-text red-text">
 										{errors.password}
-									</small>
+									</span>
 								) : null}
 							</div>
 							<p className="text-center">
 								<button
-									className="btn btn-t-blue mb-4"
+									className="btn-large blue waves-effect waves-dark"
 									type="submit"
 									onClick={this.onSubmit}>
-									Login
+									<i className="fas fa-unlock-alt" />
 								</button>
 							</p>
 						</form>
