@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const InputField = ({
+	icon,
 	inputId,
 	labelText,
 	type,
@@ -13,10 +14,9 @@ const InputField = ({
 	readOnly
 }) => {
 	return (
-		<div className="form-group">
-			<label htmlFor={inputId}>{labelText}:</label>
+		<div className="input-field">
+			{icon && <i className={`fas fa-${icon} prefix`} />}
 			<input
-				className="form-control"
 				type={type}
 				name={name}
 				placeholder={placeholder}
@@ -25,7 +25,8 @@ const InputField = ({
 				onChange={onChange}
 				readOnly={readOnly}
 			/>
-			{error && <div className="text-danger">{error}</div>}
+			<span className="helper-text">{labelText}</span>
+			{error && <small className="red-text">{error}</small>}
 		</div>
 	);
 };
@@ -36,8 +37,8 @@ InputField.defaultProps = {
 };
 
 InputField.propTypes = {
+	icon: PropTypes.string,
 	inputId: PropTypes.string.isRequired,
-	labelText: PropTypes.string.isRequired,
 	type: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	placeholder: PropTypes.string,

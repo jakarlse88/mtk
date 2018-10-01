@@ -99,7 +99,8 @@ class Login extends Component {
 									className="btn-large blue waves-effect waves-dark"
 									type="submit"
 									onClick={this.onSubmit}>
-									<i className="fas fa-unlock-alt" />
+									Login
+									<i className="right fas fa-unlock-alt" />
 								</button>
 							</p>
 						</form>

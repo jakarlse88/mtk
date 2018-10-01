@@ -11,9 +11,9 @@ const Dashboard = () => (
 				<div className="col s12 m6 l4 center-align" key={index}>
 					<i className={`fas fa-${item.icon} fa-3x`} />
 					<Link to={item.linkTo} className="text-center">
-						<h5 className="card-title">{item.cardTitle}</h5>
+						<h5>{item.cardTitle}</h5>
 					</Link>
-					<p className="card-text grey-text">{item.cardText}</p>
+					<p className="grey-text">{item.cardText}</p>
 					<small className="grey-text">{item.permissions}</small>
 				</div>
 			))}

@@ -9,6 +9,8 @@ import { createEvent } from '../../actions/eventActions';
 
 import isEmpty from '../../utils/is-empty';
 
+import M from 'materialize-css';
+
 class CreateEvent extends Component {
 	constructor(props) {
 		super(props);
@@ -108,30 +110,26 @@ class CreateEvent extends Component {
 
 		return (
 			<div className="container">
-				<div className="row justify-content-center">
-					<div className="col-10 m-auto">
-						<h2 className="mt-4 text-center">Create Event</h2>
-						<hr />
+				<div className="row center-align">
+					<div className="col s12">
+						<h2>Create Event</h2>
 						{errors.alreadyExists && (
-							<p className="text-danger">{errors.alreadyExists}</p>
+							<p className="red-text">{errors.alreadyExists}</p>
 						)}
-						<div className="form-row">
-							<div className="col-12">
-								<p className="lead">General information</p>
-							</div>
-						</div>
 
-						<form onSubmit={this.onSubmit} noValidate>
+						<form
+							onSubmit={this.onSubmit}
+							noValidate
+							className="left-align">
 							<InputField
 								inputId="nameInput"
-								labelText="Name"
+								labelText="Event name"
 								name="name"
-								placeholder="f.eks. 'Vintergradering 2018'"
+								placeholder="f. eks. 'Vintergradering 2018"
 								value={this.state.name}
 								onChange={this.onChange}
 								error={errors.name}
 							/>
-
 							<InputField
 								inputId="eventGroupInput"
 								labelText="Event group"
@@ -141,9 +139,8 @@ class CreateEvent extends Component {
 								onChange={this.onChange}
 								error={errors.eventGroup}
 							/>
-
-							<div className="form-row">
-								<div className="col-8">
+							<div className="row">
+								<div className="col s8">
 									<InputField
 										inputId="typeInput"
 										labelText="Event type"
@@ -154,7 +151,7 @@ class CreateEvent extends Component {
 										error={errors.eventType}
 									/>
 								</div>
-								<div className="col-4">
+								<div className="col s4">
 									<InputField
 										inputId="prizeInput"
 										labelText="Prize"
@@ -165,94 +162,93 @@ class CreateEvent extends Component {
 									/>
 								</div>
 							</div>
-							<div className="form-group">
-								<label htmlFor="descriptionInput">Description:</label>
+							<div className="input-field">
 								<textarea
-									className="form-control"
+									className="materialize-textarea"
 									name="description"
 									placeholder="f.eks. 'Gradering for TKD'"
 									id="descriptionInput"
 									value={this.state.description}
 									onChange={this.onChange}
 								/>
+								<span className="helper-text">Event description</span>
 								{errors.description && (
-									<div className="text-danger">{errors.description}</div>
+									<small className="red-text">{errors.description}</small>
 								)}
 							</div>
 							<div className="row">
-								<div className="col-12">
-									<p className="lead">Schedule</p>
+								<div className="col s12">
+									<h4 className="center-align">Schedule</h4>
 								</div>
 							</div>
-							<div className="form-group">
-								<div className="form-row">
-									<div className="col-12 col-md-2">
-										<label htmlFor="scheduleDateInput">Date:</label>
+							<div className="input-field">
+								<div className="row">
+									<div className="col s12 m2">
 										<input
 											name="scheduleDateBuffer"
 											type="date"
-											className="form-control mb-2"
 											id="scheduleDateInput"
 											value={this.state.scheduleDateBuffer}
 											onChange={this.onChange}
 										/>
+										<small className="helper-text">Date</small>
 									</div>
-									<div className="col-11 col-md-9">
-										<label htmlFor="scheduleContentInput">Content: </label>
+									<div className="col s11 m9">
 										<input
 											placeholder="10:00-11:30 -- Gibon jase"
 											type="text"
-											className="form-control mb-2"
 											id="scheduleContentInput"
 											value={this.state.scheduleContentBuffer}
 											onChange={this.onChange}
 											name="scheduleContentBuffer"
 										/>
+										<small className="helper-text">Lesson content</small>
 									</div>
-									<div className="col-1 d-flex">
+									<div className="col s1">
 										<button
 											type="button"
-											className="btn btn-success align-self-end mb-2"
+											className="btn darken-2 green"
 											onClick={this.onScheduleItemAdd}>
 											<i className="fas fa-plus" />
 										</button>
 									</div>
 									{errors.schedule && (
-										<div className="text-danger col-12">
+										<div className="red-text col s12">
 											{errors.schedule}
 										</div>
 									)}
-									{this.state.schedule.length > 0 && (
-										<div className="col-12">
-											Schedule preview: <br />
-											<ul className="text-muted">
-												{this.state.schedule.map((item, index) => (
-													<li key={index}>
-														{item.date}: {item.content}
-													</li>
-												))}
-											</ul>
-										</div>
-									)}
+									<div className="row">
+										<div className="col s12" />
+									</div>
+									<div className="row">
+										{this.state.schedule.length > 0 && (
+											<div className="col s12">
+												Schedule preview: <br />
+												<ul className="grey-text">
+													{this.state.schedule.map((item, index) => (
+														<li key={index}>
+															{item.date}: {item.content}
+														</li>
+													))}
+												</ul>
+											</div>
+										)}
+									</div>
 								</div>
 							</div>
-
-							<div className="col-12 m-auto">
-								<p className="text-center">
-									<Link to="/manage-events">
-										<button className="btn btn-secondary mb-4 mt-2 mr-4">
-											<span className="badge">
-												<i className="fas fa-arrow-left" />
-											</span>{' '}
-											Back
-										</button>
-									</Link>
-									<button
-										className="btn btn-success mb-4 mt-2"
-										onClick={this.onSubmit}>
-										Create Event
+							<div className="col waves-effect waves-dark s6 right-align">
+								<Link to="/manage-events">
+									<button className="btn grey">
+										<i className="left fas fa-arrow-left" />
+										Back
 									</button>
-								</p>
+								</Link>
+							</div>
+							<div className="col waves-effect waves-dark s6 left-align">
+								<button className="btn blue" onClick={this.onSubmit}>
+									<i className="right fas fa-share-square" />
+									Create Event
+								</button>
 							</div>
 						</form>
 					</div>
