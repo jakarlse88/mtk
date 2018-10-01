@@ -17,24 +17,22 @@ class Article extends Component {
 
 		if (errors.article || errors.find) {
 			localContent = (
-				<div className="col-12 m-auto">
+				<div className="col s12 center-align">
 					<span>
-						<p className="mt-4 lead text-center text-danger">
-							<span className="badge">
-								<i className="fas fa-exclamation-triangle fa-3x" /> <br />
-								<br />
-								<br />
-								Oops! Something went wrong. Try again, or contact an admin.
-							</span>
+						<p className="center-align red-text">
+							<i className="fas fa-exclamation-triangle fa-3x" /> <br />
+							<br />
+							<br />
+							Oops! Something went wrong. Try again, or contact an admin.
 						</p>
-						<p className="text-center text-muted">
+						<p className="center-align grey-text">
 							The following errors were encountered:
 						</p>
 						{errors.article ? (
-							<p className="text-center">{errors.article}</p>
+							<p className="center-align">{errors.article}</p>
 						) : null}
 						{errors.find ? (
-							<p className="text-center">{errors.find}</p>
+							<p className="center-align">{errors.find}</p>
 						) : null}
 					</span>
 				</div>
@@ -44,11 +42,9 @@ class Article extends Component {
 		if (Object.keys(errors).length === 0 && content.article) {
 			localContent = (
 				<div>
-					<h2 className="display-4 text-center mt-4">
-						{content.article.headline}
-					</h2>
-					<p className="text-center">
-						<small className="text-muted">
+					<h2 className="center-align">{content.article.headline}</h2>
+					<p className="center-align">
+						<small className="grey-text">
 							<Moment
 								date={content.article.date}
 								format="dddd DD/MM/YYYY, HH:MM"
@@ -56,11 +52,10 @@ class Article extends Component {
 							by {content.article.author}
 						</small>
 						<br />
-						<small className="text-muted">
+						<small className="grey-text">
 							Category: {content.article.category}
 						</small>
 					</p>
-					<hr />
 					<p>{content.article.content}</p>
 				</div>
 			);
@@ -70,30 +65,26 @@ class Article extends Component {
 			<div className="container">
 				<div className="row">
 					{content.articleLoading ? (
-						<p className="text-center">
-							<span className="badge">
-								<i className="fa fa-spinner fa-spin fa-3x" />
-							</span>
+						<p className="center-align">
+							<i className="fa fa-spinner fa-spin fa-3x" />
 						</p>
 					) : (
 						<Fragment>
-							<div className="col-12 m-auto">{localContent}</div>
-							<div className="col-8 m-auto text-center">
+							<div className="col s12 center-align">{localContent}</div>
+							<div className="col s6 right-align">
 								<Link to="/articles">
-									<button className="btn btn-secondary mt-2 mb-4">
-										<span className="badge">
-											<i className="fas fa-arrow-left" />
-										</span>{' '}
+									<button className="btn grey waves-effect waves-dark">
 										Back
+										<i className="fas fa-chevron-circle-left left fa-1x" />
 									</button>
 								</Link>
+							</div>
+							<div className="col s6 left-align">
 								{auth.isAuthenticated && auth.user.role === 'admin' ? (
 									<Link to={`/edit-article/${content.article._id}`}>
-										<button className="btn btn-info mt-2 mb-4 ml-2">
-											<span className="badge">
-												<i className="fas fa-cogs" />
-											</span>{' '}
+										<button className="btn blue waves-effect waves-dark">
 											Edit article
+											<i className="fas fa-cogs right" />
 										</button>
 									</Link>
 								) : null}

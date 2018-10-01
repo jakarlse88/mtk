@@ -66,7 +66,7 @@ class Articles extends Component {
 				<div className="row">
 					<div className="col s12">
 						<h2 className="center-align">Nyheter</h2>
-						<hr />
+						<div className="divider" />
 					</div>
 					{content.articleLoading ? (
 						<p className="text-center">

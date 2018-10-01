@@ -77,91 +77,83 @@ class EditArticle extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<div className="col-12 m-auto">
-						<h2 className="display-4 text-center mt-4">Edit Article</h2>
-						<hr />
+					<div className="col s12 center-align">
+						<h2>Edit Article</h2>
+						<p className="grey-text center-align">
+							<Moment
+								format="DD/MM/YYYY - HH:MM"
+								date={this.state.articleDate}
+							/>
+						</p>
 					</div>
 					{content.articleLoading ? (
-						<div className="col-12 m-auto">
-							<p className="text-center">
-								<span className="badge">
-									<i className="fa fa-spinner fa-spin fa-3x" />
-								</span>
+						<div className="col s12 center-align">
+							<p>
+								<i className="fa fa-spinner fa-spin fa-3x" />
 							</p>
 						</div>
 					) : (
-						<div className="col-12 m-auto">
+						<div className="col s12 center-align">
 							<form noValidate onSubmit={this.onSubmit}>
-								<div className="form-row">
-									<div className="col-12 col-md-4">
-										<div className="form-group">
-											<label htmlFor="editorInputId">Edited by:</label>
+								<div className="row">
+									<div className="col s12 m6">
+										<div className="input-field left-align">
+											<i className="prefix fas fa-user-circle" />
 											<input
 												id="editorInputId"
 												readOnly={true}
 												type="text"
-												className="form-control"
 												value={this.state.articleEditor}
 											/>
+											<span className="helper-text">Editor</span>
 										</div>
 									</div>
-									<div className="col-12 col-md-4 m-auto">
-										<div className="form-group">
-											<label htmlFor="categoryInput">Date edited:</label>
-											<br />
-											<p className="mt-1">
-												<Moment
-													format="DD/MM/YYY - HH:MM"
-													date={this.state.articleDate}
-												/>
-											</p>
-										</div>
-									</div>
-									<div className="col-12 col-md-4">
-										<div className="form-group">
-											<label htmlFor="categoryInput">Category:</label>
-											<br />
+									<div className="col s12 m6">
+										<div className="input-field left-align">
+											<i className="prefix fas fa-tag" />
 											<input
 												name="articleCategory"
 												type="text"
-												className="form-control"
 												value={this.state.articleCategory}
 												onChange={this.onChange}
 											/>
+											<span className="helper-text">Category</span>
 										</div>
 									</div>
-									<div className="col-12 m-auto">
-										<div className="form-group">
-											<label htmlFor="articleContentInput">Text:</label>
+									<div className="col s12 left-align">
+										<div className="input-field">
+											<i className="prefix fas fa-edit" />
 											<textarea
-												className="form-control"
+												className="materialize-textarea"
 												name="articleContent"
 												onChange={this.onChange}
 												cols="30"
 												rows="10"
 												value={this.state.articleContent}
 											/>
+											<span className="helper-text">Content</span>
 										</div>
 									</div>
 								</div>
-								<p className="text-center">
-									<Link to={`/articles/${this.props.match.params.id}`}>
+								<div className="row">
+									<div className="col s6 right-align">
+										<Link to={`/articles/${this.props.match.params.id}`}>
+											<button className="btn grey" type="button">
+												<i className="fas left fa-arrow-left" />
+												Back
+											</button>
+										</Link>
+									</div>
+									<div className="col s6 left-align">
 										<button
-											className="btn btn-secondary mr-4 mt-4 mb-4"
-											type="button">
-											<span className="badge">
-												<i className="fas fa-arrow-left" />
-											</span>
-											Back
+											className="btn blue "
+											type="submit"
+											onClick={this.onSubmit}>
+											<i className="fas fa-edit right" />
+											Update article
 										</button>
-									</Link>
-									<button
-										className="btn btn-success mt-4 mb-4"
-										type="submit"
-										onClick={this.onSubmit}>
-										Update article
-									</button>
-								</p>
+									</div>
+								</div>
 							</form>
 						</div>
 					)}
