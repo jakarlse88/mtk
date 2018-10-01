@@ -10,30 +10,32 @@ export default class ArticleSearch extends Component {
 
 	render() {
 		return (
-			<div>
-				<hr />
-				<label htmlFor="articleQuery">
-					<p className="lead"> Article search:</p>
-				</label>
+			<div className="input-field">
+				<label htmlFor="articleQuery">Søk i nyheter</label>
 
 				<input
 					id="articleQuery"
-					className="form-control mb-4"
+					className="validate"
 					type="text"
 					value={this.props.value}
 					name="query"
-					placeholder="Query"
 					onChange={this.props.onFilterChange}
 				/>
-				<small id="queryBlockHelp" className="form-text text-muted">
-					Filter posts by title or author.
-				</small>
+				<span className="helper-text">
+					Du kan søke i overskrifter og forfattere.
+				</span>
+				{this.props.articlesContent.length < 1 && (
+					<span className="helper-text red-text">
+						Ingen resultater, viser derfor alle artikler.
+					</span>
+				)}
 			</div>
 		);
 	}
 }
 
 ArticleSearch.propTypes = {
+	articlesContent: PropTypes.array,
 	onFilterChange: PropTypes.func.isRequired,
 	value: PropTypes.string.isRequired
 };

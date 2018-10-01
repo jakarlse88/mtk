@@ -11,7 +11,6 @@ import escapeRegExp from 'escape-string-regexp';
 
 /*
  * TODO: Implement "X results / page"
- * FIXME: filtering
  */
 
 class Articles extends Component {
@@ -67,6 +66,7 @@ class Articles extends Component {
 				<div className="row">
 					<div className="col s12">
 						<h2 className="center-align">Nyheter</h2>
+						<hr />
 					</div>
 					{content.articleLoading ? (
 						<p className="text-center">
@@ -76,48 +76,42 @@ class Articles extends Component {
 						</p>
 					) : (
 						<Fragment>
-							<div className="col s12 l9">
-								<div className="row">
-									<div className="col-12">
-										{articlesContent && articlesContent.length ? (
-											articlesContent.map((article, index) => (
-												<ArticleItem
-													id={article._id}
-													key={index}
-													author={article.author}
-													category={article.category}
-													date={article.date}
-													headline={article.headline}
-													text={article.text}
-												/>
-											))
-										) : content.articlesArr &&
-										content.articlesArr.length ? (
-											content.articlesArr.map((article, index) => (
-												<ArticleItem
-													id={article._id}
-													key={index}
-													author={article.author}
-													category={article.category}
-													date={article.date}
-													headline={article.headline}
-													text={article.text}
-												/>
-											))
-										) : (
-											<p className="text-muted">No articles found.</p>
-										)}
-									</div>
+							<div className="row">
+								<div className="col s12 l3 push-l9">
+									<ArticleSearch
+										value={this.state.filter}
+										onFilterChange={this.onFilterChange}
+										articlesContent={articlesContent}
+									/>
 								</div>
-							</div>
-							<div className="col s12 l3">
-								<div className="row">
-									<div className="col-12">
-										<ArticleSearch
-											value={this.state.filter}
-											onFilterChange={this.onFilterChange}
-										/>
-									</div>
+								<div className="col s12 l9 pull-l3">
+									{articlesContent && articlesContent.length ? (
+										articlesContent.map((article, index) => (
+											<ArticleItem
+												id={article._id}
+												key={index}
+												author={article.author}
+												category={article.category}
+												date={article.date}
+												headline={article.headline}
+												text={article.text}
+											/>
+										))
+									) : content.articlesArr && content.articlesArr.length ? (
+										content.articlesArr.map((article, index) => (
+											<ArticleItem
+												id={article._id}
+												key={index}
+												author={article.author}
+												category={article.category}
+												date={article.date}
+												headline={article.headline}
+												text={article.text}
+											/>
+										))
+									) : (
+										<p className="text-muted">No articles found.</p>
+									)}
 								</div>
 							</div>
 						</Fragment>
