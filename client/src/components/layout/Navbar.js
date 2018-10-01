@@ -44,6 +44,7 @@ class Navbar extends Component {
 					className="waves-effect waves-dark grey-text text-darken-2"
 					to="/login">
 					Login
+					<i className="right fas fa-user fa-1x" />
 				</Link>
 			</li>
 		);
@@ -55,14 +56,13 @@ class Navbar extends Component {
 						className="waves-effect waves-dark grey-text text-darken-2"
 						to="/dashboard">
 						Dashboard
-						<i className="right fas fa-columns fa-1x" />
 					</Link>
 				</li>
 				<li>
 					<a
 						href="#!"
 						onClick={this.onLogoutClick}
-						className="waves-effect waves-dark grey-text text-darken-2">
+						className="waves-effect waves-dark text-darken-2 grey-text">
 						Logout
 						<i className="right fas fa-user-slash fa-1x" />
 					</a>
