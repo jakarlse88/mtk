@@ -10,7 +10,7 @@ export default class Landing extends Component {
 				<div className="row">
 					<div className="col s12 ">
 						<Jumbotron />
-						<hr />
+						<div className="divider" />
 					</div>
 				</div>
 				<div className="row">

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Footer extends Component {
 	render() {
 		return (
-			<footer className="footer-copyright">
+			<footer className="footer-copyright footer">
 				<div className="container">
 					<p className="grey-text center-align">
 						Copyright &copy; {new Date().getFullYear()}{' '}
