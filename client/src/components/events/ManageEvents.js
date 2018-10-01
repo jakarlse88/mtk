@@ -1,64 +1,51 @@
 import { Link } from 'react-router-dom';
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ManageEvents extends Component {
-	render() {
-		return (
-			<div className="container">
-				<h2 className="display-4 text-center mt-4">Manage Events</h2>
-				<hr />
-				<div className="row mt-4 mb-4">
-					{items.map((item, index) => (
-						<div className="col-12 col-sm-6 col-lg-4 m-auto" key={index}>
-							<div className="card mb-4">
-								<img
-									src="https://via.placeholder.com/350x185"
-									alt="Description"
-									className="card-img-top"
-								/>
-								<div className="card-body">
-									<Link to={item.linkTo} className="text-center">
-										<h5 className="card-title">{item.cardTitle}</h5>
-									</Link>
-									<p className="card-text text-muted">{item.cardText}</p>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">{item.permissions}</small>
-								</div>
-							</div>
-						</div>
-					))}
-					<div className="col-12 text-center">
-						<Link to="/dashboard">
-							<button className="btn btn-secondary mt-2">
-								<span className="badge">
-									<i className="fas fa-arrow-left" />
-								</span>{' '}
-								Back
-							</button>
-						</Link>
-					</div>
+const ManageEvents = () => (
+	<div className="container">
+		<div className="row">
+			<h2 className="center-align">Manage Events</h2>
+		</div>
+		<div className="row">
+			{items.map((item, index) => (
+				<div className="col s12 m6 l6 center-align" key={index}>
+					<i className={`fas fa-${item.icon} fa-3x`} />
+					<Link to={item.linkTo} className="text-center">
+						<h5>{item.cardTitle}</h5>
+					</Link>
+					<p className="grey-text">{item.cardText}</p>
+					<small className="grey-text">{item.permissions}</small>
 				</div>
+			))}
+		</div>
+		<div className="row">
+			<div className="col s12 center-align">
+				<Link to="/dashboard">
+					<button className="btn grey waves-effect waves-dark">
+						<i className="left fas fa-arrow-left" />
+						Back
+					</button>
+				</Link>
 			</div>
-		);
-	}
-}
+		</div>
+	</div>
+);
 
 const items = [
 	{
-		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Event',
+		icon: 'plus-circle',
 		cardTitle: 'Create event',
 		cardText: 'Create a new, unique event.',
 		permissions: 'Admin',
 		linkTo: '/create-event'
 	},
 	{
-		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Event',
+		icon: 'list-alt',
 		cardTitle: 'View events',
 		cardText: 'List all events in database.',
 		permissions: 'Admin, instructor, public',
 		linkTo: '/list-events'
 	}
 ];
+
+export default ManageEvents;
