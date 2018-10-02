@@ -220,7 +220,7 @@ class ListEvents extends Component {
 					{this.props.auth.isAuthenticated ? (
 						<div className="col s12 center-align">
 							<Link to="/manage-events">
-								<button className="btn btn-secondary mt-2 mb-4">
+								<button className="btn grey mt-2 mb-4">
 									<i className="fas fa-arrow-left left" />
 									Back
 								</button>

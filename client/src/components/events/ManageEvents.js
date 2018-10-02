@@ -6,6 +6,7 @@ const ManageEvents = () => (
 		<div className="row">
 			<h2 className="center-align">Manage Events</h2>
 		</div>
+
 		<div className="row">
 			{items.map((item, index) => (
 				<div className="col s12 m6 l6 center-align" key={index}>
@@ -13,7 +14,7 @@ const ManageEvents = () => (
 					<Link to={item.linkTo} className="text-center">
 						<h5>{item.cardTitle}</h5>
 					</Link>
-					<p className="grey-text">{item.cardText}</p>
+					<p>{item.cardText}</p>
 					<small className="grey-text">{item.permissions}</small>
 				</div>
 			))}

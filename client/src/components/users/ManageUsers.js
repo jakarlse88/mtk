@@ -1,39 +1,39 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
+/*
+ * TODO: view all users
+ */
+
 export default class ManageUsers extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h2 className="display-4 text-center mt-4">Manage Users</h2>
-				<hr />
-				<div className="row mt-4 mb-4">
+				<h2 className="center-align">Manage Users</h2>
+				<div className="row center-align">
 					{items.map((item, index) => (
-						<div className="col-12 col-sm-6 col-lg-4 m-auto" key={index}>
-							<div className="card mb-4">
-								<img
-									src="https://via.placeholder.com/350x185"
-									alt="Description"
-									className="card-img-top"
-								/>
-								<div className="card-body">
-									<Link to={item.linkTo} className="text-center">
-										<h5 className="card-title">{item.cardTitle}</h5>
-									</Link>
-									<p className="card-text text-muted">{item.cardText}</p>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">{item.permissions}</small>
-								</div>
-							</div>
+						<div className="col s12 m12 center-align" key={index}>
+							<i className={`fas fa-${item.icon} fa-3x`} />
+							<Link to={item.linkTo} className="center-align">
+								<h5>{item.cardTitle}</h5>
+							</Link>
+							<p>{item.cardText}</p>
+							<small className="grey-text">{item.permissions}</small>
 						</div>
 					))}
-					<div className="col-12 text-center">
+					<div className="row">
+						<div className="col" />
+					</div>
+					<div className="row">
+						<div className="col" />
+					</div>
+					<div className="row">
+						<div className="col" />
+					</div>
+					<div className="col s12 center-align">
 						<Link to="/dashboard">
-							<button className="btn btn-secondary mt-2">
-								<span className="badge">
-									<i className="fas fa-arrow-left" />
-								</span>{' '}
+							<button className="btn grey">
+								<i className="fas fa-arrow-left left" />
 								Back
 							</button>
 						</Link>
@@ -46,8 +46,7 @@ export default class ManageUsers extends Component {
 
 const items = [
 	{
-		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'User',
+		icon: 'plus',
 		cardTitle: 'Register User',
 		cardText: 'Create a new, unique user.',
 		permissions: 'Admin',

@@ -5,38 +5,33 @@ export default class ManageContent extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h2 className="display-4 text-center mt-4">Manage Content</h2>
-				<hr />
-				<div className="row mt-4 mb-4">
+				<h2 className="center-align">Manage Content</h2>
+				<div className="row">
+					<div className="row">
+						<div className="col" />
+					</div>
 					{items.map((item, index) => (
-						<div className="col-12 col-sm-6 col-lg-4 m-auto" key={index}>
-							<div className="card mb-4">
-								<img
-									src="https://via.placeholder.com/350x185"
-									alt="Description"
-									className="card-img-top"
-								/>
-								<div className="card-body">
-									<Link to={item.linkTo} className="text-center">
-										<h5 className="card-title">{item.cardTitle}</h5>
-									</Link>
-									<p className="card-text text-muted">{item.cardText}</p>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">{item.permissions}</small>
-								</div>
-							</div>
+						<div className="col s12 m6 l6 center-align" key={index}>
+							<i className={`fas fa-${item.icon} fa-3x`} />
+							<Link to={item.linkTo} className="text-center">
+								<h5 className="card-title">{item.cardTitle}</h5>
+							</Link>
+							<p>{item.cardText}</p>
+							<small className="grey-text">{item.permissions}</small>
 						</div>
 					))}
-					<div className="col-12 text-center">
-						<Link to="/dashboard">
-							<button className="btn btn-secondary mt-2">
-								<span className="badge">
-									<i className="fas fa-arrow-left" />
-								</span>{' '}
-								Back
-							</button>
-						</Link>
+					<div className="row">
+						<div className="col" />
+					</div>
+					<div className="row">
+						<div className="col s12 center-align">
+							<Link to="/dashboard">
+								<button className="btn grey waves-effect waves-dark">
+									<i className="fas left fa-arrow-left" />
+									Back
+								</button>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -46,16 +41,14 @@ export default class ManageContent extends Component {
 
 const items = [
 	{
-		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Content',
+		icon: 'newspaper',
 		cardTitle: 'Articles',
 		cardText: 'Write a new article, or manage already existing articles',
 		permissions: 'Admin',
 		linkTo: '/manage-articles'
 	},
 	{
-		imgSrc: 'https://via.placeholder.com/350x185',
-		imgAlt: 'Event',
+		icon: 'info-circle',
 		cardTitle: 'Information',
 		cardText: '"About" pages, schedule, etc.',
 		permissions: 'Admin, instructor, public',

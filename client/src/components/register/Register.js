@@ -56,13 +56,13 @@ class Register extends Component {
 
 		if (this.props.auth.user && this.props.auth.user.role !== 'admin') {
 			content = (
-				<div className="col-12 m-auto text-center">
-					<h2 className="mt-4">Hello, {this.props.auth.user.name}!</h2>
-					<p className="lead text-center">
+				<div className="col s12 center-align">
+					<h2>Hello, {this.props.auth.user.name}!</h2>
+					<p className="center-align flow-text">
 						Unfortunately, this functionality requires administrator
 						privileges.
 					</p>
-					<p className="text-center">
+					<p className="center-align">
 						<Link to="/dashboard">Return to dashboard?</Link>
 					</p>
 				</div>
@@ -70,95 +70,97 @@ class Register extends Component {
 		} else {
 			content = (
 				<Fragment>
-					<div className="col-12 m-auto">
-						<h2 className="display-4 mt-4 text-center">
-							User Registration
-						</h2>
-						<hr />
+					<div className="col s12 center-align">
+						<h2 className="center-align">User Registration</h2>
 					</div>
-					<div className="col-8 m-auto">
+					<div className="col s12 center-align">
 						<form noValidate onSubmit={this.onSubmit}>
-							<div className="form-group">
-								<label htmlFor="emailInput">E-mail:</label>
+							<div className="input-field">
+								<i className="prefix fas fa-at" />
 								<input
+									placeholder="name@address.com"
 									aria-describedby="emailHelp"
-									className="form-control"
 									id="emailInput"
 									name="email"
 									onChange={this.onChange}
-									placeholder="E-post"
 									type="text"
 									value={this.state.email}
 								/>
+								<span className="helper-text left-align">E-post</span>
 								{errors.email ? (
-									<small id="emailHelp" className="form-text text-danger">
+									<small
+										id="emailHelp"
+										className="helper-text left-align red-text">
 										{errors.email}
 									</small>
 								) : null}
 							</div>
-							<div className="form-group">
-								<label htmlFor="nameInput">Name:</label>
+							<div className="input-field">
+								<i className="prefix fas fa-user" />
 								<input
 									aria-describedby="nameHelp"
-									className="form-control"
 									id="nameInput"
 									name="name"
 									onChange={this.onChange}
-									placeholder="Fullt navn"
+									placeholder="Ola Nordmann"
 									type="text"
 									value={this.state.name}
 								/>
+								<span className="helper-text left-align">Navn</span>
 								{errors.name ? (
-									<small id="nameHelp" className="form-text text-danger">
+									<small
+										id="nameHelp"
+										className="helper-text red-text left-align">
 										{errors.name}
 									</small>
 								) : null}
 							</div>
-							<div className="form-group">
-								<label htmlFor="passwordInput">Password:</label>
+							<div className="input-field">
+								<i className="prefix fas fa-key" />
 								<input
 									aria-describedby="passwordHelp"
-									className="form-control"
 									id="passwordInput"
 									name="password"
 									onChange={this.onChange}
-									placeholder="Password"
+									placeholder="*****"
 									type="password"
 									value={this.state.password}
 								/>
+								<span className="helper-text left-align">Passord</span>
 								{errors.password ? (
 									<small
 										id="passwordHelp"
-										className="form-text text-danger">
+										className="helper-text red-text left-align">
 										{errors.password}
 									</small>
 								) : null}
 							</div>
-							<div className="form-group">
-								<label htmlFor="password2Input">Confirm password:</label>
+							<div className="input-field">
+								<i className="prefix fas fa-key" />
 								<input
 									aria-describedby="password2Help"
-									className="form-control"
 									id="password2Input"
 									name="password2"
 									onChange={this.onChange}
-									placeholder="Confirm password"
+									placeholder="*****"
 									type="password"
 									value={this.state.password2}
 								/>
+								<span className="helper-text left-align">
+									Bekreft passord
+								</span>
 								{errors.password2 ? (
 									<small
 										id="password2Help"
-										className="form-text text-danger">
+										className="helper-text red-text left-align">
 										{errors.password2}
 									</small>
 								) : null}
 							</div>
-							<div className="form-group">
-								<label htmlFor="sauceInput">Saus:</label>
+							<div className="input-field">
+								<i className="prefix fas fa-question" />
 								<input
 									aria-describedby="sauceHelp"
-									className="form-control"
 									id="sauceInput"
 									name="sauce"
 									onChange={this.onChange}
@@ -166,48 +168,59 @@ class Register extends Component {
 									type="password"
 									value={this.state.sauce}
 								/>
+								<span className="helper-text left-align">Saus</span>
 								{errors.sauce ? (
-									<small id="sauceHelp" className="form-text text-danger">
+									<small
+										id="sauceHelp"
+										className="helper-text left-align red-text">
 										{errors.sauce}
 									</small>
 								) : null}
 							</div>
-							<div className="form-group">
-								<label htmlFor="roleInput">Role:</label>
+							<div className="input-field">
+								<i className="prefix fas fa-user-cog" />
 								<input
 									aria-describedby="roleHelp"
 									className="form-control"
 									id="roleInput"
 									name="role"
 									onChange={this.onChange}
-									placeholder="Role"
+									placeholder="Admin"
 									type="text"
 									value={this.state.role}
 								/>
+								<span className="helper-text left-align">Rolle</span>
 								{errors.role ? (
-									<small id="roleHelp" className="form-text text-danger">
+									<small
+										id="roleHelp"
+										className="helper-text left-align red-text">
 										{errors.role}
 									</small>
 								) : null}
 							</div>
-							<p className="text-center">
-								<Link to="/manage-users">
+							<div className="row">
+								<div className="col s6 right-align">
+									{' '}
+									<Link to="/manage-users">
+										<button
+											className="btn grey waves-effect waves-dark"
+											type="button">
+											<i className="fas fa-arrow-left left" />
+											Back
+										</button>
+									</Link>
+								</div>
+								<div className="col s6 left-align">
+									{' '}
 									<button
-										className="btn btn-secondary mr-4 mt-4 mb-4"
-										type="button">
-										<span className="badge">
-											<i className="fas fa-arrow-left" />
-										</span>
-										Back
+										className="btn blue waves-effect waves-blue"
+										type="submit"
+										onClick={this.onSubmit}>
+										<i className="fas fa-share-square right" />
+										Send Registration
 									</button>
-								</Link>
-								<button
-									className="btn btn-success mt-4 mb-4"
-									type="submit"
-									onClick={this.onSubmit}>
-									Send Registration
-								</button>
-							</p>
+								</div>
+							</div>
 						</form>
 					</div>
 				</Fragment>
