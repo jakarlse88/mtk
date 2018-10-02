@@ -238,6 +238,7 @@ class Navbar extends Component {
 								className="collapsible-header waves-effect waves-blue "
 								to="/dashboard"
 								onClick={this.onSidenavLinkClick}>
+								<i className="left fas fa-tachometer-alt fa-1x" />
 								Dashboard
 							</Link>
 						</li>
@@ -246,6 +247,7 @@ class Navbar extends Component {
 								href="#!"
 								className="collapsible-header waves-effect waves-blue"
 								onClick={this.onSidenavLogoutClick}>
+								<i className="left red-text fas fa-user-slash fa-1x" />
 								Logout
 							</a>
 						</li>

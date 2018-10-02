@@ -1,3 +1,7 @@
+/*
+ * Pagination based on https://stackoverflow.com/a/40234427/7041984
+ */
+
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
