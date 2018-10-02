@@ -10,7 +10,7 @@ import { logoutUser } from '../../actions/authActions';
 class Navbar extends Component {
 	componentDidMount = () => {
 		let elem = document.querySelector('.sidenav');
-		let instance = M.Sidenav.init(elem, {
+		M.Sidenav.init(elem, {
 			edge: 'left'
 		});
 	};
@@ -162,7 +162,7 @@ class Navbar extends Component {
 				</li>
 				<li>
 					<a
-						href="#"
+						href="#!"
 						className="waves-effect waves-blue collapsible-header">
 						Informasjon
 						<i className="left fas fa-info-circle fa-1x" />
@@ -271,7 +271,7 @@ class Navbar extends Component {
 									</span>
 								</Link>
 								<a
-									href="#"
+									href="#!"
 									className="sidenav-trigger"
 									data-target="mobile-menu">
 									<i className="fas fa-bars fa-2x grey-text text-darken-2" />
@@ -300,7 +300,7 @@ class Navbar extends Component {
 									</li>
 									<li>
 										<a
-											href="#"
+											href="#!"
 											className="dropdown-trigger grey-text text-darken-2"
 											data-target="info-menu-dropdown">
 											Informasjon

@@ -9,8 +9,6 @@ import { createEvent } from '../../actions/eventActions';
 
 import isEmpty from '../../utils/is-empty';
 
-import M from 'materialize-css';
-
 class CreateEvent extends Component {
 	constructor(props) {
 		super(props);

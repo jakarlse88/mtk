@@ -72,7 +72,7 @@ class EditArticle extends Component {
 	};
 
 	render() {
-		const { content, errors } = this.props;
+		const { content } = this.props;
 
 		return (
 			<div className="container">

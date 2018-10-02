@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import React, { Component } from 'react';
@@ -28,6 +27,5 @@ Jumbotron.defaultProps = {
 
 Jumbotron.propTypes = {
 	title: PropTypes.string.isRequired,
-	link: PropTypes.string.isRequired,
 	content: PropTypes.string.isRequired
 };

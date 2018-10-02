@@ -17,3 +17,9 @@
     of the button to still show through. */
     background-color: rgba(3, 155, 229, 0.65);
 }
+
+/* Custom background color for active pagination links */
+
+.pagination li.active a {
+    background-color: #2196f3
+}

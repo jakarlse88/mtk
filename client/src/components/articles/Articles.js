@@ -49,7 +49,7 @@ class Articles extends Component {
 	};
 
 	render() {
-		const { content, filter, filteredArticleArr } = this.state;
+		const { content, filter } = this.state;
 		const query = new RegExp(escapeRegExp(filter), 'i');
 
 		let articlesContent = [];

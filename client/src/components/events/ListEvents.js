@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+
+import classnames from 'classnames';
 
 import { getEventsArr } from '../../actions/eventActions';
-
-// TODO: pagination
 
 class ListEvents extends Component {
 	constructor(props) {
@@ -16,7 +16,11 @@ class ListEvents extends Component {
 			events: {},
 			errors: {},
 			currentPage: 1,
-			eventsPerPage: 5
+			eventsPerPage: 5,
+			currentEvents: [],
+			indexOfFirstEvent: null,
+			indexOfLastEvent: null,
+			pageNumbers: []
 		};
 	}
 
@@ -25,15 +29,68 @@ class ListEvents extends Component {
 	};
 
 	componentWillReceiveProps = nextProps => {
-		if (nextProps.events) {
-			this.setState({
-				events: nextProps.events
+		if (
+			nextProps.events.eventsArr instanceof Array &&
+			nextProps.events.eventsArr.length
+		) {
+			this.setState(prevState => {
+				// Event display logic
+				const indexOfLastEvent =
+					prevState.currentPage * prevState.eventsPerPage;
+				const indexOfFirstEvent =
+					indexOfLastEvent - prevState.eventsPerPage;
+				const currentEvents = nextProps.events.eventsArr.slice(
+					indexOfFirstEvent,
+					indexOfLastEvent
+				);
+
+				// Logic for displaying page numbers
+				const pageNumbers = [];
+
+				if (nextProps.events.eventsArr) {
+					for (
+						let i = 1;
+						i <=
+						Math.ceil(
+							nextProps.events.eventsArr.length / prevState.eventsPerPage
+						);
+						i++
+					) {
+						pageNumbers.push(i);
+					}
+				}
+
+				return {
+					currentEvents,
+					indexOfFirstEvent,
+					indexOfLastEvent,
+					pageNumbers
+				};
 			});
 		}
 
 		if (nextProps.errors) {
 			this.setState({
 				errors: nextProps.errors
+			});
+		}
+	};
+
+	componentDidUpdate = (prevProps, prevState) => {
+		if (this.state.currentPage !== prevState.currentPage) {
+			const indexOfLastEvent =
+				this.state.currentPage * this.state.eventsPerPage;
+			const indexOfFirstEvent =
+				indexOfLastEvent - this.state.eventsPerPage;
+			const currentEvents = this.props.events.eventsArr.slice(
+				indexOfFirstEvent,
+				indexOfLastEvent
+			);
+
+			this.setState({
+				indexOfFirstEvent,
+				indexOfLastEvent,
+				currentEvents
 			});
 		}
 	};
@@ -46,104 +103,12 @@ class ListEvents extends Component {
 
 	render() {
 		const { auth } = this.props;
-		const { currentPage, eventsPerPage, events, errors } = this.state;
+		const { currentEvents, events, errors, pageNumbers } = this.state;
 
-		let content;
-
-		// Event display logic
-		const indexOfLastEvent = currentPage * eventsPerPage;
-		const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-		const currentEvents = events.eventsArr.slice(
-			indexOfFirstEvent,
-			indexOfLastEvent
-		);
-
-		const renderEvents = currentEvents.map((event, index) => (
-			<div className="col s12 l6">
-				<div className="card horizontal hoverable" key={index}>
-					<div className="card-stacked">
-						<div className="card-content">
-							<span className="card-title">{event.name}</span>
-							<small className="grey-text">
-								{event.eventType},{' '}
-								<Moment date={event.startDate} format="dddd DD/MM/YYYY" />{' '}
-								to <Moment date={event.endDate} format="dddd DD/MM/YYYY" />{' '}
-								by {event.owner}
-							</small>
-							<br />
-							<br />
-							<p>{event.description}</p>
-						</div>
-						<div className="card-action">
-							<Link to={`/single-event/${event._id}`}>
-								<button className="btn blue waves-effect waves-blue">
-									<i className="fas fa-search fa-xl left" />
-									View event
-								</button>
-							</Link>
-							{auth.user.role === 'admin' && (
-								<Link
-									to={`/admin-event/${event._id}`}
-									className="red-text">
-									<button className="btn blue waves-effect waves-blue">
-										<i className="fas fa-cogs fa-xl left" />
-										Administrate event
-									</button>
-								</Link>
-							)}
-						</div>
-					</div>
-				</div>
-			</div>
-		));
-
-		// Logic for displaying page numbers
-		const pageNumbers = [];
-		for (
-			let i = 1;
-			i <= Math.ceil(events.eventsArr.length / eventsPerPage);
-			i++
-		) {
-			pageNumbers.push(i);
-		}
-
-		const renderPageNumbers = pageNumbers.map(number => (
-			<li
-				className="waves-effect"
-				id={number}
-				key={number}
-				onClick={this.onClick}>
-				{number}
-			</li>
-		));
-
-		if (events.eventLoading) {
-			content = (
-				<p className="flow-text center-align">
-					<i className="fa fa-spinner fa-spin fa-3x" />
-				</p>
-			);
-		}
-
-		if (Object.keys(errors).length > 0) {
-			content = (
-				<p className="flow-text center-align red-text">
-					<i className="fas fa-exclamation-triangle fa-3x" />
-					<br />
-					<br />
-					<br />
-					Oops! Something went wrong. Try again, or contact an admin.
-				</p>
-			);
-		}
-
-		if (
-			Object.keys(events).length > 0 &&
-			events.eventsArr instanceof Array
-		) {
-			content = events.eventsArr.map((event, index) => (
-				<div className="col s12 l6">
-					<div className="card horizontal hoverable" key={index}>
+		const renderEvents = currentEvents.map((event, index) => {
+			return (
+				<div className="col s12" key={index}>
+					<div className="card horizontal hoverable">
 						<div className="card-stacked">
 							<div className="card-content">
 								<span className="card-title">{event.name}</span>
@@ -163,7 +128,7 @@ class ListEvents extends Component {
 							</div>
 							<div className="card-action">
 								<Link to={`/single-event/${event._id}`}>
-									<button className="btn blue waves-effect waves-blue">
+									<button className="btn btn-flat white black-text waves-effect waves-blue">
 										<i className="fas fa-search fa-xl left" />
 										View event
 									</button>
@@ -172,7 +137,7 @@ class ListEvents extends Component {
 									<Link
 										to={`/admin-event/${event._id}`}
 										className="red-text">
-										<button className="btn blue waves-effect waves-blue">
+										<button className="btn btn-flat white black-text waves-effect waves-blue">
 											<i className="fas fa-cogs fa-xl left" />
 											Administrate event
 										</button>
@@ -182,8 +147,41 @@ class ListEvents extends Component {
 						</div>
 					</div>
 				</div>
-			));
-		}
+			);
+		});
+
+		const renderPageNumbers = pageNumbers.map(number => {
+			return (
+				<li
+					className={classnames({
+						'waves-effect': true,
+						'waves-blue': true,
+						active: number === this.state.currentPage
+					})}
+					key={number}
+					onClick={this.onClick}>
+					<a id={number} href="#!">
+						{number}
+					</a>
+				</li>
+			);
+		});
+
+		const renderLoading = (
+			<p className="flow-text center-align">
+				<i className="fa fa-spinner fa-spin fa-3x" />
+			</p>
+		);
+
+		const renderErrors = (
+			<p className="flow-text center-align red-text">
+				<i className="fas fa-exclamation-triangle fa-3x" />
+				<br />
+				<br />
+				<br />
+				Oops! Something went wrong. Try again, or contact an admin.
+			</p>
+		);
 
 		return (
 			<div className="container">
@@ -195,7 +193,23 @@ class ListEvents extends Component {
 					<div className="row">
 						<div className="col" />
 					</div>
-					<div className="col s12">{content}</div>
+					<div className="col s12">
+						{events.eventLoading ? (
+							{ renderLoading }
+						) : Object.keys(errors).length > 0 ? (
+							{ renderErrors }
+						) : (
+							<Fragment>
+								{renderEvents}
+								<div className="row">
+									<div className="col" />
+								</div>
+								<ul className="pagination center-align">
+									{renderPageNumbers}
+								</ul>
+							</Fragment>
+						)}
+					</div>
 					<div className="row">
 						<div className="col" />
 					</div>
