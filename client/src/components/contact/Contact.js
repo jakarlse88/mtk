@@ -71,6 +71,7 @@ export default class Contact extends Component {
 								<i className="prefix fas fa-edit" />
 								<textarea
 									onChange={this.onChange}
+									value={this.state.message}
 									name="message"
 									id="textArea"
 									cols="30"

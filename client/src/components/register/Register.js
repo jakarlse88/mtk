@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
+import InputField from '../common/InputField';
+
 import { registerUser } from '../../actions/authActions';
 
+/*
+ * TODO: authenticate user performing registration as admin
+ */
 class Register extends Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +20,6 @@ class Register extends Component {
 			password: '',
 			password2: '',
 			role: '',
-			sauce: '',
 			errors: {}
 		};
 	}
@@ -42,7 +46,6 @@ class Register extends Component {
 			name: this.state.name,
 			password: this.state.password,
 			password2: this.state.password2,
-			sauce: this.state.sauce,
 			role: this.state.role
 		};
 
@@ -73,123 +76,69 @@ class Register extends Component {
 					<div className="col s12 center-align">
 						<h2 className="center-align">User Registration</h2>
 					</div>
-					<div className="col s12 center-align">
+					<div className="col s12 left-align">
 						<form noValidate onSubmit={this.onSubmit}>
-							<div className="input-field">
-								<i className="prefix fas fa-at" />
-								<input
-									placeholder="name@address.com"
-									aria-describedby="emailHelp"
-									id="emailInput"
-									name="email"
-									onChange={this.onChange}
-									type="text"
-									value={this.state.email}
-								/>
-								<span className="helper-text left-align">E-post</span>
-								{errors.email ? (
-									<small
-										id="emailHelp"
-										className="helper-text left-align red-text">
-										{errors.email}
-									</small>
-								) : null}
-							</div>
-							<div className="input-field">
-								<i className="prefix fas fa-user" />
-								<input
-									aria-describedby="nameHelp"
-									id="nameInput"
-									name="name"
-									onChange={this.onChange}
-									placeholder="Ola Nordmann"
-									type="text"
-									value={this.state.name}
-								/>
-								<span className="helper-text left-align">Navn</span>
-								{errors.name ? (
-									<small
-										id="nameHelp"
-										className="helper-text red-text left-align">
-										{errors.name}
-									</small>
-								) : null}
-							</div>
-							<div className="input-field">
-								<i className="prefix fas fa-key" />
-								<input
-									aria-describedby="passwordHelp"
-									id="passwordInput"
-									name="password"
-									onChange={this.onChange}
-									placeholder="*****"
-									type="password"
-									value={this.state.password}
-								/>
-								<span className="helper-text left-align">Passord</span>
-								{errors.password ? (
-									<small
-										id="passwordHelp"
-										className="helper-text red-text left-align">
-										{errors.password}
-									</small>
-								) : null}
-							</div>
-							<div className="input-field">
-								<i className="prefix fas fa-key" />
-								<input
-									aria-describedby="password2Help"
-									id="password2Input"
-									name="password2"
-									onChange={this.onChange}
-									placeholder="*****"
-									type="password"
-									value={this.state.password2}
-								/>
-								<span className="helper-text left-align">
-									Bekreft passord
-								</span>
-								{errors.password2 ? (
-									<small
-										id="password2Help"
-										className="helper-text red-text left-align">
-										{errors.password2}
-									</small>
-								) : null}
-							</div>
-							<div className="input-field">
-								<i className="prefix fas fa-question" />
-								<input
-									aria-describedby="sauceHelp"
-									id="sauceInput"
-									name="sauce"
-									onChange={this.onChange}
-									placeholder="Saus"
-									type="password"
-									value={this.state.sauce}
-								/>
-								<span className="helper-text left-align">Saus</span>
-								{errors.sauce ? (
-									<small
-										id="sauceHelp"
-										className="helper-text left-align red-text">
-										{errors.sauce}
-									</small>
-								) : null}
-							</div>
+							<InputField
+								icon="at"
+								inputId="emailInput"
+								value={this.state.email}
+								name="email"
+								type="text"
+								onChange={this.onChange}
+								labelText="E-post"
+								placeholder="ola.nordmann@gmail.com"
+								error={errors.email}
+							/>
+							<InputField
+								icon="user"
+								inputId="nameInput"
+								value={this.state.name}
+								name="name"
+								type="text"
+								onChange={this.onChange}
+								labelText="Navn"
+								placeholder="Ola Nordmann"
+								error={errors.name}
+							/>
+							<InputField
+								icon="key"
+								inputId="passwordInput"
+								value={this.state.password}
+								name="password"
+								type="password"
+								onChange={this.onChange}
+								labelText="Passord"
+								placeholder="*****"
+								error={errors.password}
+							/>
+							<InputField
+								icon="key"
+								inputId="password2Input"
+								value={this.state.password2}
+								name="password2"
+								type="password"
+								onChange={this.onChange}
+								labelText="Bekreft passord"
+								placeholder="*****"
+								error={errors.password2}
+							/>
+
 							<div className="input-field">
 								<i className="prefix fas fa-user-cog" />
-								<input
-									aria-describedby="roleHelp"
-									className="form-control"
-									id="roleInput"
-									name="role"
-									onChange={this.onChange}
-									placeholder="Admin"
-									type="text"
+								<select
 									value={this.state.role}
-								/>
-								<span className="helper-text left-align">Rolle</span>
+									onChange={this.onChange}
+									name="role">
+									<option value="" disabled defaultValue>
+										Velg...
+									</option>
+									<option value="admin">Admin</option>
+									<option value="mod">Moderator</option>
+									<option value="asst">Assistent</option>
+								</select>
+								<span className="helper-text black-text left-align">
+									Rolle
+								</span>
 								{errors.role ? (
 									<small
 										id="roleHelp"

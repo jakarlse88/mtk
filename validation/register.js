@@ -15,7 +15,6 @@ module.exports = validateRegisterInput = data => {
 	data.email = !isEmpty(data.email) ? data.email : '';
 	data.password = !isEmpty(data.password) ? data.password : '';
 	data.password2 = !isEmpty(data.password2) ? data.password2 : '';
-	data.sauce = !isEmpty(data.sauce) ? data.sauce : '';
 	data.role = !isEmpty(data.role) ? data.role : '';
 
 	// Validate inputs
@@ -51,15 +50,7 @@ module.exports = validateRegisterInput = data => {
 		errors.password2 = 'Passwords must match';
 	}
 
-	if (data.sauce.toLowerCase() !== adminSecretSauce.toLowerCase()) {
-		errors.sauce = 'Wrong sauce!';
-	}
-
-	if (Validator.isEmpty(data.sauce)) {
-		errors.sauce = 'Sauce field is required';
-	}
-
-	if (['admin', 'mod'].indexOf(data.role.toLowerCase()) === -1) {
+	if (['admin', 'mod', 'asst'].indexOf(data.role.toLowerCase()) === -1) {
 		errors.role = 'Invalid role';
 	}
 
