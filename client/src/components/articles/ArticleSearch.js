@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import InputField from '../common/InputField';
+
 export default class ArticleSearch extends Component {
 	onSearchFieldChange = e => {
 		this.setState({
@@ -11,23 +13,21 @@ export default class ArticleSearch extends Component {
 	render() {
 		return (
 			<div className="input-field">
-				<label htmlFor="articleQuery">Søk i nyheter</label>
-
-				<input
-					id="articleQuery"
+				<InputField
+					icon="search"
+					inputId="articleQuery"
 					className="validate"
 					type="text"
+					placeholder="Søk i nyheter"
 					value={this.props.value}
 					name="query"
 					onChange={this.props.onFilterChange}
+					labelText="Du kan søke i overskrifter og forfattere."
 				/>
-				<span className="helper-text">
-					Du kan søke i overskrifter og forfattere.
-				</span>
 				{this.props.articlesContent.length < 1 && (
-					<span className="helper-text red-text">
-						Ingen resultater, viser derfor alle artikler.
-					</span>
+					<p className="flow-text red-text center-align">
+						Ingen resultater.
+					</p>
 				)}
 			</div>
 		);

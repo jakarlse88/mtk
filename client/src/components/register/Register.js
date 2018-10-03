@@ -5,11 +5,9 @@ import { Link, withRouter } from 'react-router-dom';
 
 import InputField from '../common/InputField';
 
-import { registerUser } from '../../actions/authActions';
+import M from 'materialize-css';
 
-/*
- * TODO: authenticate user performing registration as admin
- */
+import { registerUser } from '../../actions/authActions';
 class Register extends Component {
 	constructor(props) {
 		super(props);
@@ -23,6 +21,11 @@ class Register extends Component {
 			errors: {}
 		};
 	}
+
+	componentDidMount = () => {
+		const elems = document.querySelectorAll('select');
+		const instances = M.FormSelect.init(elems, {});
+	};
 
 	componentWillReceiveProps = nextProps => {
 		if (nextProps.errors) {
@@ -126,15 +129,22 @@ class Register extends Component {
 							<div className="input-field">
 								<i className="prefix fas fa-user-cog" />
 								<select
+									className="grey-text"
 									value={this.state.role}
 									onChange={this.onChange}
 									name="role">
 									<option value="" disabled defaultValue>
 										Velg...
 									</option>
-									<option value="admin">Admin</option>
-									<option value="mod">Moderator</option>
-									<option value="asst">Assistent</option>
+									<option className="grey-text" value="admin">
+										Admin
+									</option>
+									<option className="grey-text" value="mod">
+										Moderator
+									</option>
+									<option className="grey-text" value="asst">
+										Assistent
+									</option>
 								</select>
 								<span className="helper-text black-text left-align">
 									Rolle
