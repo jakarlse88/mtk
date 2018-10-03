@@ -25,7 +25,7 @@ const InputField = ({
 				onChange={onChange}
 				readOnly={readOnly}
 			/>
-			<span className="helper-text">{labelText}</span>
+			<span className="helper-text black-text">{labelText}</span>
 			{error && <small className="red-text">{error}</small>}
 		</div>
 	);
