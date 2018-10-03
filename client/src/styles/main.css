@@ -23,3 +23,7 @@
 .pagination li.active a {
     background-color: #2196f3
 }
+
+.mb-2 {
+    margin-bottom: 2em;
+}
