@@ -2,6 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
+const showdown = require('showdown');
+const xssFilter = require('showdown-xss-filter');
+const converter = new showdown.Converter({ extensions: [xssFilter] });
+
 /*
  * Load models
  */
@@ -18,9 +22,7 @@ const validateNewInformationInput = require('../../validation/new-info');
 /*
  * Test route
  */
-router.get('/test', (req, res) =>
-  res.json({ msg: '/content works' })
-);
+router.get('/test', (req, res) => res.json({ msg: '/content works' }));
 
 /*
  * @route   GET /api/content/articles
@@ -28,10 +30,10 @@ router.get('/test', (req, res) =>
  * @access  Public
  */
 router.get('/articles', (req, res) => {
-  ArticleContent.find()
-    .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => console.log(err));
+	ArticleContent.find()
+		.sort({ date: -1 })
+		.then(posts => res.json(posts))
+		.catch(err => console.log(err));
 });
 
 /*
@@ -40,23 +42,23 @@ router.get('/articles', (req, res) => {
  * @access  Public
  */
 router.get('/articles/:id', (req, res) => {
-  // Hold onto any error(s) encountered
-  const errors = {};
+	// Hold onto any error(s) encountered
+	const errors = {};
 
-  ArticleContent.findById(req.params.id)
-    .then(post => {
-      if (post) {
-        return res.json(post);
-      } else {
-        errors.article = 'Article not found';
+	ArticleContent.findById(req.params.id)
+		.then(post => {
+			if (post) {
+				return res.json(post);
+			} else {
+				errors.article = 'Article not found';
 
-        return res.status(404).json(errors);
-      }
-    })
-    .catch(err => {
-      errors.find = err.message;
-      res.status(400).json(errors);
-    });
+				return res.status(404).json(errors);
+			}
+		})
+		.catch(err => {
+			errors.find = err.message;
+			res.status(400).json(errors);
+		});
 });
 
 /*
@@ -65,48 +67,48 @@ router.get('/articles/:id', (req, res) => {
  * @access  Private
  */
 router.post(
-  '/articles/new',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateNewArticleInput(
-      req.body,
-      req.user.name
-    );
+	'/articles/new',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		const { errors, isValid } = validateNewArticleInput(
+			req.body,
+			req.user.name
+		);
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
 
-    ArticleContent.findOne({
-      author: req.user.name,
-      content: req.body.content,
-      date: req.body.date,
-      headline: req.body.headline,
-      category: req.body.category
-    })
-      .then(article => {
-        if (article) {
-          return res.status(400).json({
-            articleAlreadyExists:
-              'Duplicate articles are not allowed'
-          });
-        }
-      })
-      .catch(err => console.log(err));
+		const text = converter.makeHtml(req.body.content);
 
-    const newArticle = new ArticleContent({
-      author: req.user.name,
-      content: req.body.content,
-      date: req.body.date,
-      headline: req.body.headline,
-      category: req.body.category
-    });
+		ArticleContent.findOne({
+			author: req.user.name,
+			content: text,
+			headline: req.body.headline,
+			category: req.body.category
+		})
+			.then(article => {
+				if (article) {
+					return res.status(400).json({
+						articleAlreadyExists: 'Duplicate articles are not allowed'
+					});
+				}
+			})
+			.catch(err => console.log(err));
 
-    newArticle
-      .save()
-      .then(article => res.json(article))
-      .catch(err => console.log(err));
-  }
+		const newArticle = new ArticleContent({
+			author: req.user.name,
+			content: text,
+			date: req.body.date,
+			headline: req.body.headline,
+			category: req.body.category
+		});
+
+		newArticle
+			.save()
+			.then(article => res.json(article))
+			.catch(err => console.log(err));
+	}
 );
 
 /*
@@ -116,50 +118,49 @@ router.post(
  * FIXME: 	Currently a straight copy/paste from POST article/new
  */
 router.post(
-  '/information/new',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateNewInformationInput(
-      req.body,
-      req.user.name
-    );
+	'/information/new',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		const { errors, isValid } = validateNewInformationInput(
+			req.body,
+			req.user.name
+		);
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
 
-    InformationContent.findOne({
-      author: req.user.name,
-      content: req.body.content,
-      date: req.body.date,
-      title: req.body.title,
-      style: req.body.style,
-      category: req.body.category
-    })
-      .then(article => {
-        if (article) {
-          return res.status(400).json({
-            articleAlreadyExists:
-              'Duplicate articles are not allowed'
-          });
-        }
-      })
-      .catch(err => console.log(err));
+		InformationContent.findOne({
+			author: req.user.name,
+			content: req.body.content,
+			date: req.body.date,
+			title: req.body.title,
+			style: req.body.style,
+			category: req.body.category
+		})
+			.then(article => {
+				if (article) {
+					return res.status(400).json({
+						articleAlreadyExists: 'Duplicate articles are not allowed'
+					});
+				}
+			})
+			.catch(err => console.log(err));
 
-    const newArticle = new InformationContent({
-      author: req.user.name,
-      content: req.body.content,
-      date: req.body.date,
-      title: req.body.title,
-      style: req.body.style,
-      category: req.body.category
-    });
+		const newArticle = new InformationContent({
+			author: req.user.name,
+			content: req.body.content,
+			date: req.body.date,
+			title: req.body.title,
+			style: req.body.style,
+			category: req.body.category
+		});
 
-    newArticle
-      .save()
-      .then(article => res.json(article))
-      .catch(err => console.log(err));
-  }
+		newArticle
+			.save()
+			.then(article => res.json(article))
+			.catch(err => console.log(err));
+	}
 );
 
 /*
@@ -168,51 +169,48 @@ router.post(
  * @access  Private
  */
 router.put(
-  '/articles/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateArticleEditInput(
-      req.body
-    );
+	'/articles/:id',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		const { errors, isValid } = validateArticleEditInput(req.body);
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
 
-    if (req.user.role !== 'admin') {
-      errors.role =
-        "'Admin' role required for this functionality";
-      return res.status(400).json(errors);
-    }
+		if (req.user.role !== 'admin') {
+			errors.role = "'Admin' role required for this functionality";
+			return res.status(400).json(errors);
+		}
 
-    // Valid input, user auth'd and is admin
-    ArticleContent.findById(req.params.id)
-      .then(article => {
-        // Article not found
-        if (!article) {
-          errors.article = 'Article not found';
-          return res.status(404).json(errors);
-        }
+		// Valid input, user auth'd and is admin
+		ArticleContent.findById(req.params.id)
+			.then(article => {
+				// Article not found
+				if (!article) {
+					errors.article = 'Article not found';
+					return res.status(404).json(errors);
+				}
 
-        // Article found
-        article.content = req.body.content;
-        article.date = req.body.date;
-        article.editedBy = req.body.editor;
-        article.headline = req.body.headline;
+				// Article found
+				article.content = req.body.content;
+				article.date = req.body.date;
+				article.editedBy = req.body.editor;
+				article.headline = req.body.headline;
 
-        article
-          .save()
-          .then(article => res.json(article))
-          .catch(err => {
-            errors.internal = err.response;
-            return res.status(500).json(errors);
-          });
-      })
-      .catch(err => {
-        errors.internal = err.response;
-        return res.status(500).json(errors);
-      });
-  }
+				article
+					.save()
+					.then(article => res.json(article))
+					.catch(err => {
+						errors.internal = err.response;
+						return res.status(500).json(errors);
+					});
+			})
+			.catch(err => {
+				errors.internal = err.response;
+				return res.status(500).json(errors);
+			});
+	}
 );
 
 module.exports = router;

@@ -5,6 +5,7 @@ import {
 	GET_ERRORS,
 	GET_ARTICLE,
 	GET_ARTICLES_ARR,
+	POST_NEW_ARTICLE,
 	SET_ARTICLE_LOADING,
 	UPDATE_ARTICLE
 } from './types';
@@ -46,6 +47,31 @@ export const getArticle = id => dispatch => {
 				payload: res.data
 			})
 		)
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
+};
+
+/*
+ * Post a new article
+ */
+export const postNewArticle = (newArticleData, history) => dispatch => {
+	dispatch(clearErrors());
+	dispatch(setArticleLoading());
+
+	axios
+		.post('/api/content/articles/new', newArticleData)
+		.then(res => {
+			dispatch({
+				type: POST_NEW_ARTICLE,
+				payload: res.data
+			});
+
+			history.push(`/articles/${res.data._id}`);
+		})
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,

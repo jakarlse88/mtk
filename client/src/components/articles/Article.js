@@ -56,7 +56,9 @@ class Article extends Component {
 							Category: {content.article.category}
 						</small>
 					</p>
-					<p>{content.article.content}</p>
+					<div
+						dangerouslySetInnerHTML={{ __html: content.article.content }}
+					/>
 				</div>
 			);
 		}

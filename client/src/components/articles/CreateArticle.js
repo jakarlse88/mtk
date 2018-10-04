@@ -9,8 +9,11 @@ import 'react-mde/lib/styles/css/react-mde-all.css';
 
 import InputField from '../common/InputField';
 
+import { postNewArticle } from '../../actions/contentActions';
+
 /*
  * FIXME: reactMde css interfering with form text (probably)
+ * TODO: disable on mobile
  */
 
 class CreateArticle extends Component {
@@ -55,14 +58,14 @@ class CreateArticle extends Component {
 		const { articleAuthor, articleCategory, articleHeadline } = this.state;
 		const content = this.state.mdeState.html;
 
-		const newArticle = {
+		const newArticleData = {
 			author: articleAuthor,
 			category: articleCategory,
 			headline: articleHeadline,
 			content
 		};
 
-		console.log(newArticle);
+		this.props.postNewArticle(newArticleData, this.props.history);
 	};
 
 	goBack = () => {
@@ -162,7 +165,8 @@ class CreateArticle extends Component {
 
 CreateArticle.propTypes = {
 	auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
+	errors: PropTypes.object.isRequired,
+	postNewArticle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -170,4 +174,7 @@ const mapStateToProps = state => ({
 	errors: state.errors
 });
 
-export default connect(mapStateToProps)(withRouter(CreateArticle));
+export default connect(
+	mapStateToProps,
+	{ postNewArticle }
+)(withRouter(CreateArticle));
