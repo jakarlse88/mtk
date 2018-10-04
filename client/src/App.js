@@ -20,6 +20,7 @@ import AdministrateEvent from './components/events/AdministrateEvent';
 import Article from './components/articles/Article';
 import Articles from './components/articles/Articles';
 import Contact from './components/contact/Contact';
+import CreateArticle from './components/articles/CreateArticle';
 import CreateEvent from './components/events/CreateEvent';
 import CreateEventSuccess from './components/events/CreateEventSuccess';
 import Dashboard from './components/dashboard/Dashboard';
@@ -117,6 +118,11 @@ class App extends Component {
 									exact
 									path="/manage-articles"
 									component={ManageArticles}
+								/>
+								<ProtectedRoute
+									exact
+									path="/create-article"
+									component={CreateArticle}
 								/>
 								<ProtectedRoute
 									exact
