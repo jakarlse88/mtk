@@ -4,21 +4,22 @@ import Menu from '../common/Menu';
 
 const ManageContent = () => <Menu headline={headline} items={items} />;
 
-const headline = 'Manage Content';
+const headline = 'Administrér Innhold';
 
 const items = [
 	{
 		icon: 'newspaper',
-		cardTitle: 'Articles',
-		cardText: 'Write a new article, or manage already existing articles',
-		permissions: 'Admin',
+		cardTitle: 'Nyhetsartikler',
+		cardText:
+			'Opprett en ny artikkel, eller redigér en allerede eksisterende artikkel',
+		permissions: 'Admin, moderator',
 		linkTo: '/manage-articles'
 	},
 	{
 		icon: 'info-circle',
-		cardTitle: 'Information',
-		cardText: '"About" pages, schedule, etc.',
-		permissions: 'Admin, instructor, public',
+		cardTitle: 'Informasjonsartikler',
+		cardText: '"Om"-sider, timeplan, etc.',
+		permissions: 'Admin, instructor',
 		linkTo: '/manage-information'
 	}
 ];

@@ -39,7 +39,7 @@ export default class Contact extends Component {
 						<form onSubmit={this.onSubmit}>
 							<InputField
 								icon="user-circle"
-								id="nameInput"
+								inputId="nameInput"
 								value={this.state.name}
 								name="name"
 								type="text"
@@ -49,7 +49,7 @@ export default class Contact extends Component {
 							/>
 							<InputField
 								icon="at"
-								id="emailInput"
+								inputId="emailInput"
 								value={this.state.email}
 								name="email"
 								type="text"
@@ -59,7 +59,7 @@ export default class Contact extends Component {
 							/>
 							<InputField
 								icon="question-circle"
-								id="subjectInput"
+								inputId="subjectInput"
 								value={this.state.subject}
 								name="subject"
 								type="text"

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ReactMde from 'react-mde';
@@ -72,7 +72,7 @@ class CreateArticle extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col s12 center-align">
-						<h2>Create Article</h2>
+						<h2>Ny Artikkel</h2>
 					</div>
 				</div>
 				<form noValidate onSubmit={this.onSubmit}>
@@ -115,10 +115,10 @@ class CreateArticle extends Component {
 					<div className="col s12">
 						<div className="row">
 							<div className="col s12">
-								<h4>
+								<h5>
 									<i className="fas fa-pen left" />
 									Tekst
-								</h4>
+								</h5>
 							</div>
 						</div>
 						<ReactMde
@@ -139,7 +139,7 @@ class CreateArticle extends Component {
 								type="button"
 								className="btn grey waves-effect waves-dark">
 								<i className="fas fa-arrow-left left" />
-								Back
+								Tilbake
 							</button>
 						</div>
 						<div className="col s12 m6 left-align">
@@ -148,7 +148,7 @@ class CreateArticle extends Component {
 								onClick={this.onSubmit}
 								className="btn blue waves-effect waves-dark">
 								<i className="fas fa-paper-plane right" />
-								Submit
+								Opprett artikkel
 							</button>
 						</div>
 					</div>

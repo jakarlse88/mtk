@@ -122,9 +122,9 @@ class ListEvents extends Component {
 										date={event.startDate}
 										format="dddd DD/MM/YYYY"
 									/>{' '}
-									to{' '}
+									til{' '}
 									<Moment date={event.endDate} format="dddd DD/MM/YYYY" />{' '}
-									by {event.owner}
+									av {event.owner}
 								</small>
 								<br />
 								<br />
@@ -134,7 +134,7 @@ class ListEvents extends Component {
 								<Link to={`/single-event/${event._id}`}>
 									<button className="btn btn-flat white black-text waves-effect waves-blue">
 										<i className="fas fa-search fa-xl left" />
-										View event
+										Inspisér arrangement
 									</button>
 								</Link>
 								{auth.user.role === 'admin' && (
@@ -143,7 +143,7 @@ class ListEvents extends Component {
 										className="red-text">
 										<button className="btn btn-flat white black-text waves-effect waves-blue">
 											<i className="fas fa-cogs fa-xl left" />
-											Administrate event
+											Administrér arrangement
 										</button>
 									</Link>
 								)}
@@ -183,7 +183,7 @@ class ListEvents extends Component {
 				<br />
 				<br />
 				<br />
-				Oops! Something went wrong. Try again, or contact an admin.
+				Oops! Noe gikk galt. Prøv igjen, eller kontakt en administrator.
 			</p>
 		);
 
@@ -191,7 +191,7 @@ class ListEvents extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col s12">
-						<h2 className="center-align">Events</h2>
+						<h2 className="center-align">Arrangementer</h2>
 						<div className="divider" />
 					</div>
 					<div className="row">

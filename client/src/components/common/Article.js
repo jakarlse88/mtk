@@ -9,8 +9,8 @@ const Article = ({ author, content, date, headline }) => {
 			<h2>{headline}</h2>
 			<p>
 				<small className="grey-text">
-					<Moment date={date} format="dddd DD/MM/YYYY, HH:MM" /> by{' '}
-					{author}
+					<Moment date={date} format="dddd DD/MM/YYYY, HH:MM" />, skrevet
+					av {author}
 				</small>
 			</p>
 			<p>{content}</p>
@@ -21,7 +21,7 @@ const Article = ({ author, content, date, headline }) => {
 Article.propTypes = {
 	author: PropTypes.string.isRequired,
 	content: PropTypes.string.isRequired,
-	date: PropTypes.instanceOf(Date).isRequired,
+	date: PropTypes.number.isRequired,
 	headline: PropTypes.string.isRequired
 };
 

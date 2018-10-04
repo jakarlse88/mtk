@@ -66,7 +66,7 @@ class CreateEvent extends Component {
 		if (isEmpty(scheduleDateBuffer)) {
 			this.setState({
 				errors: {
-					schedule: 'Schedule date is required'
+					schedule: 'Dato må spesifiseres'
 				}
 			});
 
@@ -76,7 +76,7 @@ class CreateEvent extends Component {
 		if (isEmpty(scheduleContentBuffer)) {
 			this.setState({
 				errors: {
-					schedule: 'Schedule content is required'
+					schedule: 'Innhold må spesifiseres'
 				}
 			});
 
@@ -110,7 +110,7 @@ class CreateEvent extends Component {
 			<div className="container">
 				<div className="row center-align">
 					<div className="col s12">
-						<h2>Create Event</h2>
+						<h2>Opprett Arrangement</h2>
 						{errors.alreadyExists && (
 							<p className="red-text">{errors.alreadyExists}</p>
 						)}
@@ -121,7 +121,7 @@ class CreateEvent extends Component {
 							className="left-align">
 							<InputField
 								inputId="nameInput"
-								labelText="Event name"
+								labelText="Navn på arrangement"
 								name="name"
 								placeholder="f. eks. 'Vintergradering 2018"
 								value={this.state.name}
@@ -130,7 +130,7 @@ class CreateEvent extends Component {
 							/>
 							<InputField
 								inputId="eventGroupInput"
-								labelText="Event group"
+								labelText="Gruppe"
 								name="eventGroup"
 								placeholder="Taekwondo, hapkido, jujutsu, muay thai, or self defense"
 								value={this.state.eventGroup}
@@ -141,9 +141,9 @@ class CreateEvent extends Component {
 								<div className="col s8">
 									<InputField
 										inputId="typeInput"
-										labelText="Event type"
+										labelText="Arrangementstype"
 										name="eventType"
-										placeholder="Grading, seminar, or social"
+										placeholder="f.eks. gradering, seminar, sosialt"
 										value={this.state.eventType}
 										onChange={this.onChange}
 										error={errors.eventType}
@@ -152,7 +152,7 @@ class CreateEvent extends Component {
 								<div className="col s4">
 									<InputField
 										inputId="prizeInput"
-										labelText="Prize"
+										labelText="Pris"
 										name="prize"
 										value={this.state.prize}
 										onChange={this.onChange}
@@ -169,14 +169,16 @@ class CreateEvent extends Component {
 									value={this.state.description}
 									onChange={this.onChange}
 								/>
-								<span className="helper-text">Event description</span>
+								<span className="helper-text">
+									Arrangementsbeskrivelse
+								</span>
 								{errors.description && (
 									<small className="red-text">{errors.description}</small>
 								)}
 							</div>
 							<div className="row">
 								<div className="col s12">
-									<h4 className="center-align">Schedule</h4>
+									<h4 className="center-align">Timeplan</h4>
 								</div>
 							</div>
 							<div className="input-field">
@@ -189,7 +191,7 @@ class CreateEvent extends Component {
 											value={this.state.scheduleDateBuffer}
 											onChange={this.onChange}
 										/>
-										<small className="helper-text">Date</small>
+										<small className="helper-text">Dato</small>
 									</div>
 									<div className="col s11 m9">
 										<input
@@ -200,7 +202,7 @@ class CreateEvent extends Component {
 											onChange={this.onChange}
 											name="scheduleContentBuffer"
 										/>
-										<small className="helper-text">Lesson content</small>
+										<small className="helper-text">Innhold</small>
 									</div>
 									<div className="col s1">
 										<button
@@ -221,7 +223,7 @@ class CreateEvent extends Component {
 									<div className="row">
 										{this.state.schedule.length > 0 && (
 											<div className="col s12">
-												Schedule preview: <br />
+												Forhåndsvisning timeplan: <br />
 												<ul className="grey-text">
 													{this.state.schedule.map((item, index) => (
 														<li key={index}>
@@ -238,14 +240,14 @@ class CreateEvent extends Component {
 								<Link to="/manage-events">
 									<button className="btn grey">
 										<i className="left fas fa-arrow-left" />
-										Back
+										Tilbake
 									</button>
 								</Link>
 							</div>
 							<div className="col waves-effect waves-dark s6 left-align">
 								<button className="btn blue" onClick={this.onSubmit}>
-									<i className="right fas fa-share-square" />
-									Create Event
+									<i className="right fas fa-paper-plane" />
+									Opprett Arrangement
 								</button>
 							</div>
 						</form>

@@ -48,7 +48,7 @@ const Menu = ({ headline, items }) => {
 					<Link to="/dashboard">
 						<button className="btn grey">
 							<i className="fas fa-arrow-left left" />
-							Back
+							Tilbake
 						</button>
 					</Link>
 				</div>

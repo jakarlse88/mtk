@@ -7,13 +7,13 @@ import Menu from '../common/Menu';
 
 const ManageUsers = () => <Menu headline={headline} items={items} />;
 
-const headline = 'Manage Users';
+const headline = 'Administrér Brukere';
 
 const items = [
 	{
 		icon: 'plus',
-		cardTitle: 'Register User',
-		cardText: 'Create a new, unique user.',
+		cardTitle: 'Opprett Bruker',
+		cardText: 'Registrér en ny, unik bruker.',
 		permissions: 'Admin',
 		linkTo: '/register-user'
 	}

@@ -18,7 +18,7 @@ const ArticleItem = ({ author, category, date, headline, id, text }) => {
 				<p>{text}</p>
 				<Link to={`/articles/${id}`}>Les mer...</Link>
 				<p className="mt-2">
-					<small className="text-muted">Category: {category}</small>
+					<small className="text-muted">Kategori: {category}</small>
 				</p>
 			</div>
 			<div className="divider" />

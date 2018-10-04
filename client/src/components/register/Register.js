@@ -65,11 +65,11 @@ class Register extends Component {
 				<div className="col s12 center-align">
 					<h2>Hello, {this.props.auth.user.name}!</h2>
 					<p className="center-align flow-text">
-						Unfortunately, this functionality requires administrator
-						privileges.
+						Denne funksjonaliteten er forbeholdt brukere med
+						administrator-nivå.
 					</p>
 					<p className="center-align">
-						<Link to="/dashboard">Return to dashboard?</Link>
+						<Link to="/dashboard">Tilbake til kontrollpanel?</Link>
 					</p>
 				</div>
 			);
@@ -77,7 +77,7 @@ class Register extends Component {
 			content = (
 				<Fragment>
 					<div className="col s12 center-align">
-						<h2 className="center-align">User Registration</h2>
+						<h2 className="center-align">Opprett Bruker</h2>
 					</div>
 					<div className="col s12 left-align">
 						<form noValidate onSubmit={this.onSubmit}>
@@ -165,7 +165,7 @@ class Register extends Component {
 											className="btn grey waves-effect waves-dark"
 											type="button">
 											<i className="fas fa-arrow-left left" />
-											Back
+											Tilbake
 										</button>
 									</Link>
 								</div>
@@ -175,8 +175,8 @@ class Register extends Component {
 										className="btn blue waves-effect waves-blue"
 										type="submit"
 										onClick={this.onSubmit}>
-										<i className="fas fa-share-square right" />
-										Send Registration
+										<i className="fas fa-paper-plane right" />
+										Send
 									</button>
 								</div>
 							</div>

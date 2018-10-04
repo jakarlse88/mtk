@@ -4,7 +4,7 @@ import React from 'react';
 const Dashboard = () => (
 	<div className="container">
 		<div className="row">
-			<h2 className="center-align">Dashboard</h2>
+			<h2 className="center-align">Kontrollpanel</h2>
 		</div>
 		<div className="row">
 			{items.map((item, index) => (
@@ -24,26 +24,23 @@ const Dashboard = () => (
 const items = [
 	{
 		icon: 'tasks',
-		cardTitle: 'Manage Events',
-		cardText: 'Seminars, gradings, training camps, etc.',
-		permissions: 'Admin, instructor',
-		linkText: 'Events',
+		cardTitle: 'Arrangementer',
+		cardText: 'Seminarer, graderinger, konkurranser, samlinger, etc.',
+		permissions: 'Admin, moderator, assistent',
 		linkTo: '/manage-events'
 	},
 	{
 		icon: 'align-justify',
-		cardTitle: 'Manage Content',
-		cardText: 'Schedule, news, individual page content, etc.',
-		permissions: 'Admin, instructor',
-		linkText: 'Content',
+		cardTitle: 'Innhold',
+		cardText: 'Nyheter og informasjonssider',
+		permissions: 'Admin, moderator, assistent',
 		linkTo: '/manage-content'
 	},
 	{
 		icon: 'users',
-		cardTitle: 'Manage Users',
-		cardText: 'Register new users, edit/update/delete existing users',
+		cardTitle: 'Brukere',
+		cardText: 'Opprett ny bruker, administrér eksisterende brukere',
 		permissions: 'Admin',
-		linkText: 'Users',
 		linkTo: '/manage-users'
 	}
 ];

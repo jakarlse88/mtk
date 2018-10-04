@@ -43,7 +43,7 @@ class Navbar extends Component {
 				<Link
 					className="waves-effect waves-blue grey-text text-darken-2"
 					to="/login">
-					Login
+					Innlogging
 					<i className="right fas fa-user fa-1x" />
 				</Link>
 			</li>
@@ -55,7 +55,7 @@ class Navbar extends Component {
 					<Link
 						className="waves-effect waves-blue grey-text text-darken-2"
 						to="/dashboard">
-						Dashboard
+						Kontrollpanel
 					</Link>
 				</li>
 				<li>
@@ -63,7 +63,7 @@ class Navbar extends Component {
 						href="#!"
 						onClick={this.onLogoutClick}
 						className="waves-effect waves-blue text-darken-2 grey-text">
-						Logout
+						Utlogging
 						<i className="right fas fa-user-slash fa-1x" />
 					</a>
 				</li>
@@ -144,7 +144,7 @@ class Navbar extends Component {
 				</li>
 				<li>
 					<Link
-						to="/events"
+						to="/list-events"
 						className="waves-effect waves-blue collapsible-header"
 						onClick={this.onSidenavLinkClick}>
 						Arrangementer
@@ -227,7 +227,7 @@ class Navbar extends Component {
 							to="/login"
 							onClick={this.onSidenavLinkClick}>
 							<i className="left fas fa-user fa-sm" />
-							Login
+							Innlogging
 						</Link>
 					</li>
 				)}
@@ -239,7 +239,7 @@ class Navbar extends Component {
 								to="/dashboard"
 								onClick={this.onSidenavLinkClick}>
 								<i className="left fas fa-tachometer-alt fa-1x" />
-								Dashboard
+								Kontrollpanel
 							</Link>
 						</li>
 						<li>
@@ -248,7 +248,7 @@ class Navbar extends Component {
 								className="collapsible-header waves-effect waves-blue"
 								onClick={this.onSidenavLogoutClick}>
 								<i className="left red-text fas fa-user-slash fa-1x" />
-								Logout
+								Utlogging
 							</a>
 						</li>
 					</Fragment>
@@ -288,7 +288,7 @@ class Navbar extends Component {
 									</li>
 									<li>
 										<Link
-											to="/events"
+											to="/list-events"
 											className="waves-effect waves-blue grey-text text-darken-2">
 											Arrangementer
 										</Link>

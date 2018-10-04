@@ -4,20 +4,20 @@ import Menu from '../common/Menu';
 
 const ManageArticles = () => <Menu headline={headline} items={items} />;
 
-const headline = 'Manage Articles';
+const headline = 'Administrér Nyhetsartikler';
 
 const items = [
 	{
 		icon: 'plus',
-		cardTitle: 'Create Article',
-		cardText: 'Create a new, unique article.',
+		cardTitle: 'Opprett nyhetsartikkel',
+		cardText: 'Opprett en ny, unik nyhetsartikkel.',
 		permissions: 'Admin, moderator',
 		linkTo: '/create-article'
 	},
 	{
 		icon: 'list-alt',
-		cardTitle: 'View Articles',
-		cardText: 'List all articles in database.',
+		cardTitle: 'Se nyhetsartikler',
+		cardText: 'Se alle nyhetsartikler i databasen.',
 		permissions: 'Admin, moderator, public',
 		linkTo: '/articles'
 	}

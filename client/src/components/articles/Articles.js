@@ -10,10 +10,6 @@ import { getArticlesArr } from '../../actions/contentActions';
 
 import escapeRegExp from 'escape-string-regexp';
 
-/*
- * TODO: Implement search in modal, results in modal
- */
-
 class Articles extends Component {
 	constructor(props) {
 		super(props);

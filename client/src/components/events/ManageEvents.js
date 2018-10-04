@@ -4,21 +4,21 @@ import Menu from '../common/Menu';
 
 const ManageEvents = () => <Menu headline={headline} items={items} />;
 
-const headline = 'Manage Events';
+const headline = 'Administrér Arrangementer';
 
 const items = [
 	{
 		icon: 'plus-circle',
-		cardTitle: 'Create event',
-		cardText: 'Create a new, unique event.',
-		permissions: 'Admin',
+		cardTitle: 'Opprett arrangement',
+		cardText: 'Opprett et nytt, unikt arrangement',
+		permissions: 'Admin, moderator',
 		linkTo: '/create-event'
 	},
 	{
 		icon: 'list-alt',
-		cardTitle: 'View events',
-		cardText: 'List all events in database.',
-		permissions: 'Admin, instructor, public',
+		cardTitle: 'Se arrangementer',
+		cardText: 'Se alle arrangementer i databasen.',
+		permissions: 'Admin, instructor, moderator, public',
 		linkTo: '/list-events'
 	}
 ];

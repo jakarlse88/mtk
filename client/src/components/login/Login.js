@@ -58,7 +58,7 @@ class Login extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col s8 offset-s2 center-align">
-						<h2>Login</h2>
+						<h2>Innlogging</h2>
 						<p className="grey-text">Admin/instruktør</p>
 						<form onSubmit={this.onSubmit}>
 							<div className="input-field left-align">
@@ -99,7 +99,7 @@ class Login extends Component {
 									className="btn-large blue waves-effect waves-dark"
 									type="submit"
 									onClick={this.onSubmit}>
-									Login
+									Logg inn
 									<i className="right fas fa-unlock-alt" />
 								</button>
 							</p>
