@@ -5,6 +5,11 @@ import { Link, withRouter } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ReactMde from 'react-mde';
+import * as Showdown from 'showdown';
+import TurndownService from 'turndown';
+
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 import InputField from '../common/InputField';
 
@@ -24,8 +29,14 @@ class EditArticle extends Component {
 			articleEditor: '',
 			articleCategory: '',
 			articleContent: '',
-			errors: {}
+			errors: {},
+			mdeState: null
 		};
+
+		this.converter = new Showdown.Converter({
+			tabes: true,
+			simplifiedAutoLink: true
+		});
 	}
 
 	componentDidMount = () => {
@@ -33,11 +44,25 @@ class EditArticle extends Component {
 	};
 
 	componentWillReceiveProps = nextProps => {
-		if (nextProps.content.article) {
+		if (
+			nextProps.content.article.content &&
+			nextProps.content.article.headline &&
+			nextProps.content.article.category
+		) {
+			const turndownService = new TurndownService();
+			const markdown = turndownService.turndown(
+				nextProps.content.article.content
+			);
+			const mdeState = {
+				...this.state.mdeState,
+				html: nextProps.content.article.content,
+				markdown
+			};
+
 			this.setState({
 				articleHeadline: nextProps.content.article.headline,
 				articleCategory: nextProps.content.article.category,
-				articleContent: nextProps.content.article.content
+				mdeState
 			});
 		}
 
@@ -60,14 +85,23 @@ class EditArticle extends Component {
 		});
 	};
 
+	onEditorChange = mdeState => {
+		this.setState({
+			mdeState
+		});
+	};
+
 	onSubmit = e => {
+		const { articleEditor, articleCategory, articleHeadline } = this.state;
+		const content = this.state.mdeState.html;
+
 		e.preventDefault();
 
 		const updateData = {
-			editor: this.state.articleEditor,
-			category: this.state.articleCategory,
-			content: this.state.articleContent,
-			headline: this.state.articleHeadline
+			editor: articleEditor,
+			category: articleCategory,
+			content,
+			headline: articleHeadline
 		};
 
 		this.props.updateArticle(
@@ -84,7 +118,7 @@ class EditArticle extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col s12 center-align">
-						<h2>Edit Article</h2>
+						<h2>Redigér Artikkel</h2>
 						<p className="grey-text center-align">
 							<Moment
 								format="DD/MM/YYYY - HH:MM"
@@ -106,7 +140,7 @@ class EditArticle extends Component {
 										<InputField
 											icon="user"
 											inputId="editorInput"
-											labelText="Editor"
+											labelText="Redigert av"
 											name="articleEditor"
 											readOnly={true}
 											value={this.state.articleEditor}
@@ -116,25 +150,24 @@ class EditArticle extends Component {
 										<InputField
 											icon="tag"
 											inputId="categoryInput"
-											labelText="Category"
+											labelText="Kategori"
 											name="articleCategory"
 											value={this.state.articleCategory}
 											onChange={this.onChange}
 										/>
 									</div>
 									<div className="col s12 left-align">
-										<div className="input-field">
-											<i className="prefix fas fa-edit" />
-											<textarea
-												className="materialize-textarea"
-												name="articleContent"
-												onChange={this.onChange}
-												cols="30"
-												rows="10"
-												value={this.state.articleContent}
-											/>
-											<span className="helper-text">Content</span>
-										</div>
+										<h5>
+											Innhold
+											<i className=" fas fa-edit left" />
+										</h5>
+										<ReactMde
+											editorState={this.state.mdeState}
+											onChange={this.onEditorChange}
+											generateMarkdownPreview={markdown =>
+												Promise.resolve(this.converter.makeHtml(markdown))
+											}
+										/>
 									</div>
 								</div>
 								<div className="row">
@@ -142,7 +175,7 @@ class EditArticle extends Component {
 										<Link to={`/articles/${this.props.match.params.id}`}>
 											<button className="btn grey" type="button">
 												<i className="fas left fa-arrow-left" />
-												Back
+												Tilbake
 											</button>
 										</Link>
 									</div>
@@ -152,7 +185,7 @@ class EditArticle extends Component {
 											type="submit"
 											onClick={this.onSubmit}>
 											<i className="fas fa-paper-plane right" />
-											Update article
+											Oppdatér artikkel
 										</button>
 									</div>
 								</div>

@@ -48,10 +48,10 @@ class CreateArticle extends Component {
 	};
 
 	onSubmit = e => {
-		e.preventDefault();
-
 		const { articleAuthor, articleCategory, articleHeadline } = this.state;
 		const content = this.state.mdeState.html;
+
+		e.preventDefault();
 
 		const newArticleData = {
 			author: articleAuthor,
