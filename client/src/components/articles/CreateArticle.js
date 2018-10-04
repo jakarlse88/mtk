@@ -11,11 +11,6 @@ import InputField from '../common/InputField';
 
 import { postNewArticle } from '../../actions/contentActions';
 
-/*
- * FIXME: reactMde css interfering with form text (probably)
- * TODO: disable on mobile
- */
-
 class CreateArticle extends Component {
 	constructor(props) {
 		super(props);

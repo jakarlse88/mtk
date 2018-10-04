@@ -6,6 +6,8 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import InputField from '../common/InputField';
+
 import { getArticle, updateArticle } from '../../actions/contentActions';
 
 /*
@@ -97,32 +99,28 @@ class EditArticle extends Component {
 							</p>
 						</div>
 					) : (
-						<div className="col s12 center-align">
+						<div className="col s12">
 							<form noValidate onSubmit={this.onSubmit}>
 								<div className="row">
 									<div className="col s12 m6">
-										<div className="input-field left-align">
-											<i className="prefix fas fa-user-circle" />
-											<input
-												id="editorInputId"
-												readOnly={true}
-												type="text"
-												value={this.state.articleEditor}
-											/>
-											<span className="helper-text">Editor</span>
-										</div>
+										<InputField
+											icon="user"
+											inputId="editorInput"
+											labelText="Editor"
+											name="articleEditor"
+											readOnly={true}
+											value={this.state.articleEditor}
+										/>
 									</div>
 									<div className="col s12 m6">
-										<div className="input-field left-align">
-											<i className="prefix fas fa-tag" />
-											<input
-												name="articleCategory"
-												type="text"
-												value={this.state.articleCategory}
-												onChange={this.onChange}
-											/>
-											<span className="helper-text">Category</span>
-										</div>
+										<InputField
+											icon="tag"
+											inputId="categoryInput"
+											labelText="Category"
+											name="articleCategory"
+											value={this.state.articleCategory}
+											onChange={this.onChange}
+										/>
 									</div>
 									<div className="col s12 left-align">
 										<div className="input-field">
@@ -153,7 +151,7 @@ class EditArticle extends Component {
 											className="btn blue "
 											type="submit"
 											onClick={this.onSubmit}>
-											<i className="fas fa-edit right" />
+											<i className="fas fa-paper-plane right" />
 											Update article
 										</button>
 									</div>
