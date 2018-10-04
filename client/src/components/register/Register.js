@@ -24,7 +24,7 @@ class Register extends Component {
 
 	componentDidMount = () => {
 		const elems = document.querySelectorAll('select');
-		const instances = M.FormSelect.init(elems, {});
+		M.FormSelect.init(elems, {});
 	};
 
 	componentWillReceiveProps = nextProps => {

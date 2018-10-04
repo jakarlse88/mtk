@@ -8,6 +8,10 @@ import React, { Component } from 'react';
 
 import { getArticle, updateArticle } from '../../actions/contentActions';
 
+/*
+ * TODO: refactor
+ */
+
 class EditArticle extends Component {
 	constructor(props) {
 		super(props);
