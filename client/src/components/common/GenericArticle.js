@@ -21,7 +21,7 @@ const GenericArticle = ({ author, content, date, headline }) => {
 GenericArticle.propTypes = {
 	author: PropTypes.string.isRequired,
 	content: PropTypes.string.isRequired,
-	date: PropTypes.number.isRequired,
+	date: PropTypes.string.isRequired,
 	headline: PropTypes.string.isRequired
 };
 

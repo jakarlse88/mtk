@@ -28,13 +28,12 @@ class EditArticle extends Component {
 			articleDate: Date.now(),
 			articleEditor: '',
 			articleCategory: '',
-			articleContent: '',
 			errors: {},
 			mdeState: null
 		};
 
 		this.converter = new Showdown.Converter({
-			tabes: true,
+			tables: true,
 			simplifiedAutoLink: true
 		});
 	}
@@ -53,6 +52,7 @@ class EditArticle extends Component {
 			const markdown = turndownService.turndown(
 				nextProps.content.article.content
 			);
+
 			const mdeState = {
 				...this.state.mdeState,
 				html: nextProps.content.article.content,
@@ -159,7 +159,7 @@ class EditArticle extends Component {
 									<div className="col s12 left-align">
 										<h5>
 											Innhold
-											<i className=" fas fa-edit left" />
+											<i className="fas fa-edit left" />
 										</h5>
 										<ReactMde
 											editorState={this.state.mdeState}

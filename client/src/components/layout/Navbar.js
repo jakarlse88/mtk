@@ -74,7 +74,7 @@ class Navbar extends Component {
 			<ul id="info-menu-dropdown" className="dropdown-content">
 				<li>
 					<Link
-						to="/about-club"
+						to="/information/about_club"
 						className="grey-text waves-effect waves-blue text-darken-2">
 						Om klubben
 					</Link>
@@ -82,49 +82,49 @@ class Navbar extends Component {
 				<li>
 					<Link
 						className="grey-text waves-effect waves-blue text-darken-2"
-						to="/taekwondo">
+						to="/information/taekwondo">
 						Taekwondo
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="grey-text waves-effect waves-blue text-darken-2"
-						to="/hapkido">
+						to="/information/hapkido">
 						Hapkido
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="grey-text waves-effect waves-blue text-darken-2"
-						to="/jujutsu">
+						to="/information/jujutsu">
 						Brasiliansk Jujutsu
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="grey-text waves-effect waves-blue text-darken-2"
-						to="/thai">
+						to="/information/muay_thai">
 						Muay Thai
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="grey-text waves-effect waves-blue text-darken-2"
-						to="/self-defense">
+						to="/information/self_defense">
 						Selvforsvar for kvinner
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="grey-text waves-effect waves-blue text-darken-2"
-						to="/schedule">
+						to="/information/schedule">
 						Treningstider
 					</Link>
 				</li>
 				<li>
 					<Link
 						className="grey-text waves-effect waves-blue text-darken-2"
-						to="/pricing">
+						to="/information/mem_pricing">
 						Medlemskap & priser
 					</Link>
 				</li>
@@ -170,49 +170,49 @@ class Navbar extends Component {
 					<div className="collapsible-body">
 						<ul>
 							<li className="waves-effect waves-blue">
-								<Link to="/about-club">
+								<Link to="/information/about-club">
 									Om klubben
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li className="waves-effect waves-blue">
-								<Link to="/taekwondo">
+								<Link to="/information/taekwondo">
 									Taekwondo
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li className="waves-effect waves-blue">
-								<Link to="/hapkido">
+								<Link to="/information/hapkido">
 									Hapkido
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li className="waves-effect waves-blue">
-								<Link to="/jujutsu">
+								<Link to="/information/jujutsu">
 									Brasiliansk Jujutsu
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li className="waves-effect waves-blue">
-								<Link to="/thai">
+								<Link to="/information/muay_thai">
 									Muay Thai
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li className="waves-effect waves-blue">
-								<Link to="/self-defense">
+								<Link to="/information/self_defense">
 									Selvforsvar for kvinner
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li className="waves-effect waves-blue">
-								<Link to="/schedule">
+								<Link to="/information/schedule">
 									Treningstider
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>
 							</li>
 							<li className="waves-effect waves-blue">
-								<Link to="/pricing">
+								<Link to="/information/mem_pricing">
 									Medlemskap & priser
 									<i className="left fas fa-caret-right fa-1x" />
 								</Link>

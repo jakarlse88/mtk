@@ -5,8 +5,10 @@ import {
 	GET_ERRORS,
 	GET_ARTICLE,
 	GET_ARTICLES_ARR,
+	GET_INFO_ARTICLE,
 	POST_NEW_ARTICLE,
 	SET_ARTICLE_LOADING,
+	SET_ARTICLE_NOT_LOADING,
 	UPDATE_ARTICLE
 } from './types';
 
@@ -44,6 +46,30 @@ export const getArticle = id => dispatch => {
 		.then(res =>
 			dispatch({
 				type: GET_ARTICLE,
+				payload: res.data
+			})
+		)
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			});
+			dispatch(setArticleNotLoading());
+		});
+};
+
+/*
+ * Get a single info article
+ */
+export const getInfoArticle = type => dispatch => {
+	dispatch(clearErrors());
+	dispatch(setArticleLoading());
+
+	axios
+		.get(`/api/content/information/${type}`)
+		.then(res =>
+			dispatch({
+				type: GET_INFO_ARTICLE,
 				payload: res.data
 			})
 		)
@@ -106,11 +132,20 @@ export const updateArticle = (id, updateData, history) => dispatch => {
 };
 
 /*
- * Set article loading state
+ * Set article loading state to true
  */
 export const setArticleLoading = () => {
 	return {
 		type: SET_ARTICLE_LOADING
+	};
+};
+
+/*
+ * Set article loading state to false
+ */
+export const setArticleNotLoading = () => {
+	return {
+		type: SET_ARTICLE_NOT_LOADING
 	};
 };
 

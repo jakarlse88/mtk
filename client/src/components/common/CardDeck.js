@@ -3,6 +3,23 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export default class CardDeck extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			types: [
+				'ABOUT_CLUB',
+				'TAEKWONDO',
+				'HAPKIDO',
+				'JUJUTSU',
+				'MUAY_THAI',
+				'SELF_DEFENSE',
+				'SCHEDULE',
+				'MEM_PRICING'
+			]
+		};
+	}
+
 	render() {
 		return (
 			<section className="row">

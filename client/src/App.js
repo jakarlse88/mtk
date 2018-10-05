@@ -8,14 +8,6 @@ import './styles/main.css';
 
 import M from 'materialize-css';
 
-import AboutClub from './components/information/AboutClub';
-import AboutHapkido from './components/information/AboutHapkido';
-import AboutJujutsu from './components/information/AboutJujutsu';
-import AboutPricing from './components/information/AboutPricing';
-import AboutSchedule from './components/information/AboutSchedule';
-import AboutSelfDefense from './components/information/AboutSelfDefense';
-import AboutTaekwondo from './components/information/AboutTaekwondo';
-import AboutThai from './components/information/AboutThai';
 import AdministrateEvent from './components/events/AdministrateEvent';
 import Article from './components/articles/Article';
 import Articles from './components/articles/Articles';
@@ -25,7 +17,9 @@ import CreateEvent from './components/events/CreateEvent';
 import CreateEventSuccess from './components/events/CreateEventSuccess';
 import Dashboard from './components/dashboard/Dashboard';
 import EditArticle from './components/articles/EditArticle';
+import EditInformation from './components/information/EditInformation';
 import Footer from './components/layout/Footer';
+import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
 import ListEvents from './components/events/ListEvents';
 import Login from './components/login/Login';
@@ -81,7 +75,6 @@ class App extends Component {
 						<main>
 							<Switch>
 								<Route exact path="/" component={Landing} />
-								<Route exact path="/about-club" component={AboutClub} />
 								<ProtectedRoute
 									exact
 									path="/admin-event/:id"
@@ -115,10 +108,18 @@ class App extends Component {
 									path="/edit-article/:id"
 									component={EditArticle}
 								/>
-								<Route exact path="/hapkido" component={AboutHapkido} />
-								<Route exact path="/jujutsu" component={AboutJujutsu} />
 								<Route exact path="/list-events" component={ListEvents} />
 								<Route exact path="/login" component={Login} />
+								<ProtectedRoute
+									exact
+									path="/edit-information/:type"
+									component={EditInformation}
+								/>
+								<Route
+									exact
+									path="/information/:type"
+									component={Information}
+								/>
 								<ProtectedRoute
 									exact
 									path="/manage-articles"
@@ -144,7 +145,6 @@ class App extends Component {
 									path="/manage-users"
 									component={ManageUsers}
 								/>
-								<Route exact path="/pricing" component={AboutPricing} />
 								<ProtectedRoute
 									exact
 									path="/register-user"
@@ -155,23 +155,11 @@ class App extends Component {
 									path="/register-user-success"
 									component={RegisterUserSuccess}
 								/>
-								<Route exact path="/schedule" component={AboutSchedule} />
-								<Route
-									exact
-									path="/self-defense"
-									component={AboutSelfDefense}
-								/>
 								<Route
 									exact
 									path="/single-event/:id"
 									component={SingleEvent}
 								/>
-								<Route
-									exact
-									path="/taekwondo"
-									component={AboutTaekwondo}
-								/>
-								<Route exact path="/thai" component={AboutThai} />
 								<Route component={NoMatch} />
 							</Switch>
 						</main>

@@ -7,7 +7,7 @@ const informationTypes = require('./informationTypes');
  * Validates new article input
  */
 
-module.exports = validateNewInformationInput = (data, author) => {
+module.exports = validateInformationEditInput = (data, author) => {
 	// Hold onto any error(s) encountered
 	const errors = {};
 
@@ -16,7 +16,6 @@ module.exports = validateNewInformationInput = (data, author) => {
 	author = !isEmpty(author) ? author : '';
 	data.content = !isEmpty(data.content) ? data.content : '';
 	data.title = !isEmpty(data.title) ? data.title : '';
-	data.category = !isEmpty(data.category) ? data.category : '';
 	data.type = !isEmpty(data.type) ? data.type : '';
 
 	// Validate inputs

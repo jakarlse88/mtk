@@ -1,5 +1,6 @@
 import {
 	GET_ARTICLE,
+	GET_INFO_ARTICLE,
 	GET_ARTICLES_ARR,
 	SET_ARTICLE_LOADING,
 	UPDATE_ARTICLE,
@@ -9,7 +10,8 @@ import {
 const initialState = {
 	article: {},
 	articlesArr: [],
-	articleLoading: false
+	articleLoading: false,
+	infoArticle: {}
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +21,12 @@ export default (state = initialState, action) => {
 				...state,
 				articleLoading: false,
 				article: action.payload
+			};
+		case GET_INFO_ARTICLE:
+			return {
+				...state,
+				articleLoading: false,
+				infoArticle: action.payload
 			};
 		case GET_ARTICLES_ARR:
 			return {

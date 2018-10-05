@@ -18,6 +18,7 @@ const InformationContent = require('../../models/InformationContent');
 const validateArticleEditInput = require('../../validation/update-article');
 const validateNewArticleInput = require('../../validation/new-article');
 const validateNewInformationInput = require('../../validation/new-info');
+const validateInformationEditInput = require('../../validation/update-info');
 
 /*
  * Test route
@@ -34,6 +35,32 @@ router.get('/articles', (req, res) => {
 		.sort({ date: -1 })
 		.then(posts => res.json(posts))
 		.catch(err => console.log(err));
+});
+
+/*
+ * @route	GET /api/content/information/:type
+ * @desc	Get an infoArticle by type
+ * @access 	Public
+ */
+router.get('/information/:type', (req, res) => {
+	// Hold onto any error(s) encountered
+	const errors = {};
+
+	InformationContent.findOne({
+		type: req.params.type.toUpperCase()
+	})
+		.then(infoArticle => {
+			if (infoArticle) {
+				return res.json(infoArticle);
+			} else {
+				errors.infoArticle = 'Information article not found';
+				return res.status(404).json(errors);
+			}
+		})
+		.catch(err => {
+			errors.infoArticle = err;
+			return res.status(500).json(errors);
+		});
 });
 
 /*
@@ -115,7 +142,6 @@ router.post(
  * @route   POST /api/content/information/new
  * @desc    Create a new information item
  * @access  Private
- * FIXME: 	Currently a straight copy/paste from POST article/new
  */
 router.post(
 	'/information/new',
@@ -123,7 +149,7 @@ router.post(
 	(req, res) => {
 		const { errors, isValid } = validateNewInformationInput(
 			req.body,
-			req.user.name
+			req.user
 		);
 
 		if (!isValid) {
@@ -131,34 +157,35 @@ router.post(
 		}
 
 		InformationContent.findOne({
-			author: req.user.name,
-			content: req.body.content,
-			date: req.body.date,
-			title: req.body.title,
-			style: req.body.style,
-			category: req.body.category
+			type: req.body.type.toUpperCase()
 		})
 			.then(article => {
 				if (article) {
 					return res.status(400).json({
-						articleAlreadyExists: 'Duplicate articles are not allowed'
+						infoArticle: 'Only one info article is allowed per type'
 					});
 				}
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				console.log(err);
+				return;
+			});
 
-		const newArticle = new InformationContent({
-			author: req.user.name,
+		const newInfoArticle = new InformationContent({
+			author: {
+				name: req.user.name,
+				id: req.user.id,
+				role: req.user.role
+			},
 			content: req.body.content,
 			date: req.body.date,
 			title: req.body.title,
-			style: req.body.style,
-			category: req.body.category
+			type: req.body.type.toUpperCase()
 		});
 
-		newArticle
+		newInfoArticle
 			.save()
-			.then(article => res.json(article))
+			.then(infoArticle => res.json(infoArticle))
 			.catch(err => console.log(err));
 	}
 );
@@ -193,7 +220,7 @@ router.put(
 				}
 
 				// Article found
-				article.content = req.body.content;
+				article.content = converter.makeHtml(req.body.content);
 				article.date = req.body.date;
 				article.editedBy = req.body.editor;
 				article.headline = req.body.headline;
@@ -208,6 +235,62 @@ router.put(
 			})
 			.catch(err => {
 				errors.internal = err.response;
+				return res.status(500).json(errors);
+			});
+	}
+);
+
+/*
+ * @route   PUT /api/content/information/:type
+ * @desc    Update an info article item by type
+ * @access  Private
+ */
+router.put(
+	'/information/',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		const { errors, isValid } = validateInformationEditInput(
+			req.body,
+			req.user
+		);
+
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
+
+		if (req.user.role !== 'admin') {
+			errors.role = '"Admin" role required for this functionality';
+			return res.status(400).json(errors);
+		}
+
+		InformationContent.findOne({
+			type: req.body.type.toUpperCase()
+		})
+			.then(infoArticle => {
+				if (!infoArticle) {
+					errors.infoArticle = 'Information article not found';
+					return res.status(404).json(errors);
+				}
+
+				infoArticle.lastEditedBy = {
+					name: req.user.name,
+					id: req.user.id,
+					role: req.user.role
+				};
+				infoArticle.content = converter.makeHtml(req.body.content);
+				infoArticle.title = req.body.title;
+				infoArticle.lastEditedDate = Date.now();
+
+				infoArticle
+					.save()
+					.then(savedArticle => res.json(savedArticle))
+					.catch(err => {
+						errors.infoArticle = err;
+						return res.status(500).json(errors);
+					});
+			})
+			.catch(err => {
+				errors.infoArticle = err;
 				return res.status(500).json(errors);
 			});
 	}
