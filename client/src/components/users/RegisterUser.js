@@ -8,6 +8,7 @@ import InputField from '../common/InputField';
 import M from 'materialize-css';
 
 import { registerUser } from '../../actions/authActions';
+
 class Register extends Component {
 	constructor(props) {
 		super(props);

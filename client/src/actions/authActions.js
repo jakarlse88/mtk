@@ -14,7 +14,7 @@ import {
 export const registerUser = (userData, history) => dispatch => {
 	axios
 		.post('/api/users/register', userData)
-		.then(res => history.push('/register-success'))
+		.then(res => history.push('/register-user-success'))
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,

@@ -41,7 +41,7 @@ router.get(
 		User.find()
 			.then(users => res.json(users))
 			.catch(err => {
-				return res.status(404).json({ error: 'No users found' });
+				return res.status(404).json({ usersArr: 'No users found' });
 			});
 	}
 );

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import Article from '../common/Article';
+import GenericArticle from '../common/GenericArticle';
 
 export default class AboutSchedule extends Component {
 	render() {
 		return (
-			<Article
+			<GenericArticle
 				author={testProps.author}
 				content={testProps.content}
 				date={testProps.date}

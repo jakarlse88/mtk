@@ -3,7 +3,7 @@ import React from 'react';
 
 import Moment from 'react-moment';
 
-const Article = ({ author, content, date, headline }) => {
+const GenericArticle = ({ author, content, date, headline }) => {
 	return (
 		<div className="container center-align">
 			<h2>{headline}</h2>
@@ -18,11 +18,11 @@ const Article = ({ author, content, date, headline }) => {
 	);
 };
 
-Article.propTypes = {
+GenericArticle.propTypes = {
 	author: PropTypes.string.isRequired,
 	content: PropTypes.string.isRequired,
 	date: PropTypes.number.isRequired,
 	headline: PropTypes.string.isRequired
 };
 
-export default Article;
+export default GenericArticle;

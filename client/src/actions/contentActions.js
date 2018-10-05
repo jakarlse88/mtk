@@ -116,7 +116,6 @@ export const setArticleLoading = () => {
 
 /*
  * Clear errors
- * FIXME: refactor error actions into separate file
  */
 export const clearErrors = () => {
 	return {
