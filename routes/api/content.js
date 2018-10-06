@@ -246,7 +246,7 @@ router.put(
  * @access  Private
  */
 router.put(
-	'/information/',
+	'/information/:type',
 	passport.authenticate('jwt', { session: false }),
 	(req, res) => {
 		const { errors, isValid } = validateInformationEditInput(
@@ -264,7 +264,7 @@ router.put(
 		}
 
 		InformationContent.findOne({
-			type: req.body.type.toUpperCase()
+			type: req.params.type.toUpperCase()
 		})
 			.then(infoArticle => {
 				if (!infoArticle) {

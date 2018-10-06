@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -71,6 +72,30 @@ class Information extends Component {
 								date={content.infoArticle.date}
 								headline={content.infoArticle.title}
 							/>
+						</div>
+						<div className="row">
+							<div className="col s6 right-align">
+								<Link to="/articles">
+									<button className="btn grey waves-effect waves-dark">
+										Back
+										<i className="fas fa-chevron-circle-left left fa-1x" />
+									</button>
+								</Link>
+							</div>
+
+							{auth && auth.user.role === 'admin' ? (
+								<div className="col s6 left-align">
+									<Link
+										to={`/edit-information/${
+											this.props.match.params.type
+										}`}>
+										<button className="btn blue waves-effect waves-dark">
+											Edit article
+											<i className="fas fa-cogs right" />
+										</button>
+									</Link>
+								</div>
+							) : null}
 						</div>
 					</div>
 				) : errors && errors.infoArticle ? (

@@ -1,10 +1,11 @@
 import {
 	GET_ARTICLE,
-	GET_INFO_ARTICLE,
 	GET_ARTICLES_ARR,
+	GET_INFO_ARTICLE,
+	POST_NEW_ARTICLE,
 	SET_ARTICLE_LOADING,
 	UPDATE_ARTICLE,
-	POST_NEW_ARTICLE
+	UPDATE_INFO_ARTICLE
 } from '../actions/types';
 
 const initialState = {
@@ -50,6 +51,12 @@ export default (state = initialState, action) => {
 				...state,
 				articleLoading: false,
 				article: action.payload
+			};
+		case UPDATE_INFO_ARTICLE:
+			return {
+				...state,
+				articleLoading: false,
+				infoArticle: action.payload
 			};
 		default:
 			return state;

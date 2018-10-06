@@ -9,7 +9,8 @@ import {
 	POST_NEW_ARTICLE,
 	SET_ARTICLE_LOADING,
 	SET_ARTICLE_NOT_LOADING,
-	UPDATE_ARTICLE
+	UPDATE_ARTICLE,
+	UPDATE_INFO_ARTICLE
 } from './types';
 
 /*
@@ -111,7 +112,6 @@ export const postNewArticle = (newArticleData, history) => dispatch => {
  */
 export const updateArticle = (id, updateData, history) => dispatch => {
 	dispatch(clearErrors());
-	dispatch(setArticleLoading());
 
 	axios
 		.put(`/api/content/articles/${id}`, updateData)
@@ -129,6 +129,35 @@ export const updateArticle = (id, updateData, history) => dispatch => {
 				payload: err.response.data
 			})
 		);
+};
+
+/*
+ * Update/edit an info article
+ */
+export const updateInfoArticle = (
+	type,
+	updateData,
+	history
+) => dispatch => {
+	dispatch(clearErrors());
+	dispatch(setArticleLoading());
+
+	axios
+		.put(`/api/content/information/${type}`, updateData)
+		.then(res => {
+			dispatch({
+				type: UPDATE_INFO_ARTICLE,
+				payload: res.data
+			});
+
+			history.push(`/information/${type}`);
+		})
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			});
+		});
 };
 
 /*

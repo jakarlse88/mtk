@@ -13,7 +13,7 @@ const GenericArticle = ({ author, content, date, headline }) => {
 					av {author}
 				</small>
 			</p>
-			<p>{content}</p>
+			<div dangerouslySetInnerHTML={{ __html: content }} />
 		</div>
 	);
 };

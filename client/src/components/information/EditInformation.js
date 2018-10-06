@@ -10,11 +10,10 @@ import 'react-mde/lib/styles/css/react-mde-all.css';
 
 import InputField from '../common/InputField';
 
-import { getInfoArticle } from '../../actions/contentActions';
-
-/*
- * FIXME: editor state preload doesn't work properly
- */
+import {
+	getInfoArticle,
+	updateInfoArticle
+} from '../../actions/contentActions';
 
 class EditInformation extends Component {
 	constructor(props) {
@@ -93,7 +92,8 @@ class EditInformation extends Component {
 		e.preventDefault();
 
 		const { articleEditor, articleTitle } = this.state;
-		const { content } = this.state.mdeState.html;
+		const content = this.state.mdeState.html;
+		const { type } = this.props.match.params;
 
 		const updateData = {
 			lastEditedBy: articleEditor,
@@ -101,7 +101,7 @@ class EditInformation extends Component {
 			content
 		};
 
-		// updateInfoArticle
+		this.props.updateInfoArticle(type, updateData, this.props.history);
 	};
 
 	render() {
@@ -200,5 +200,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getInfoArticle }
+	{ getInfoArticle, updateInfoArticle }
 )(withRouter(EditInformation));
