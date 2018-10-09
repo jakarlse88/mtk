@@ -7,6 +7,11 @@ import M from 'materialize-css';
 
 import { logoutUser } from '../../actions/authActions';
 
+/*
+ * TODO: Links to register should now go to /sign-up
+ * TODO: Refactor login to signup/login
+ */
+
 class Navbar extends Component {
 	componentDidMount = () => {
 		let elem = document.querySelector('.sidenav');

@@ -31,8 +31,8 @@ import ManageUsers from './components/users/ManageUsers';
 import Navbar from './components/layout/Navbar';
 import NoMatch from './components/common/NoMatch';
 import ProtectedRoute from './components/common/ProtectedRoute';
-import RegisterUser from './components/users/RegisterUser';
-import RegisterUserSuccess from './components/users/RegisterUserSuccess';
+import SignUp from './components/users/SignUp';
+import SignUpSuccess from './components/users/SignUpSuccess';
 import SingleEvent from './components/events/SingleEvent';
 
 import { setCurrentUser, logoutUser } from './actions/authActions';
@@ -145,15 +145,11 @@ class App extends Component {
 									path="/manage-users"
 									component={ManageUsers}
 								/>
-								<ProtectedRoute
-									exact
-									path="/register-user"
-									component={RegisterUser}
-								/>
+								<Route exact path="/sign-up" component={SignUp} />
 								<Route
 									exact
-									path="/register-user-success"
-									component={RegisterUserSuccess}
+									path="/sign-up-success"
+									component={SignUpSuccess}
 								/>
 								<Route
 									exact
