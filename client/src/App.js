@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
@@ -22,7 +21,7 @@ import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
 import ListEvents from './components/events/ListEvents';
-import Login from './components/login/Login';
+import SignIn from './components/signin/SignIn';
 import ManageArticles from './components/content/ManageArticles';
 import ManageContent from './components/content/ManageContent';
 import ManageEvents from './components/events/ManageEvents';
@@ -35,35 +34,27 @@ import SignUp from './components/users/SignUp';
 import SignUpSuccess from './components/users/SignUpSuccess';
 import SingleEvent from './components/events/SingleEvent';
 
-import { setCurrentUser, logoutUser } from './actions/authActions';
 import store from './store';
 
-import setAuthToken from './utils/setAuthToken';
-
-// Check for token
-if (localStorage.jwtToken) {
-	// Set Authorization header to auth token
-	setAuthToken(localStorage.jwtToken);
-
-	// Decode token, get user info
-	const decoded = jwt_decode(localStorage.jwtToken);
-
-	// Set user, isAuthenticated
-	store.dispatch(setCurrentUser(decoded));
-
-	// Check for expired token
-	const currentTime = Date.now() / 1000;
-	if (decoded.exp < currentTime) {
-		store.dispatch(logoutUser());
-
-		// Redirect to front page
-		window.location.href = '/';
-	}
-}
+import { firebase } from './firebase';
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			authUser: null
+		};
+	}
+
 	componentDidMount = () => {
 		M.AutoInit();
+
+		firebase.auth.onAuthStateChanged(authUser => {
+			authUser
+				? this.setState({ authUser })
+				: this.setState({ authUser: null });
+		});
 	};
 
 	render() {
@@ -71,7 +62,7 @@ class App extends Component {
 			<Provider store={store}>
 				<Router>
 					<Fragment>
-						<Route path="/" component={Navbar} />
+						<Navbar authUser={this.state.authUser} />
 						<main>
 							<Switch>
 								<Route exact path="/" component={Landing} />
@@ -109,7 +100,7 @@ class App extends Component {
 									component={EditArticle}
 								/>
 								<Route exact path="/list-events" component={ListEvents} />
-								<Route exact path="/login" component={Login} />
+								<Route exact path="/signin" component={SignIn} />
 								<ProtectedRoute
 									exact
 									path="/edit-information/:type"

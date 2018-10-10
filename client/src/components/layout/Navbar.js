@@ -1,11 +1,9 @@
-import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
-import M from 'materialize-css';
+import { auth } from '../../firebase';
 
-import { logoutUser } from '../../actions/authActions';
+import M from 'materialize-css';
 
 /*
  * TODO: Links to register should now go to /sign-up
@@ -23,7 +21,7 @@ class Navbar extends Component {
 	onLogoutClick = e => {
 		e.preventDefault();
 
-		this.props.logoutUser(this.props.history);
+		auth.doSignOut();
 	};
 
 	onSidenavLinkClick = () => {
@@ -37,17 +35,17 @@ class Navbar extends Component {
 		let instance = M.Sidenav.getInstance(elem);
 		instance.close();
 
-		this.props.logoutUser(this.props.history);
+		auth.doSignOut();
 	};
 
 	render() {
-		const { isAuthenticated } = this.props.auth;
+		const { authUser } = this.props;
 
 		const visitorLinks = (
 			<li>
 				<Link
 					className="waves-effect waves-blue grey-text text-darken-2"
-					to="/login">
+					to="/signin">
 					Innlogging
 					<i className="right fas fa-user fa-1x" />
 				</Link>
@@ -225,18 +223,18 @@ class Navbar extends Component {
 						</ul>
 					</div>
 				</li>
-				{!isAuthenticated && (
+				{!authUser && (
 					<li>
 						<Link
 							className="collapsible-header waves-effect waves-blue "
-							to="/login"
+							to="/signin"
 							onClick={this.onSidenavLinkClick}>
 							<i className="left fas fa-user fa-sm" />
 							Innlogging
 						</Link>
 					</li>
 				)}
-				{isAuthenticated && (
+				{authUser && (
 					<Fragment>
 						<li>
 							<Link
@@ -314,8 +312,8 @@ class Navbar extends Component {
 											<i className="right fas fa-caret-down fa-1x" />
 										</a>
 									</li>
-									{!isAuthenticated && visitorLinks}
-									{isAuthenticated && adminLinks}
+									{!authUser && visitorLinks}
+									{authUser && adminLinks}
 								</ul>
 							</div>
 						</div>
@@ -328,16 +326,4 @@ class Navbar extends Component {
 	}
 }
 
-Navbar.propTypes = {
-	auth: PropTypes.object.isRequired,
-	logoutUser: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => ({
-	auth: state.auth
-});
-
-export default connect(
-	mapStateToProps,
-	{ logoutUser }
-)(withRouter(Navbar));
+export default withRouter(Navbar);
