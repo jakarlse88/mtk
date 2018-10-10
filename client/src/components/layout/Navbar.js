@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 
 import { auth } from '../../firebase';
 
+import AuthUserContext from '../context/AuthUserContext';
+
 import M from 'materialize-css';
 
 /*
@@ -260,68 +262,74 @@ class Navbar extends Component {
 		);
 
 		return (
-			<header>
-				<div className="navbar-fixed row">
-					<nav className="white black-text">
-						<div className="nav-wrapper">
-							<div className="col s12">
-								<Link
-									className="waves-effect grey-text text-darken-3 waves-blue brand-logo"
-									to="/">
-									<span className="right hide-on-large-only">
-										Moss TKD
-									</span>
-									<span className="hide-on-med-and-down">
-										Moss Taekwondo Klubb
-									</span>
-								</Link>
-								<a
-									href="#!"
-									className="sidenav-trigger"
-									data-target="mobile-menu">
-									<i className="fas fa-bars fa-2x grey-text text-darken-2" />
-								</a>
-								<ul id="nav-mobile" className="right hide-on-med-and-down">
-									<li>
+			<AuthUserContext.Consumer>
+				{authUser => (
+					<header>
+						<div className="navbar-fixed row">
+							<nav className="white black-text">
+								<div className="nav-wrapper">
+									<div className="col s12">
 										<Link
-											to="/articles"
-											className="grey-text text-darken-2 waves-effect waves-blue">
-											Nyheter
+											className="waves-effect grey-text text-darken-3 waves-blue brand-logo"
+											to="/">
+											<span className="right hide-on-large-only">
+												Moss TKD
+											</span>
+											<span className="hide-on-med-and-down">
+												Moss Taekwondo Klubb
+											</span>
 										</Link>
-									</li>
-									<li>
-										<Link
-											to="/list-events"
-											className="waves-effect waves-blue grey-text text-darken-2">
-											Arrangementer
-										</Link>
-									</li>
-									<li>
-										<Link
-											to="/contact"
-											className="waves-effect waves-blue grey-text text-darken-2">
-											Kontakt oss
-										</Link>
-									</li>
-									<li>
 										<a
 											href="#!"
-											className="dropdown-trigger grey-text text-darken-2"
-											data-target="info-menu-dropdown">
-											Informasjon
-											<i className="right fas fa-caret-down fa-1x" />
+											className="sidenav-trigger"
+											data-target="mobile-menu">
+											<i className="fas fa-bars fa-2x grey-text text-darken-2" />
 										</a>
-									</li>
-									{!authUser && visitorLinks}
-									{authUser && adminLinks}
-								</ul>
-							</div>
+										<ul
+											id="nav-mobile"
+											className="right hide-on-med-and-down">
+											<li>
+												<Link
+													to="/articles"
+													className="grey-text text-darken-2 waves-effect waves-blue">
+													Nyheter
+												</Link>
+											</li>
+											<li>
+												<Link
+													to="/list-events"
+													className="waves-effect waves-blue grey-text text-darken-2">
+													Arrangementer
+												</Link>
+											</li>
+											<li>
+												<Link
+													to="/contact"
+													className="waves-effect waves-blue grey-text text-darken-2">
+													Kontakt oss
+												</Link>
+											</li>
+											<li>
+												<a
+													href="#!"
+													className="dropdown-trigger grey-text text-darken-2"
+													data-target="info-menu-dropdown">
+													Informasjon
+													<i className="right fas fa-caret-down fa-1x" />
+												</a>
+											</li>
+											{!authUser && visitorLinks}
+											{authUser && adminLinks}
+										</ul>
+									</div>
+								</div>
+							</nav>
 						</div>
-					</nav>
-				</div>
-				{infoDropdownContent}
-				{sidenavContent}
-			</header>
+						{infoDropdownContent}
+						{sidenavContent}
+					</header>
+				)}
+			</AuthUserContext.Consumer>
 		);
 	}
 }

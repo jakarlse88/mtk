@@ -34,27 +34,13 @@ import SignUp from './components/users/SignUp';
 import SignUpSuccess from './components/users/SignUpSuccess';
 import SingleEvent from './components/events/SingleEvent';
 
+import withAuthentication from './components/HOC/withAuthentication';
+
 import store from './store';
 
-import { firebase } from './firebase';
-
 class App extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			authUser: null
-		};
-	}
-
 	componentDidMount = () => {
 		M.AutoInit();
-
-		firebase.auth.onAuthStateChanged(authUser => {
-			authUser
-				? this.setState({ authUser })
-				: this.setState({ authUser: null });
-		});
 	};
 
 	render() {
@@ -62,7 +48,7 @@ class App extends Component {
 			<Provider store={store}>
 				<Router>
 					<Fragment>
-						<Navbar authUser={this.state.authUser} />
+						<Navbar />
 						<main>
 							<Switch>
 								<Route exact path="/" component={Landing} />
@@ -150,7 +136,7 @@ class App extends Component {
 								<Route component={NoMatch} />
 							</Switch>
 						</main>
-						<Route path="/" component={Footer} />
+						<Footer />
 					</Fragment>
 				</Router>
 			</Provider>
@@ -158,4 +144,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default withAuthentication(App);
