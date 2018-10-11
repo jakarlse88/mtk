@@ -7,6 +7,7 @@ import './styles/main.css';
 
 import M from 'materialize-css';
 
+import AccountPage from './components/account_page';
 import AdministrateEvent from './components/events/AdministrateEvent';
 import Article from './components/articles/Article';
 import Articles from './components/articles/Articles';
@@ -27,12 +28,12 @@ import ManageContent from './components/content/ManageContent';
 import ManageEvents from './components/events/ManageEvents';
 import ManageInformation from './components/content/ManageInformation';
 import ManageUsers from './components/users/ManageUsers';
-import Navbar from './components/layout/Navbar';
+import Navbar from './navbar';
 import NoMatch from './components/common/NoMatch';
+import PasswordUpdate from './components/password_update';
 import PasswordForget from './components/password_forget';
-import ProtectedRoute from './components/common/ProtectedRoute';
-import SignUp from './components/users/SignUp';
-import SignUpSuccess from './components/users/SignUpSuccess';
+import SignUp from './components/account/SignUp';
+import SignUpSuccess from './components/account/SignUpSuccess';
 import SingleEvent from './components/events/SingleEvent';
 
 import withAuthentication from './components/HOC/withAuthentication';
@@ -52,8 +53,9 @@ class App extends Component {
 						<Navbar />
 						<main>
 							<Switch>
+								<Route exact path="/account" component={AccountPage} />
 								<Route exact path="/" component={Landing} />
-								<ProtectedRoute
+								<Route
 									exact
 									path="/admin-event/:id"
 									component={AdministrateEvent}
@@ -61,34 +63,30 @@ class App extends Component {
 								<Route exact path="/articles" component={Articles} />
 								<Route exact path="/articles/:id" component={Article} />
 								<Route exact path="/contact" component={Contact} />
-								<ProtectedRoute
+								<Route
 									exact
 									path="/create-article"
 									component={CreateArticle}
 								/>
-								<ProtectedRoute
+								<Route
 									exact
 									path="/create-event"
 									component={CreateEvent}
 								/>
-								<ProtectedRoute
+								<Route
 									exact
 									path="/create-event-success/:id"
 									component={CreateEventSuccess}
 								/>
-								<ProtectedRoute
-									exact
-									path="/dashboard"
-									component={Dashboard}
-								/>
-								<ProtectedRoute
+								<Route exact path="/dashboard" component={Dashboard} />
+								<Route
 									exact
 									path="/edit-article/:id"
 									component={EditArticle}
 								/>
 								<Route exact path="/list-events" component={ListEvents} />
 								<Route exact path="/signin" component={SignIn} />
-								<ProtectedRoute
+								<Route
 									exact
 									path="/edit-information/:type"
 									component={EditInformation}
@@ -98,27 +96,27 @@ class App extends Component {
 									path="/information/:type"
 									component={Information}
 								/>
-								<ProtectedRoute
+								<Route
 									exact
 									path="/manage-articles"
 									component={ManageArticles}
 								/>
-								<ProtectedRoute
+								<Route
 									exact
 									path="/manage-content"
 									component={ManageContent}
 								/>
-								<ProtectedRoute
+								<Route
 									exact
 									path="/manage-events"
 									component={ManageEvents}
 								/>
-								<ProtectedRoute
+								<Route
 									exact
 									path="/manage-information"
 									component={ManageInformation}
 								/>
-								<ProtectedRoute
+								<Route
 									exact
 									path="/manage-users"
 									component={ManageUsers}
@@ -133,6 +131,11 @@ class App extends Component {
 									exact
 									path="/password-forget"
 									component={PasswordForget}
+								/>
+								<Route
+									exact
+									path="/password-update"
+									component={PasswordUpdate}
 								/>
 								<Route
 									exact

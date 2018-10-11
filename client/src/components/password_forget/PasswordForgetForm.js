@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { link } from 'react-router-dom';
 
 import InputField from '../common/InputField';
 
@@ -27,7 +26,7 @@ export default class PasswordForgetForm extends Component {
 		auth
 			.doResetPassword(email)
 			.then(() => this.setState({ ...INITIAL_STATE }))
-			.catch(err => this.setState({ error: err }));
+			.catch(error => this.setState({ error }));
 
 		e.preventDefault();
 	};
@@ -49,17 +48,22 @@ export default class PasswordForgetForm extends Component {
 						value={email}
 					/>
 				</div>
+
 				<div className="col s12 center-align">
 					<button
+						type="submit"
 						className="btn blue waves-effect waves-dark"
 						disabled={isInvalid}>
 						<i className="fas fa-paper-plane right" />
 						Nulstill password
 					</button>
 				</div>
-				<div className="col s12">
-					<p className="center-align">{error && error.message}</p>
-				</div>
+
+				{error && (
+					<div className="col s12">
+						<p className="center-align">{error.message}</p>
+					</div>
+				)}
 			</form>
 		);
 	}

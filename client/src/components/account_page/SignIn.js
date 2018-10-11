@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { auth } from '../../firebase';
 
@@ -78,12 +78,15 @@ class SignIn extends Component {
 							<p className="text-center">
 								<button
 									disabled={isInvalid}
-									className="btn-large blue waves-effect waves-dark"
+									className="btn blue waves-effect waves-dark"
 									type="submit"
 									onClick={this.onSubmit}>
 									Logg inn
 									<i className="right fas fa-unlock-alt" />
 								</button>
+							</p>
+							<p className="text-center">
+								<Link to="/password-forget">Glemt passord?</Link>
 							</p>
 						</form>
 					</div>
