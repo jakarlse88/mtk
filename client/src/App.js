@@ -29,6 +29,7 @@ import ManageInformation from './components/content/ManageInformation';
 import ManageUsers from './components/users/ManageUsers';
 import Navbar from './components/layout/Navbar';
 import NoMatch from './components/common/NoMatch';
+import PasswordForget from './components/password_forget';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import SignUp from './components/users/SignUp';
 import SignUpSuccess from './components/users/SignUpSuccess';
@@ -127,6 +128,11 @@ class App extends Component {
 									exact
 									path="/sign-up-success"
 									component={SignUpSuccess}
+								/>
+								<Route
+									exact
+									path="/password-forget"
+									component={PasswordForget}
 								/>
 								<Route
 									exact
