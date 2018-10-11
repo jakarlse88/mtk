@@ -36,7 +36,11 @@ const dropdownLinks = [
 	}
 ];
 
-export default (authUser, onSidenavLinkClick, onSidenavLogoutClick) => (
+export default ({
+	authUser,
+	onSidenavLinkClick,
+	onSidenavLogoutClick
+}) => (
 	<ul className="sidenav collapsible" id="mobile-menu">
 		<li>
 			<Link

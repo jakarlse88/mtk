@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import AuthUserContext from '../context/AuthUserContext';
 
-import { firebase } from '../../firebase';
+import { firebase } from '../firebase';
 
 const withAuthentication = WrappedComponent => {
 	class WithAuthentication extends Component {

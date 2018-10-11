@@ -4,16 +4,15 @@ import React, { Component, Fragment } from 'react';
 import InfoDropdownContent from './InfoDropdownContent';
 import SideNavContent from './SideNavContent';
 
-import { auth } from '../firebase';
+import { auth } from '../../firebase';
 
-import AuthUserContext from '../components/context/AuthUserContext';
+import AuthUserContext from '../../context/AuthUserContext';
 
 import M from 'materialize-css';
 import CommonLinks from './CommonLinks';
 
 /*
- * TODO: Links to register should now go to /sign-up
- * TODO: Refactor login to signup/login
+ * FIXME: presently no sign out button
  */
 
 class Navbar extends Component {

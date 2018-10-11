@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AuthUserContext from '../context/AuthUserContext';
+import AuthUserContext from '../../context/AuthUserContext';
 import PasswordForgetForm from '../password_forget/PasswordForgetForm';
 import PasswordUpdateForm from '../password_update/PasswordUpdateForm';
 

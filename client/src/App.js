@@ -22,21 +22,21 @@ import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
 import ListEvents from './components/events/ListEvents';
-import SignIn from './components/signin/SignIn';
 import ManageArticles from './components/content/ManageArticles';
 import ManageContent from './components/content/ManageContent';
 import ManageEvents from './components/events/ManageEvents';
 import ManageInformation from './components/content/ManageInformation';
 import ManageUsers from './components/users/ManageUsers';
-import Navbar from './navbar';
+import Navbar from './components/navbar';
 import NoMatch from './components/common/NoMatch';
-import PasswordUpdate from './components/password_update';
 import PasswordForget from './components/password_forget';
-import SignUp from './components/account/SignUp';
-import SignUpSuccess from './components/account/SignUpSuccess';
+import PasswordUpdate from './components/password_update';
+import SignIn from './components/account_page/SignIn';
+import SignUp from './components/account_page/SignUp';
+import SignUpSuccess from './components/account_page/SignUpSuccess';
 import SingleEvent from './components/events/SingleEvent';
 
-import withAuthentication from './components/HOC/withAuthentication';
+import withAuthentication from './HOC/withAuthentication';
 
 import store from './store';
 

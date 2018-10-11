@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 
+import withAuthorization from '../../HOC/withAuthorization';
+
 const Dashboard = () => (
 	<div className="container">
 		<div className="row">
@@ -45,4 +47,6 @@ const items = [
 	}
 ];
 
-export default Dashboard;
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)(Dashboard);
