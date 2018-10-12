@@ -1,4 +1,7 @@
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 
 import BackButton from '../common/BackButton';
@@ -7,7 +10,7 @@ import SubmitButton from '../common/SubmitButton';
 
 import M from 'materialize-css';
 
-import { auth, db } from '../../firebase';
+import { registerUser } from '../../actions/authActions';
 
 const INITIAL_STATE = {
 	username: '',
@@ -40,22 +43,13 @@ class SignUp extends Component {
 
 		const { history } = this.props;
 
-		const { username, email, passwordOne } = this.state;
+		const userData = {
+			username: this.state.username,
+			email: this.state.email,
+			password: this.state.passwordOne
+		};
 
-		auth
-			.doCreateUserWithEmailAndPassword(email, passwordOne)
-			.then(authUser => {
-				// Also create a user in own Firebase DB
-				db.doCreateUser(authUser.user.uid, username, email).then(() => {
-					this.setState({ ...INITIAL_STATE });
-					history.push('/signup-success');
-				});
-			})
-			.catch(err =>
-				this.setState({
-					error: err
-				})
-			);
+		this.props.registerUser(userData, history);
 	};
 
 	render() {
@@ -149,4 +143,17 @@ class SignUp extends Component {
 	}
 }
 
-export default withRouter(SignUp);
+const mapStateToProps = state => ({
+	auth: state.auth,
+	errors: state.errors
+});
+
+const enhance = compose(
+	connect(
+		mapStateToProps,
+		{ registerUser }
+	),
+	withRouter
+);
+
+export default enhance(SignUp);

@@ -1,23 +1,37 @@
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
-import { db } from '../../firebase';
+import { setUsers } from '../../actions/authActions';
 
 import withAuthorization from '../../HOC/withAuthorization';
+
+const INITIAL_STATE = {
+	users: null
+};
 
 class ListUsers extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			users: null
+			...INITIAL_STATE
 		};
 	}
 
 	componentDidMount = () => {
-		db.onceGetUsers().then(snapshot =>
-			this.setState({ users: snapshot.val() })
-		);
+		this.props.setUsers();
 	};
+
+	componentWillReceiveProps = nextProps => {
+		if (nextProps.auth.users) {
+			this.setState({
+				users: nextProps.auth.users
+			});
+		}
+	};
+
+	component;
 
 	render() {
 		const { users } = this.state;
@@ -47,6 +61,17 @@ const UserList = ({ users }) => (
 	</>
 );
 
+const mapStateToProps = state => ({
+	auth: state.auth,
+	errors: state.errors
+});
+
 const authCondition = authUser => !!authUser;
 
-export default withAuthorization(authCondition)(ListUsers);
+export default compose(
+	withAuthorization(authCondition),
+	connect(
+		mapStateToProps,
+		{ setUsers }
+	)
+)(ListUsers);

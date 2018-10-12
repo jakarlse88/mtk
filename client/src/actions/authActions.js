@@ -5,21 +5,29 @@ import jwt_decode from 'jwt-decode';
 import {
 	GET_ERRORS,
 	CLEAR_ERRORS,
-	SET_CURRENT_USER
+	SET_CURRENT_USER,
+	SET_USERS
 } from '../actions/types';
+
+import { auth, db } from '../firebase';
 
 /*
  * Register user
  */
 export const registerUser = (userData, history) => dispatch => {
-	axios
-		.post('/api/users/register', userData)
-		.then(res => history.push('/register-user-success'))
-		.catch(err =>
-			dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
+	const { username, email, password } = userData;
+
+	dispatch({ type: CLEAR_ERRORS });
+
+	auth
+		.doCreateUserWithEmailAndPassword(email, password)
+		.then(authUser =>
+			db.doCreateUser(authUser.user.uid, username, email).then(() => {
+				history.push('/signup-success');
 			})
+		)
+		.catch(err =>
+			dispatch({ type: GET_ERRORS, payload: err.response.data })
 		);
 };
 
@@ -63,6 +71,27 @@ export const setCurrentUser = decoded => {
 		type: SET_CURRENT_USER,
 		payload: decoded
 	};
+};
+
+/*
+ * Set all users
+ */
+export const setUsers = () => dispatch => {
+	dispatch({ type: CLEAR_ERRORS });
+
+	db.onceGetUsers()
+		.then(snapshot =>
+			dispatch({
+				type: SET_USERS,
+				payload: snapshot.val()
+			})
+		)
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
 };
 
 /*

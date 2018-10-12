@@ -1,3 +1,4 @@
+import { compose } from 'recompose';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';

@@ -20,17 +20,6 @@ const whichCompose = () => {
 	}
 };
 
-// const store = createStore(reducers, {}, whichCompose());
-
-const store = createStore(
-	rootReducer,
-	initialState,
-	whichCompose()
-	// compose(
-	//   applyMiddleware(...middleware),
-	//   window.__REDUX_DEVTOOLS_EXTENSION__ &&
-	//     window.__REDUX_DEVTOOLS_EXTENSION__()
-	// )
-);
+const store = createStore(rootReducer, initialState, whichCompose());
 
 export default store;
