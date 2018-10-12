@@ -85,6 +85,9 @@ class SignIn extends Component {
 									<i className="right fas fa-unlock-alt" />
 								</button>
 							</p>
+							<p className="text-center flow-text">
+								<Link to="/signup">Ny bruker</Link>
+							</p>
 							<p className="text-center">
 								<Link to="/password-forget">Glemt passord?</Link>
 							</p>

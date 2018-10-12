@@ -64,7 +64,7 @@ class Navbar extends Component {
 												Moss Taekwondo Klubb
 											</span>
 										</Link>
-										<CommonLinks authUser={authUser} />
+										<CommonLinks />
 									</div>
 								</div>
 							</nav>

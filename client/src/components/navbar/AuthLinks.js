@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 
+import { auth } from '../../firebase';
+
 export default () => (
 	<>
 		<li>
@@ -17,5 +19,15 @@ export default () => (
 				Brukerkonto
 			</Link>
 		</li>
+		<li>
+			<a
+				href="#!"
+				className="grey-text text-darken-2"
+				onClick={logoutClick}>
+				Logg ut
+			</a>
+		</li>
 	</>
 );
+
+const logoutClick = () => auth.doSignOut();

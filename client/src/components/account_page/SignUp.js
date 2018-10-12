@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
+import BackButton from '../common/BackButton';
 import InputField from '../common/InputField';
+import SubmitButton from '../common/SubmitButton';
 
 import M from 'materialize-css';
 
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 
 const INITIAL_STATE = {
 	username: '',
@@ -27,14 +29,6 @@ class SignUp extends Component {
 		M.FormSelect.init(elems, {});
 	};
 
-	componentWillReceiveProps = nextProps => {
-		// if (nextProps.errors) {
-		// 	this.setState({
-		// 		errors: nextProps.errors
-		// 	});
-		// }
-	};
-
 	onChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -51,8 +45,11 @@ class SignUp extends Component {
 		auth
 			.doCreateUserWithEmailAndPassword(email, passwordOne)
 			.then(authUser => {
-				this.setState({ ...INITIAL_STATE });
-				history.push('/sign-up-success');
+				// Also create a user in own Firebase DB
+				db.doCreateUser(authUser.user.uid, username, email).then(() => {
+					this.setState({ ...INITIAL_STATE });
+					history.push('/signup-success');
+				});
 			})
 			.catch(err =>
 				this.setState({
@@ -62,8 +59,6 @@ class SignUp extends Component {
 	};
 
 	render() {
-		const { history } = this.props;
-
 		const {
 			username,
 			email,
@@ -82,7 +77,7 @@ class SignUp extends Component {
 			<div className="container">
 				<div className="row">
 					<div className="col s12 center-align">
-						<h2 className="center-align">Opprett Bruker</h2>
+						<h2 className="center-align">Ny bruker</h2>
 					</div>
 
 					<div className="col s12 left-align">
@@ -136,25 +131,14 @@ class SignUp extends Component {
 
 							<div className="row">
 								<div className="col s6 right-align">
-									{' '}
-									<Link to="/manage-users">
-										<button
-											className="btn grey waves-effect waves-dark"
-											type="button">
-											<i className="fas fa-arrow-left left" />
-											Tilbake
-										</button>
-									</Link>
+									<BackButton linkTo="/manage-users" />
 								</div>
 								<div className="col s6 left-align">
-									<button
-										disabled={isInvalid}
-										className="btn blue waves-effect waves-blue"
-										type="submit"
-										onClick={this.onSubmit}>
-										<i className="fas fa-paper-plane right" />
-										Send
-									</button>
+									<SubmitButton
+										isInvalid={isInvalid}
+										onClick={this.onSubmit}
+										buttonText="Send"
+									/>
 								</div>
 							</div>
 						</form>

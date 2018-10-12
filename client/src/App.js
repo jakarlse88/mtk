@@ -22,6 +22,7 @@ import Footer from './components/layout/Footer';
 import Information from './components/information/Information';
 import Landing from './components/layout/Landing';
 import ListEvents from './components/events/ListEvents';
+import ListUsers from './components/users/ListUsers';
 import ManageArticles from './components/content/ManageArticles';
 import ManageContent from './components/content/ManageContent';
 import ManageEvents from './components/events/ManageEvents';
@@ -85,6 +86,7 @@ class App extends Component {
 									component={EditArticle}
 								/>
 								<Route exact path="/list-events" component={ListEvents} />
+								<Route exact path="/list-users" component={ListUsers} />
 								<Route exact path="/signin" component={SignIn} />
 								<Route
 									exact
@@ -121,10 +123,10 @@ class App extends Component {
 									path="/manage-users"
 									component={ManageUsers}
 								/>
-								<Route exact path="/sign-up" component={SignUp} />
+								<Route exact path="/signup" component={SignUp} />
 								<Route
 									exact
-									path="/sign-up-success"
+									path="/signup-success"
 									component={SignUpSuccess}
 								/>
 								<Route

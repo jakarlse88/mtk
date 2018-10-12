@@ -11,11 +11,11 @@ const headline = 'Administrér Brukere';
 
 const items = [
 	{
-		icon: 'plus',
-		cardTitle: 'Opprett Bruker',
-		cardText: 'Registrér en ny, unik bruker.',
+		icon: 'search',
+		cardTitle: 'Se brukere',
+		cardText: 'Liste over alle brukere.',
 		permissions: 'Admin',
-		linkTo: '/register-user'
+		linkTo: '/list-users'
 	}
 ];
 
