@@ -1,78 +1,79 @@
-import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import { setUsers } from '../../actions/authActions';
 
-import withAuthorization from '../../HOC/withAuthorization';
+import Authorization from '../common/Authorization';
 
 const INITIAL_STATE = {
-    users: null
+	users: null
 };
 
 class ListUsers extends Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
-            ...INITIAL_STATE
-        };
-    }
+		this.state = {
+			...INITIAL_STATE
+		};
+	}
 
-    componentDidMount = () => {
-        this.props.setUsers();
-    };
+	componentDidMount = () => {
+		this.props.setUsers();
+	};
 
-    componentWillReceiveProps = nextProps => {
-        if (nextProps.auth.users) {
-            this.setState({
-                users: nextProps.auth.users
-            });
-        }
-    };
+	componentWillReceiveProps = nextProps => {
+		if (nextProps.auth.users) {
+			this.setState({
+				users: nextProps.auth.users
+			});
+		}
+	};
 
-    render() {
-        const { users } = this.state;
+	render() {
+		const { users } = this.state;
 
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col s12 center-align">
-                        <h2>List users</h2>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s12 center-align">
-                        {!!users && <UserList users={users} />}
-                    </div>
-                </div>
-            </div>
-        );
-    }
+		return (
+			<Authorization authCondition={authUser => !!authUser}>
+				{() => (
+					<div className="container">
+						<div className="row">
+							<div className="col s12 center-align">
+								<h2>List users</h2>
+							</div>
+						</div>
+						<div className="row">
+							<div className="col s12 center-align">
+								{!!users && <UserList users={users} />}
+							</div>
+						</div>
+					</div>
+				)}
+			</Authorization>
+		);
+	}
 }
 
 const UserList = ({ users }) => (
-    <>
-        {Object.keys(users).map((key, index) => (
-            <div key={index}>{users[key].username}</div>
-        ))}
-    </>
+	<>
+		{Object.keys(users).map((key, index) => (
+			<div key={index}>{users[key].username}</div>
+		))}
+	</>
 );
 
+ListUsers.propTypes = {
+	auth: PropTypes.object.isRequired,
+	error: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
+	auth: state.auth,
+	errors: state.errors
 });
 
-const authCondition = authUser => !!authUser;
-
-// const composedListUsers = compose(
-// 	withAuthorization(authCondition),
-// 	connect(
-// 		mapStateToProps,
-// 		{ setUsers }
-// 	),
-// 	ListUsers
-// );
-
-export default ListUsers;
+export default connect(
+	mapStateToProps,
+	{ setUsers }
+)(ListUsers);
