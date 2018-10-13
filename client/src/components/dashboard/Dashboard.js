@@ -1,27 +1,43 @@
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { Component } from 'react';
 
 import withAuthorization from '../../HOC/withAuthorization';
 
-const Dashboard = () => (
-	<div className="container">
-		<div className="row">
-			<h2 className="center-align">Kontrollpanel</h2>
-		</div>
-		<div className="row">
-			{items.map((item, index) => (
-				<div className="col s12 m6 l4 center-align" key={index}>
-					<i className={`fas fa-${item.icon} fa-3x`} />
-					<Link to={item.linkTo} className="text-center">
-						<h5>{item.cardTitle}</h5>
-					</Link>
-					<p className="grey-text">{item.cardText}</p>
-					<small className="grey-text">{item.permissions}</small>
+const INITIAL_STATE = { authUser: null };
+
+class Dashboard extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			...INITIAL_STATE
+		};
+	}
+
+	render() {
+		return (
+			<div className="container">
+				<div className="row">
+					<h2 className="center-align">Kontrollpanel</h2>
 				</div>
-			))}
-		</div>
-	</div>
-);
+				<div className="row">
+					{items.map((item, index) => (
+						<div className="col s12 m6 l4 center-align" key={index}>
+							<i className={`fas fa-${item.icon} fa-3x`} />
+							<Link to={item.linkTo} className="text-center">
+								<h5>{item.cardTitle}</h5>
+							</Link>
+							<p className="grey-text">{item.cardText}</p>
+							<small className="grey-text">{item.permissions}</small>
+						</div>
+					))}
+				</div>
+			</div>
+		);
+	}
+}
 
 const items = [
 	{
@@ -49,4 +65,17 @@ const items = [
 
 const authCondition = authUser => !!authUser;
 
-export default withAuthorization(authCondition)(Dashboard);
+const composedDashboard = compose(withAuthorization(authCondition))(
+	Dashboard
+);
+
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+
+// export default composedDashboard;
+
+export default compose(
+	connect(mapStateToProps),
+	withAuthorization(authCondition)
+)(Dashboard);

@@ -6,22 +6,25 @@ import React, { Component } from 'react';
 import { firebase } from '../firebase';
 import { setCurrentUser } from '../actions/authActions';
 
+const INITIAL_STATE = {
+	authUser: null
+};
+
 const withAuthentication = WrappedComponent => {
 	class WithAuthentication extends Component {
 		constructor(props) {
 			super(props);
 
-			this.state = {
-				authUser: null
-			};
+			this.state = { ...INITIAL_STATE };
 		}
 
 		componentDidMount = () => {
-			firebase.auth.onAuthStateChanged(authUser => {
-				authUser
-					? this.props.setCurrentUser(authUser)
-					: this.props.setCurrentUser(null);
-			});
+			firebase.auth.onAuthStateChanged(
+				authUser =>
+					authUser
+						? this.props.setCurrentUser(authUser)
+						: this.props.setCurrentUser(null)
+			);
 		};
 
 		render() {

@@ -1,5 +1,3 @@
-import { connect, Provider } from 'react-redux';
-import { compose } from 'recompose';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
 
@@ -39,8 +37,6 @@ import SignUpSuccess from './components/account_page/SignUpSuccess';
 import SingleEvent from './components/events/SingleEvent';
 
 import withAuthentication from './HOC/withAuthentication';
-
-// import store from './store';
 
 class App extends Component {
 	componentDidMount = () => {

@@ -31,8 +31,6 @@ class ListUsers extends Component {
 		}
 	};
 
-	component;
-
 	render() {
 		const { users } = this.state;
 
@@ -68,10 +66,13 @@ const mapStateToProps = state => ({
 
 const authCondition = authUser => !!authUser;
 
-export default compose(
+const composedListUsers = compose(
 	withAuthorization(authCondition),
 	connect(
 		mapStateToProps,
 		{ setUsers }
-	)
-)(ListUsers);
+	),
+	ListUsers
+);
+
+export default composedListUsers;

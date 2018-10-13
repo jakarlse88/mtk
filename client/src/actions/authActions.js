@@ -66,10 +66,10 @@ export const loginUser = (loginData, history) => dispatch => {
 /*
  * Set logged-in user
  */
-export const setCurrentUser = decoded => {
+export const setCurrentUser = currentUser => {
 	return {
 		type: SET_CURRENT_USER,
-		payload: decoded
+		payload: currentUser
 	};
 };
 
