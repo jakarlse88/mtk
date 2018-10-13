@@ -1,6 +1,6 @@
+import { connect, Provider } from 'react-redux';
 import { compose } from 'recompose';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
 import 'materialize-css/dist/css/materialize.min.css';
@@ -40,7 +40,7 @@ import SingleEvent from './components/events/SingleEvent';
 
 import withAuthentication from './HOC/withAuthentication';
 
-import store from './store';
+// import store from './store';
 
 class App extends Component {
 	componentDidMount = () => {
@@ -49,109 +49,99 @@ class App extends Component {
 
 	render() {
 		return (
-			<Provider store={store}>
-				<Router>
-					<Fragment>
-						<Navbar />
-						<main>
-							<Switch>
-								<Route exact path="/account" component={AccountPage} />
-								<Route exact path="/" component={Landing} />
-								<Route
-									exact
-									path="/admin-event/:id"
-									component={AdministrateEvent}
-								/>
-								<Route exact path="/articles" component={Articles} />
-								<Route exact path="/articles/:id" component={Article} />
-								<Route exact path="/contact" component={Contact} />
-								<Route
-									exact
-									path="/create-article"
-									component={CreateArticle}
-								/>
-								<Route
-									exact
-									path="/create-event"
-									component={CreateEvent}
-								/>
-								<Route
-									exact
-									path="/create-event-success/:id"
-									component={CreateEventSuccess}
-								/>
-								<Route exact path="/dashboard" component={Dashboard} />
-								<Route
-									exact
-									path="/edit-article/:id"
-									component={EditArticle}
-								/>
-								<Route exact path="/list-events" component={ListEvents} />
-								<Route exact path="/list-users" component={ListUsers} />
-								<Route exact path="/signin" component={SignIn} />
-								<Route
-									exact
-									path="/edit-information/:type"
-									component={EditInformation}
-								/>
-								<Route
-									exact
-									path="/information/:type"
-									component={Information}
-								/>
-								<Route
-									exact
-									path="/manage-articles"
-									component={ManageArticles}
-								/>
-								<Route
-									exact
-									path="/manage-content"
-									component={ManageContent}
-								/>
-								<Route
-									exact
-									path="/manage-events"
-									component={ManageEvents}
-								/>
-								<Route
-									exact
-									path="/manage-information"
-									component={ManageInformation}
-								/>
-								<Route
-									exact
-									path="/manage-users"
-									component={ManageUsers}
-								/>
-								<Route exact path="/signup" component={SignUp} />
-								<Route
-									exact
-									path="/signup-success"
-									component={SignUpSuccess}
-								/>
-								<Route
-									exact
-									path="/password-forget"
-									component={PasswordForget}
-								/>
-								<Route
-									exact
-									path="/password-update"
-									component={PasswordUpdate}
-								/>
-								<Route
-									exact
-									path="/single-event/:id"
-									component={SingleEvent}
-								/>
-								<Route component={NoMatch} />
-							</Switch>
-						</main>
-						<Footer />
-					</Fragment>
-				</Router>
-			</Provider>
+			<Router>
+				<Fragment>
+					<Navbar />
+					<main>
+						<Switch>
+							<Route exact path="/account" component={AccountPage} />
+							<Route exact path="/" component={Landing} />
+							<Route
+								exact
+								path="/admin-event/:id"
+								component={AdministrateEvent}
+							/>
+							<Route exact path="/articles" component={Articles} />
+							<Route exact path="/articles/:id" component={Article} />
+							<Route exact path="/contact" component={Contact} />
+							<Route
+								exact
+								path="/create-article"
+								component={CreateArticle}
+							/>
+							<Route exact path="/create-event" component={CreateEvent} />
+							<Route
+								exact
+								path="/create-event-success/:id"
+								component={CreateEventSuccess}
+							/>
+							<Route exact path="/dashboard" component={Dashboard} />
+							<Route
+								exact
+								path="/edit-article/:id"
+								component={EditArticle}
+							/>
+							<Route exact path="/list-events" component={ListEvents} />
+							<Route exact path="/list-users" component={ListUsers} />
+							<Route exact path="/signin" component={SignIn} />
+							<Route
+								exact
+								path="/edit-information/:type"
+								component={EditInformation}
+							/>
+							<Route
+								exact
+								path="/information/:type"
+								component={Information}
+							/>
+							<Route
+								exact
+								path="/manage-articles"
+								component={ManageArticles}
+							/>
+							<Route
+								exact
+								path="/manage-content"
+								component={ManageContent}
+							/>
+							<Route
+								exact
+								path="/manage-events"
+								component={ManageEvents}
+							/>
+							<Route
+								exact
+								path="/manage-information"
+								component={ManageInformation}
+							/>
+							<Route exact path="/manage-users" component={ManageUsers} />
+							<Route exact path="/signup" component={SignUp} />
+							<Route
+								exact
+								path="/signup-success"
+								component={SignUpSuccess}
+							/>
+							<Route
+								exact
+								path="/password-forget"
+								component={PasswordForget}
+							/>
+							<Route
+								exact
+								path="/password-update"
+								component={PasswordUpdate}
+							/>
+							<Route
+								exact
+								path="/single-event/:id"
+								component={SingleEvent}
+							/>
+							<Route component={NoMatch} />
+						</Switch>
+					</main>
+					<Footer />
+				</Fragment>
+			</Router>
 		);
 	}
 }

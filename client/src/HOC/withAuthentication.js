@@ -1,8 +1,10 @@
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import AuthUserContext from '../context/AuthUserContext';
-
 import { firebase } from '../firebase';
+import { setCurrentUser } from '../actions/authActions';
 
 const withAuthentication = WrappedComponent => {
 	class WithAuthentication extends Component {
@@ -17,21 +19,32 @@ const withAuthentication = WrappedComponent => {
 		componentDidMount = () => {
 			firebase.auth.onAuthStateChanged(authUser => {
 				authUser
-					? this.setState({ authUser })
-					: this.setState({ authUser: null });
+					? this.props.setCurrentUser(authUser)
+					: this.props.setCurrentUser(null);
 			});
 		};
 
 		render() {
-			const { authUser } = this.state;
-			return (
-				<AuthUserContext.Provider value={authUser}>
-					<WrappedComponent {...this.props} />
-				</AuthUserContext.Provider>
-			);
+			return <WrappedComponent {...this.props} />;
 		}
 	}
 	return WithAuthentication;
 };
 
-export default withAuthentication;
+withAuthentication.propTypes = {
+	auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+
+const composedHOC = compose(
+	connect(
+		mapStateToProps,
+		{ setCurrentUser }
+	),
+	withAuthentication
+);
+
+export default composedHOC;
