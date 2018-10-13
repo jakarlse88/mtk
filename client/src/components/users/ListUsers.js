@@ -7,72 +7,72 @@ import { setUsers } from '../../actions/authActions';
 import withAuthorization from '../../HOC/withAuthorization';
 
 const INITIAL_STATE = {
-	users: null
+    users: null
 };
 
 class ListUsers extends Component {
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			...INITIAL_STATE
-		};
-	}
+        this.state = {
+            ...INITIAL_STATE
+        };
+    }
 
-	componentDidMount = () => {
-		this.props.setUsers();
-	};
+    componentDidMount = () => {
+        this.props.setUsers();
+    };
 
-	componentWillReceiveProps = nextProps => {
-		if (nextProps.auth.users) {
-			this.setState({
-				users: nextProps.auth.users
-			});
-		}
-	};
+    componentWillReceiveProps = nextProps => {
+        if (nextProps.auth.users) {
+            this.setState({
+                users: nextProps.auth.users
+            });
+        }
+    };
 
-	render() {
-		const { users } = this.state;
+    render() {
+        const { users } = this.state;
 
-		return (
-			<div className="container">
-				<div className="row">
-					<div className="col s12 center-align">
-						<h2>List users</h2>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col s12 center-align">
-						{!!users && <UserList users={users} />}
-					</div>
-				</div>
-			</div>
-		);
-	}
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col s12 center-align">
+                        <h2>List users</h2>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12 center-align">
+                        {!!users && <UserList users={users} />}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 const UserList = ({ users }) => (
-	<>
-		{Object.keys(users).map((key, index) => (
-			<div key={index}>{users[key].username}</div>
-		))}
-	</>
+    <>
+        {Object.keys(users).map((key, index) => (
+            <div key={index}>{users[key].username}</div>
+        ))}
+    </>
 );
 
 const mapStateToProps = state => ({
-	auth: state.auth,
-	errors: state.errors
+    auth: state.auth,
+    errors: state.errors
 });
 
 const authCondition = authUser => !!authUser;
 
-const composedListUsers = compose(
-	withAuthorization(authCondition),
-	connect(
-		mapStateToProps,
-		{ setUsers }
-	),
-	ListUsers
-);
+// const composedListUsers = compose(
+// 	withAuthorization(authCondition),
+// 	connect(
+// 		mapStateToProps,
+// 		{ setUsers }
+// 	),
+// 	ListUsers
+// );
 
-export default composedListUsers;
+export default ListUsers;
