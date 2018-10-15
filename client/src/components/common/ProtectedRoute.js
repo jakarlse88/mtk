@@ -4,8 +4,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 /*
- * If user is authenticated, load the passed-in component.
- * If user is not authenticated, redirect to /login.
+ * If user is authenticated, load the passed-in component;
+ * else redirect to /login.
  */
 const ProtectedRoute = ({ component: Component, auth, ...rest }) => (
 	<Route
@@ -14,7 +14,7 @@ const ProtectedRoute = ({ component: Component, auth, ...rest }) => (
 			auth.isAuthenticated === true ? (
 				<Component {...props} />
 			) : (
-				<Redirect to="/login" />
+				<Redirect to="/signin" />
 			)
 		}
 	/>

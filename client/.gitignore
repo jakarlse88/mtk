@@ -22,3 +22,6 @@ yarn-error.log*
 
 # scss
 **/*.scss
+
+# firebase auth
+/src/firebase/config_dev.js

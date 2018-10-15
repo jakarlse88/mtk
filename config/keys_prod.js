@@ -1,5 +1,4 @@
 module.exports = {
-  mongoURI: process.env.MONGO_URI,
-  secretOrKey: process.env.SECRET_OR_KEY,
-  adminSecretSauce: process.env.ADMIN_SECRET_SAUCE
+    mongoURI: process.env.MONGO_URI,
+    secretOrKey: process.env.SECRET_OR_KEY
 };

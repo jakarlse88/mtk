@@ -37,15 +37,15 @@ InputField.defaultProps = {
 };
 
 InputField.propTypes = {
+	error: PropTypes.string,
 	icon: PropTypes.string,
 	inputId: PropTypes.string.isRequired,
-	type: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
-	placeholder: PropTypes.string,
-	value: PropTypes.string.isRequired,
 	onChange: PropTypes.func,
-	error: PropTypes.string,
-	readOnly: PropTypes.bool
+	placeholder: PropTypes.string,
+	readOnly: PropTypes.bool,
+	type: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired
 };
 
 export default InputField;

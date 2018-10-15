@@ -1,21 +1,23 @@
 import React from 'react';
 
+import Authorization from '../common/Authorization';
 import Menu from '../common/Menu';
-/*
- * TODO: view all users
- */
 
-const ManageUsers = () => <Menu headline={headline} items={items} />;
+const ManageUsers = () => (
+	<Authorization authCondition={authUser => !!authUser}>
+		{() => <Menu headline={headline} items={items} />}
+	</Authorization>
+);
 
 const headline = 'Administrér Brukere';
 
 const items = [
 	{
-		icon: 'plus',
-		cardTitle: 'Opprett Bruker',
-		cardText: 'Registrér en ny, unik bruker.',
+		icon: 'search',
+		cardTitle: 'Se brukere',
+		cardText: 'Liste over alle brukere.',
 		permissions: 'Admin',
-		linkTo: '/register-user'
+		linkTo: '/list-users'
 	}
 ];
 
