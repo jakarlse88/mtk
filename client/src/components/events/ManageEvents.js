@@ -1,8 +1,13 @@
 import React from 'react';
 
+import Authorization from '../common/Authorization';
 import Menu from '../common/Menu';
 
-const ManageEvents = () => <Menu headline={headline} items={items} />;
+const ManageEvents = () => (
+	<Authorization authCondition={authUser => !!authUser}>
+		{() => <Menu headline={headline} items={items} />}
+	</Authorization>
+);
 
 const headline = 'Administrér Arrangementer';
 

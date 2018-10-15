@@ -7,6 +7,7 @@ import * as Showdown from 'showdown';
 
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
+import Authorization from '../common/Authorization';
 import InputField from '../common/InputField';
 
 import { postNewArticle } from '../../actions/contentActions';
@@ -69,91 +70,95 @@ class CreateArticle extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<div className="row">
-					<div className="col s12 center-align">
-						<h2>Ny Artikkel</h2>
-					</div>
-				</div>
-				<form noValidate onSubmit={this.onSubmit}>
-					<div className="row">
-						<div className="col s12 m6">
-							<InputField
-								icon="user"
-								inputId="userInput"
-								labelText="Skrevet av"
-								name="articleAuthor"
-								placeholder="Ola Nordmann"
-								value={this.state.articleAuthor}
-								onChange={this.onChange}
-								readOnly={true}
-							/>
-						</div>
-						<div className="col s12 m6">
-							<InputField
-								icon="wrench"
-								inputId="categoryInput"
-								labelText="Kategori"
-								name="articleCategory"
-								placeholder="Taekwondo"
-								value={this.state.articleCategory}
-								onChange={this.onChange}
-							/>
-						</div>
-						<div className="col s12">
-							<InputField
-								icon="heading"
-								inputId="headlineInput"
-								labelText="Overskrift"
-								name="articleHeadline"
-								placeholder="Treningstider Høst 2018"
-								value={this.state.articleHeadline}
-								onChange={this.onChange}
-							/>
-						</div>
-					</div>
-					<div className="col s12">
+			<Authorization authCondition={authUser => !!authUser}>
+				{() => (
+					<div className="container">
 						<div className="row">
-							<div className="col s12">
-								<h5>
-									<i className="fas fa-pen left" />
-									Tekst
-								</h5>
+							<div className="col s12 center-align">
+								<h2>Ny Artikkel</h2>
 							</div>
 						</div>
-						<ReactMde
-							editorState={this.state.mdeState}
-							onChange={this.onEditorChange}
-							generateMarkdownPreview={markdown =>
-								Promise.resolve(this.converter.makeHtml(markdown))
-							}
-						/>
+						<form noValidate onSubmit={this.onSubmit}>
+							<div className="row">
+								<div className="col s12 m6">
+									<InputField
+										icon="user"
+										inputId="userInput"
+										labelText="Skrevet av"
+										name="articleAuthor"
+										placeholder="Ola Nordmann"
+										value={this.state.articleAuthor}
+										onChange={this.onChange}
+										readOnly={true}
+									/>
+								</div>
+								<div className="col s12 m6">
+									<InputField
+										icon="wrench"
+										inputId="categoryInput"
+										labelText="Kategori"
+										name="articleCategory"
+										placeholder="Taekwondo"
+										value={this.state.articleCategory}
+										onChange={this.onChange}
+									/>
+								</div>
+								<div className="col s12">
+									<InputField
+										icon="heading"
+										inputId="headlineInput"
+										labelText="Overskrift"
+										name="articleHeadline"
+										placeholder="Treningstider Høst 2018"
+										value={this.state.articleHeadline}
+										onChange={this.onChange}
+									/>
+								</div>
+							</div>
+							<div className="col s12">
+								<div className="row">
+									<div className="col s12">
+										<h5>
+											<i className="fas fa-pen left" />
+											Tekst
+										</h5>
+									</div>
+								</div>
+								<ReactMde
+									editorState={this.state.mdeState}
+									onChange={this.onEditorChange}
+									generateMarkdownPreview={markdown =>
+										Promise.resolve(this.converter.makeHtml(markdown))
+									}
+								/>
+							</div>
+							<div className="row">
+								<div className="col s12" />
+							</div>
+							<div className="row">
+								<div className="col s12 m6 right-align">
+									<button
+										onClick={this.goBack}
+										type="button"
+										className="btn grey waves-effect waves-dark">
+										<i className="fas fa-arrow-left left" />
+										Tilbake
+									</button>
+								</div>
+								<div className="col s12 m6 left-align">
+									<button
+										type="submit"
+										onClick={this.onSubmit}
+										className="btn blue waves-effect waves-dark">
+										<i className="fas fa-paper-plane right" />
+										Opprett artikkel
+									</button>
+								</div>
+							</div>
+						</form>
 					</div>
-					<div className="row">
-						<div className="col s12" />
-					</div>
-					<div className="row">
-						<div className="col s12 m6 right-align">
-							<button
-								onClick={this.goBack}
-								type="button"
-								className="btn grey waves-effect waves-dark">
-								<i className="fas fa-arrow-left left" />
-								Tilbake
-							</button>
-						</div>
-						<div className="col s12 m6 left-align">
-							<button
-								type="submit"
-								onClick={this.onSubmit}
-								className="btn blue waves-effect waves-dark">
-								<i className="fas fa-paper-plane right" />
-								Opprett artikkel
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
+				)}
+			</Authorization>
 		);
 	}
 }

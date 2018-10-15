@@ -1,8 +1,13 @@
 import React from 'react';
 
+import Authorization from '../common/Authorization';
 import Menu from '../common/Menu';
 
-const ManageContent = () => <Menu headline={headline} items={items} />;
+const ManageContent = () => (
+	<Authorization authCondition={authUser => !!authUser}>
+		{() => <Menu headline={headline} items={items} />}
+	</Authorization>
+);
 
 const headline = 'Administrér Innhold';
 

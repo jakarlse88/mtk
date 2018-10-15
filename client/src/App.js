@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import './styles/main.css';
@@ -46,12 +46,12 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
-				<Fragment>
+				<>
 					<Navbar />
 					<main>
 						<Switch>
-							<Route exact path="/account" component={AccountPage} />
 							<Route exact path="/" component={Landing} />
+							<Route exact path="/account" component={AccountPage} />
 							<Route
 								exact
 								path="/admin-event/:id"
@@ -79,7 +79,7 @@ class App extends Component {
 							/>
 							<Route exact path="/list-events" component={ListEvents} />
 							<Route exact path="/list-users" component={ListUsers} />
-							<Route exact path="/signin" component={SignIn} />
+
 							<Route
 								exact
 								path="/edit-information/:type"
@@ -132,11 +132,12 @@ class App extends Component {
 								path="/single-event/:id"
 								component={SingleEvent}
 							/>
+							<Route exact path="/signin" component={SignIn} />
 							<Route component={NoMatch} />
 						</Switch>
 					</main>
 					<Footer />
-				</Fragment>
+				</>
 			</Router>
 		);
 	}

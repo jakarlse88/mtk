@@ -65,7 +65,7 @@ const UserList = ({ users }) => (
 
 ListUsers.propTypes = {
 	auth: PropTypes.object.isRequired,
-	error: PropTypes.object.isRequired
+	error: PropTypes.object
 };
 
 const mapStateToProps = state => ({

@@ -12,6 +12,8 @@ import classnames from 'classnames';
 
 import { getEventsArr } from '../../actions/eventActions';
 
+import Authorization from '../common/Authorization';
+
 class ListEvents extends Component {
 	constructor(props) {
 		super(props);
@@ -137,16 +139,14 @@ class ListEvents extends Component {
 										Inspisér arrangement
 									</button>
 								</Link>
-								{auth.user.role === 'admin' && (
-									<Link
-										to={`/admin-event/${event._id}`}
-										className="red-text">
-										<button className="btn btn-flat white black-text waves-effect waves-blue">
-											<i className="fas fa-cogs fa-xl left" />
-											Administrér arrangement
-										</button>
-									</Link>
-								)}
+								<Link
+									to={`/admin-event/${event._id}`}
+									className="red-text">
+									<button className="btn btn-flat white black-text waves-effect waves-blue">
+										<i className="fas fa-cogs fa-xl left" />
+										Administrér arrangement
+									</button>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -188,56 +188,60 @@ class ListEvents extends Component {
 		);
 
 		return (
-			<div className="container">
-				<div className="row">
-					<div className="col s12">
-						<h2 className="center-align">Arrangementer</h2>
-						<div className="divider" />
-					</div>
-					<div className="row">
-						<div className="col" />
-					</div>
-					<div className="col s12">
-						{events.eventLoading ? (
-							{ renderLoading }
-						) : Object.keys(errors).length > 0 ? (
-							{ renderErrors }
-						) : (
-							<Fragment>
-								{renderEvents}
-								<div className="row">
-									<div className="col" />
+			<Authorization authCondition={authUser => !!authUser}>
+				{() => (
+					<div className="container">
+						<div className="row">
+							<div className="col s12">
+								<h2 className="center-align">Arrangementer</h2>
+								<div className="divider" />
+							</div>
+							<div className="row">
+								<div className="col" />
+							</div>
+							<div className="col s12">
+								{events.eventLoading ? (
+									{ renderLoading }
+								) : Object.keys(errors).length > 0 ? (
+									{ renderErrors }
+								) : (
+									<Fragment>
+										{renderEvents}
+										<div className="row">
+											<div className="col" />
+										</div>
+										<ul className="pagination center-align">
+											{renderPageNumbers}
+										</ul>
+									</Fragment>
+								)}
+							</div>
+							<div className="row">
+								<div className="col" />
+							</div>
+							{this.props.auth.isAuthenticated ? (
+								<div className="col s12 center-align">
+									<Link to="/manage-events">
+										<button className="btn grey mt-2 mb-4">
+											<i className="fas fa-arrow-left left" />
+											Back
+										</button>
+									</Link>
 								</div>
-								<ul className="pagination center-align">
-									{renderPageNumbers}
-								</ul>
-							</Fragment>
-						)}
-					</div>
-					<div className="row">
-						<div className="col" />
-					</div>
-					{this.props.auth.isAuthenticated ? (
-						<div className="col s12 center-align">
-							<Link to="/manage-events">
-								<button className="btn grey mt-2 mb-4">
-									<i className="fas fa-arrow-left left" />
-									Back
-								</button>
-							</Link>
+							) : (
+								<div className="col s12 center-align">
+									<Link to="/">
+										<button className="btn grey">
+											<i className="fas fa-arrow-left" />
+											Home
+										</button>
+									</Link>
+								</div>
+							)}
 						</div>
-					) : (
-						<div className="col s12 center-align">
-							<Link to="/">
-								<button className="btn grey">
-									<i className="fas fa-arrow-left" />
-									Home
-								</button>
-							</Link>
-						</div>
-					)}
-				</div>
-			</div>
+					</div>
+				)}
+			</Authorization>
 		);
 	}
 }

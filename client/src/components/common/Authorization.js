@@ -20,6 +20,10 @@ class Authorization extends Component {
 	componentDidMount = () => {
 		const { authCondition } = this.props;
 
+		if (this.props.auth) {
+			this.setState({ authUser: this.props.auth.authUser });
+		}
+
 		firebase.auth.onAuthStateChanged(authUser => {
 			if (!authCondition(authUser)) {
 				this.props.history.push('/signin');
@@ -34,12 +38,15 @@ class Authorization extends Component {
 	};
 
 	render() {
-		return this.props.children({ authUser: this.state.authUser });
+		const { authUser } = this.state;
+
+		return !!authUser ? this.props.children({ authUser }) : null;
 	}
 }
 
 Authorization.propTypes = {
-	auth: PropTypes.object.isRequired
+	auth: PropTypes.object.isRequired,
+	authCondition: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
