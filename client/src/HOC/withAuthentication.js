@@ -6,10 +6,7 @@ import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../utils/setAuthToken';
 
-import {
-	logoutUser,
-	setCurrentUser
-} from '../actions/authActions';
+import { logoutUser, setAuthUser } from '../actions/authActions';
 
 const INITIAL_STATE = {
 	authUser: null
@@ -33,7 +30,7 @@ const withAuthentication = WrappedComponent => {
 				const decodedUser = jwt_decode(localStorage.jwtToken);
 
 				// Set user, isAuthenticated
-				this.props.setCurrentUser(decodedUser);
+				this.props.setAuthUser(decodedUser);
 
 				// Check for expired token
 				const currentTime = Date.now() / 1000;
@@ -66,7 +63,7 @@ const mapStateToProps = state => ({
 const composedHOC = compose(
 	connect(
 		mapStateToProps,
-		{ logoutUser, setCurrentUser }
+		{ logoutUser, setAuthUser }
 	),
 	withAuthentication
 );

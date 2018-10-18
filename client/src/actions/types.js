@@ -6,9 +6,13 @@ export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 /*
+ * Auth
+ */
+export const SET_AUTH_USER = 'SET_AUTH_USER';
+
+/*
  * Users
  */
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const SET_USERS = 'SET_USERS';
 
 /*

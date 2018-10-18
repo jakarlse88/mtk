@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 
 import Authorization from '../common/Authorization';
 
+import { getAllUsers } from '../../actions/usersActions';
+
 const INITIAL_STATE = {
 	users: null
 };
@@ -18,13 +20,13 @@ class ListUsers extends Component {
 	}
 
 	componentDidMount = () => {
-		this.props.setUsers();
+		this.props.getAllUsers();
 	};
 
 	componentWillReceiveProps = nextProps => {
-		if (nextProps.auth.users) {
+		if (nextProps.users) {
 			this.setState({
-				users: nextProps.auth.users
+				users: nextProps.users.all
 			});
 		}
 	};
@@ -56,19 +58,25 @@ class ListUsers extends Component {
 const UserList = ({ users }) => (
 	<>
 		{Object.keys(users).map((key, index) => (
-			<div key={index}>{users[key].username}</div>
+			<div key={index}>
+				{users[key].name}{' '}
+				<em className="grey-text">{users[key].role}</em>
+			</div>
 		))}
 	</>
 );
 
 ListUsers.propTypes = {
-	auth: PropTypes.object.isRequired,
-	error: PropTypes.object
+	error: PropTypes.object,
+	users: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-	auth: state.auth,
-	errors: state.errors
+	errors: state.errors,
+	users: state.users
 });
 
-export default connect(mapStateToProps)(ListUsers);
+export default connect(
+	mapStateToProps,
+	{ getAllUsers }
+)(ListUsers);

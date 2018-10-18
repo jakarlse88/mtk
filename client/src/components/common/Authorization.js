@@ -1,11 +1,8 @@
 import { Component } from 'react';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from '../../utils/setAuthToken';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { setCurrentUser } from '../../actions/authActions';
 
 const INITIAL_STATE = {
 	authUser: null
@@ -57,9 +54,6 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-	connect(
-		mapStateToProps,
-		{ setCurrentUser }
-	),
+	connect(mapStateToProps),
 	withRouter
 )(Authorization);

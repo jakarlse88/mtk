@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 import {
 	GET_ERRORS,
 	CLEAR_ERRORS,
-	SET_CURRENT_USER
+	SET_AUTH_USER
 } from '../actions/types';
 
 /*
@@ -43,7 +43,7 @@ export const loginUser = (loginData, history) => dispatch => {
 			const decoded = jwt_decode(token);
 
 			// Set authUser
-			dispatch(setCurrentUser(decoded));
+			dispatch(setAuthUser(decoded));
 
 			history.push('/dashboard');
 		})
@@ -58,9 +58,9 @@ export const loginUser = (loginData, history) => dispatch => {
 /*
  * Set logged-in user
  */
-export const setCurrentUser = user => {
+export const setAuthUser = user => {
 	return {
-		type: SET_CURRENT_USER,
+		type: SET_AUTH_USER,
 		payload: user
 	};
 };
@@ -77,7 +77,7 @@ export const logoutUser = history => dispatch => {
 
 	// Set current user to empty object,
 	// isAuthenticated will automatically be set to false
-	dispatch(setCurrentUser(null));
+	dispatch(setAuthUser(null));
 
 	// Redirect to landing
 	if (history) {
