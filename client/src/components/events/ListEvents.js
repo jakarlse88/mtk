@@ -58,7 +58,8 @@ class ListEvents extends Component {
 						let i = 1;
 						i <=
 						Math.ceil(
-							nextProps.events.eventsArr.length / prevState.eventsPerPage
+							nextProps.events.eventsArr.length /
+								prevState.eventsPerPage
 						);
 						i++
 					) {
@@ -108,8 +109,12 @@ class ListEvents extends Component {
 	};
 
 	render() {
-		const { auth } = this.props;
-		const { currentEvents, events, errors, pageNumbers } = this.state;
+		const {
+			currentEvents,
+			events,
+			errors,
+			pageNumbers
+		} = this.state;
 
 		const renderEvents = currentEvents.map((event, index) => {
 			return (
@@ -125,7 +130,10 @@ class ListEvents extends Component {
 										format="dddd DD/MM/YYYY"
 									/>{' '}
 									til{' '}
-									<Moment date={event.endDate} format="dddd DD/MM/YYYY" />{' '}
+									<Moment
+										date={event.endDate}
+										format="dddd DD/MM/YYYY"
+									/>{' '}
 									av {event.owner}
 								</small>
 								<br />
@@ -183,7 +191,8 @@ class ListEvents extends Component {
 				<br />
 				<br />
 				<br />
-				Oops! Noe gikk galt. Prøv igjen, eller kontakt en administrator.
+				Oops! Noe gikk galt. Prøv igjen, eller kontakt en
+				administrator.
 			</p>
 		);
 

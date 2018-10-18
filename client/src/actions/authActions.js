@@ -5,29 +5,21 @@ import jwt_decode from 'jwt-decode';
 import {
 	GET_ERRORS,
 	CLEAR_ERRORS,
-	SET_CURRENT_USER,
-	SET_USERS
+	SET_AUTH_USER
 } from '../actions/types';
-
-import { auth, db } from '../firebase';
 
 /*
  * Register user
  */
 export const registerUser = (userData, history) => dispatch => {
-	const { username, email, password } = userData;
-
-	dispatch({ type: CLEAR_ERRORS });
-
-	auth
-		.doCreateUserWithEmailAndPassword(email, password)
-		.then(authUser =>
-			db.doCreateUser(authUser.user.uid, username, email).then(() => {
-				history.push('/signup-success');
-			})
-		)
+	axios
+		.post('/api/users/register', userData)
+		.then(res => history.push('/signup-success'))
 		.catch(err =>
-			dispatch({ type: GET_ERRORS, payload: err.response.data })
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
 		);
 };
 
@@ -50,8 +42,8 @@ export const loginUser = (loginData, history) => dispatch => {
 			// Decode token to get user data
 			const decoded = jwt_decode(token);
 
-			// Set current user
-			dispatch(setCurrentUser(decoded));
+			// Set authUser
+			dispatch(setAuthUser(decoded));
 
 			history.push('/dashboard');
 		})
@@ -66,32 +58,11 @@ export const loginUser = (loginData, history) => dispatch => {
 /*
  * Set logged-in user
  */
-export const setCurrentUser = currentUser => {
+export const setAuthUser = user => {
 	return {
-		type: SET_CURRENT_USER,
-		payload: currentUser
+		type: SET_AUTH_USER,
+		payload: user
 	};
-};
-
-/*
- * Set all users
- */
-export const setUsers = () => dispatch => {
-	dispatch({ type: CLEAR_ERRORS });
-
-	db.onceGetUsers()
-		.then(snapshot =>
-			dispatch({
-				type: SET_USERS,
-				payload: snapshot.val()
-			})
-		)
-		.catch(err =>
-			dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			})
-		);
 };
 
 /*
@@ -106,7 +77,7 @@ export const logoutUser = history => dispatch => {
 
 	// Set current user to empty object,
 	// isAuthenticated will automatically be set to false
-	dispatch(setCurrentUser({}));
+	dispatch(setAuthUser(null));
 
 	// Redirect to landing
 	if (history) {

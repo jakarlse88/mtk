@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch
+} from 'react-router-dom';
 import React, { Component } from 'react';
 
 import 'materialize-css/dist/css/materialize.min.css';
@@ -6,7 +10,6 @@ import './styles/main.css';
 
 import M from 'materialize-css';
 
-import AccountPage from './components/account_page';
 import AdministrateEvent from './components/events/AdministrateEvent';
 import Article from './components/articles/Article';
 import Articles from './components/articles/Articles';
@@ -29,8 +32,6 @@ import ManageInformation from './components/content/ManageInformation';
 import ManageUsers from './components/users/ManageUsers';
 import Navbar from './components/navbar';
 import NoMatch from './components/common/NoMatch';
-import PasswordForget from './components/password_forget';
-import PasswordUpdate from './components/password_update';
 import SignIn from './components/account_page/SignIn';
 import SignUp from './components/account_page/SignUp';
 import SignUpSuccess from './components/account_page/SignUpSuccess';
@@ -51,34 +52,57 @@ class App extends Component {
 					<main>
 						<Switch>
 							<Route exact path="/" component={Landing} />
-							<Route exact path="/account" component={AccountPage} />
 							<Route
 								exact
 								path="/admin-event/:id"
 								component={AdministrateEvent}
 							/>
-							<Route exact path="/articles" component={Articles} />
-							<Route exact path="/articles/:id" component={Article} />
+							<Route
+								exact
+								path="/articles"
+								component={Articles}
+							/>
+							<Route
+								exact
+								path="/articles/:id"
+								component={Article}
+							/>
 							<Route exact path="/contact" component={Contact} />
 							<Route
 								exact
 								path="/create-article"
 								component={CreateArticle}
 							/>
-							<Route exact path="/create-event" component={CreateEvent} />
+							<Route
+								exact
+								path="/create-event"
+								component={CreateEvent}
+							/>
 							<Route
 								exact
 								path="/create-event-success/:id"
 								component={CreateEventSuccess}
 							/>
-							<Route exact path="/dashboard" component={Dashboard} />
+							<Route
+								exact
+								path="/dashboard"
+								component={Dashboard}
+							/>
 							<Route
 								exact
 								path="/edit-article/:id"
 								component={EditArticle}
 							/>
-							<Route exact path="/list-events" component={ListEvents} />
-							<Route exact path="/list-users" component={ListUsers} />
+							<Route
+								exact
+								path="/list-events"
+								component={ListEvents}
+							/>
+							<Route
+								exact
+								path="/list-users"
+								component={ListUsers}
+							/>
 
 							<Route
 								exact
@@ -110,22 +134,16 @@ class App extends Component {
 								path="/manage-information"
 								component={ManageInformation}
 							/>
-							<Route exact path="/manage-users" component={ManageUsers} />
+							<Route
+								exact
+								path="/manage-users"
+								component={ManageUsers}
+							/>
 							<Route exact path="/signup" component={SignUp} />
 							<Route
 								exact
 								path="/signup-success"
 								component={SignUpSuccess}
-							/>
-							<Route
-								exact
-								path="/password-forget"
-								component={PasswordForget}
-							/>
-							<Route
-								exact
-								path="/password-update"
-								component={PasswordUpdate}
 							/>
 							<Route
 								exact

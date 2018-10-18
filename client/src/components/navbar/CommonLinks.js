@@ -4,7 +4,7 @@ import React from 'react';
 import AuthLinks from './AuthLinks';
 import VisitorLinks from './VisitorLinks';
 
-export default ({ authUser }) => (
+export default ({ authUser, onLogoutClick }) => (
 	<>
 		<a href="#!" className="sidenav-trigger" data-target="mobile-menu">
 			<i className="fas fa-bars fa-2x grey-text text-darken-2" />
@@ -40,7 +40,11 @@ export default ({ authUser }) => (
 					<i className="right fas fa-caret-down fa-1x" />
 				</a>
 			</li>
-			{authUser ? <AuthLinks /> : <VisitorLinks />}
+			{authUser ? (
+				<AuthLinks onLogoutClick={onLogoutClick} />
+			) : (
+				<VisitorLinks />
+			)}
 		</ul>
 	</>
 );

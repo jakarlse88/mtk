@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-import { auth } from '../../firebase';
-
-export default () => (
+export default ({ onLogoutClick }) => (
 	<>
 		<li>
 			<Link
@@ -23,11 +21,9 @@ export default () => (
 			<a
 				href="#!"
 				className="grey-text text-darken-2"
-				onClick={logoutClick}>
+				onClick={onLogoutClick}>
 				Logg ut
 			</a>
 		</li>
 	</>
 );
-
-const logoutClick = () => auth.doSignOut();

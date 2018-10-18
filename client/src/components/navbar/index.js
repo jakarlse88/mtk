@@ -2,13 +2,16 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import CommonLinks from './CommonLinks';
 import InfoDropdownContent from './InfoDropdownContent';
 import SideNavContent from './SideNavContent';
 
-import { auth } from '../../firebase';
+import {
+	loginUser,
+	logoutUser
+} from '../../actions/authActions';
 
 import M from 'materialize-css';
 
@@ -41,7 +44,7 @@ class Navbar extends Component {
 	onLogoutClick = e => {
 		e.preventDefault();
 
-		auth.doSignOut();
+		this.props.logoutUser(this.props.history);
 	};
 
 	onSidenavLinkClick = () => {
@@ -55,7 +58,7 @@ class Navbar extends Component {
 		let instance = M.Sidenav.getInstance(elem);
 		instance.close();
 
-		auth.doSignOut();
+		this.props.logoutUser(this.props.history);
 	};
 
 	render() {
@@ -77,13 +80,17 @@ class Navbar extends Component {
 										Moss Taekwondo Klubb
 									</span>
 								</Link>
-								<CommonLinks authUser={authUser} />
+								<CommonLinks
+									onLogoutClick={this.onLogoutClick}
+									authUser={authUser}
+								/>
 							</div>
 						</div>
 					</nav>
 				</div>
 				<InfoDropdownContent />
 				<SideNavContent
+					authUser={authUser}
 					onSidenavLinkClick={this.onSidenavLinkClick}
 					onSidenavLogoutClick={this.onSidenavLogoutClick}
 				/>
@@ -93,7 +100,9 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
-	auth: PropTypes.object.isRequired
+	auth: PropTypes.object.isRequired,
+	loginUser: PropTypes.func.isRequired,
+	logoutUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -102,5 +111,8 @@ const mapStateToProps = state => ({
 
 export default compose(
 	withRouter,
-	connect(mapStateToProps)
+	connect(
+		mapStateToProps,
+		{ loginUser, logoutUser }
+	)
 )(Navbar);

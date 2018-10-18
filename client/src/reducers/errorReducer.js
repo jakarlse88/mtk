@@ -1,14 +1,16 @@
 import { CLEAR_ERRORS, GET_ERRORS } from '../actions/types';
 
-const initialState = {};
+const _INITIAL_STATE = {
+	errors: null
+};
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case CLEAR_ERRORS:
-      return {};
-    case GET_ERRORS:
-      return action.payload;
-    default:
-      return state;
-  }
+export default (state = _INITIAL_STATE, action) => {
+	switch (action.type) {
+		case CLEAR_ERRORS:
+			return {};
+		case GET_ERRORS:
+			return action.payload;
+		default:
+			return state;
+	}
 };
