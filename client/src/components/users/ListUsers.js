@@ -2,8 +2,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import { setUsers } from '../../actions/authActions';
-
 import Authorization from '../common/Authorization';
 
 const INITIAL_STATE = {
@@ -73,7 +71,4 @@ const mapStateToProps = state => ({
 	errors: state.errors
 });
 
-export default connect(
-	mapStateToProps,
-	{ setUsers }
-)(ListUsers);
+export default connect(mapStateToProps)(ListUsers);

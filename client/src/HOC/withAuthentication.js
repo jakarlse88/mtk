@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import { firebase } from '../firebase';
-import { setCurrentUser } from '../actions/authActions';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../utils/setAuthToken';
+
+import {
+	logoutUser,
+	setCurrentUser
+} from '../actions/authActions';
 
 const INITIAL_STATE = {
 	authUser: null
@@ -19,12 +24,26 @@ const withAuthentication = WrappedComponent => {
 		}
 
 		componentDidMount = () => {
-			firebase.auth.onAuthStateChanged(
-				authUser =>
-					authUser
-						? this.props.setCurrentUser(authUser)
-						: this.props.setCurrentUser(null)
-			);
+			// Check for token
+			if (localStorage.jwtToken) {
+				// Set Authorization header to auth token
+				setAuthToken(localStorage.jwtToken);
+
+				// Decode token, get user info
+				const decodedUser = jwt_decode(localStorage.jwtToken);
+
+				// Set user, isAuthenticated
+				this.props.setCurrentUser(decodedUser);
+
+				// Check for expired token
+				const currentTime = Date.now() / 1000;
+				if (decodedUser.exp < currentTime) {
+					this.props.logoutUser();
+
+					// Redirect to front page
+					window.location.href = '/';
+				}
+			}
 		};
 
 		render() {
@@ -35,7 +54,9 @@ const withAuthentication = WrappedComponent => {
 };
 
 withAuthentication.propTypes = {
-	auth: PropTypes.object.isRequired
+	auth: PropTypes.object.isRequired,
+	setCurrentUser: PropTypes.func.isRequired,
+	logoutUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -45,7 +66,7 @@ const mapStateToProps = state => ({
 const composedHOC = compose(
 	connect(
 		mapStateToProps,
-		{ setCurrentUser }
+		{ logoutUser, setCurrentUser }
 	),
 	withAuthentication
 );

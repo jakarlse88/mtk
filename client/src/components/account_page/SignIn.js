@@ -1,7 +1,9 @@
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-import { auth } from '../../firebase';
+import { loginUser } from '../../actions/authActions';
 
 const INITIAL_STATE = {
 	email: '',
@@ -23,23 +25,13 @@ class SignIn extends Component {
 	};
 
 	onSubmit = e => {
-		e.preventDefault();
-
 		const { history } = this.props;
-
 		const { email, password } = this.state;
+		const loginData = { email, password };
 
-		auth
-			.doSignInWithEmailAndPassword(email, password)
-			.then(() => {
-				this.setState({ ...INITIAL_STATE });
-				history.push('/');
-			})
-			.catch(err => {
-				this.setState({
-					error: err
-				});
-			});
+		this.props.loginUser(loginData, history);
+
+		e.preventDefault();
 	};
 
 	render() {
@@ -99,4 +91,10 @@ class SignIn extends Component {
 	}
 }
 
-export default withRouter(SignIn);
+export default compose(
+	withRouter,
+	connect(
+		null,
+		{ loginUser }
+	)
+)(SignIn);

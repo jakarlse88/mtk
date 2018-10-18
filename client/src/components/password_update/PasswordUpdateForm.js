@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import InputField from '../common/InputField';
 
-import { auth } from '../../firebase';
-
 const INITIAL_STATE = {
 	passwordOne: '',
 	passwordTwo: '',
@@ -19,16 +17,16 @@ export default class PasswordUpdateForm extends Component {
 
 	onChange = e => this.setState({ [e.target.name]: e.target.value });
 
-	onSubmit = e => {
-		const { passwordOne } = this.state;
+	// onSubmit = e => {
+	// 	const { passwordOne } = this.state;
 
-		auth
-			.doUpdatePassword(passwordOne)
-			.then(() => this.setState({ INITIAL_STATE }))
-			.catch(error => this.setState({ error }));
+	// 	auth
+	// 		.doUpdatePassword(passwordOne)
+	// 		.then(() => this.setState({ INITIAL_STATE }))
+	// 		.catch(error => this.setState({ error }));
 
-		e.preventDefault();
-	};
+	// 	e.preventDefault();
+	// };
 
 	render() {
 		const { passwordOne, passwordTwo, error } = this.state;

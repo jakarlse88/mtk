@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch
+} from 'react-router-dom';
 import React, { Component } from 'react';
 
 import 'materialize-css/dist/css/materialize.min.css';
@@ -51,34 +55,62 @@ class App extends Component {
 					<main>
 						<Switch>
 							<Route exact path="/" component={Landing} />
-							<Route exact path="/account" component={AccountPage} />
+							<Route
+								exact
+								path="/account"
+								component={AccountPage}
+							/>
 							<Route
 								exact
 								path="/admin-event/:id"
 								component={AdministrateEvent}
 							/>
-							<Route exact path="/articles" component={Articles} />
-							<Route exact path="/articles/:id" component={Article} />
+							<Route
+								exact
+								path="/articles"
+								component={Articles}
+							/>
+							<Route
+								exact
+								path="/articles/:id"
+								component={Article}
+							/>
 							<Route exact path="/contact" component={Contact} />
 							<Route
 								exact
 								path="/create-article"
 								component={CreateArticle}
 							/>
-							<Route exact path="/create-event" component={CreateEvent} />
+							<Route
+								exact
+								path="/create-event"
+								component={CreateEvent}
+							/>
 							<Route
 								exact
 								path="/create-event-success/:id"
 								component={CreateEventSuccess}
 							/>
-							<Route exact path="/dashboard" component={Dashboard} />
+							<Route
+								exact
+								path="/dashboard"
+								component={Dashboard}
+							/>
 							<Route
 								exact
 								path="/edit-article/:id"
 								component={EditArticle}
 							/>
-							<Route exact path="/list-events" component={ListEvents} />
-							<Route exact path="/list-users" component={ListUsers} />
+							<Route
+								exact
+								path="/list-events"
+								component={ListEvents}
+							/>
+							<Route
+								exact
+								path="/list-users"
+								component={ListUsers}
+							/>
 
 							<Route
 								exact
@@ -110,7 +142,11 @@ class App extends Component {
 								path="/manage-information"
 								component={ManageInformation}
 							/>
-							<Route exact path="/manage-users" component={ManageUsers} />
+							<Route
+								exact
+								path="/manage-users"
+								component={ManageUsers}
+							/>
 							<Route exact path="/signup" component={SignUp} />
 							<Route
 								exact

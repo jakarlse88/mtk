@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import InputField from '../common/InputField';
 
-import { auth } from '../../firebase';
-
 const INITIAL_STATE = {
 	email: '',
 	error: null
@@ -20,16 +18,16 @@ export default class PasswordForgetForm extends Component {
 
 	onChange = e => this.setState({ [e.target.name]: e.target.value });
 
-	onSubmit = e => {
-		const { email } = this.state;
+	// onSubmit = e => {
+	// 	const { email } = this.state;
 
-		auth
-			.doResetPassword(email)
-			.then(() => this.setState({ ...INITIAL_STATE }))
-			.catch(error => this.setState({ error }));
+	// 	auth
+	// 		.doResetPassword(email)
+	// 		.then(() => this.setState({ ...INITIAL_STATE }))
+	// 		.catch(error => this.setState({ error }));
 
-		e.preventDefault();
-	};
+	// 	e.preventDefault();
+	// };
 
 	render() {
 		const { email, error } = this.state;

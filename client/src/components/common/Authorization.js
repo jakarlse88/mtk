@@ -1,10 +1,11 @@
+import { Component } from 'react';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Component } from 'react';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../../utils/setAuthToken';
 import { withRouter } from 'react-router-dom';
-
-import { firebase } from '../../firebase';
+import PropTypes from 'prop-types';
+import { setCurrentUser } from '../../actions/authActions';
 
 const INITIAL_STATE = {
 	authUser: null
@@ -24,11 +25,13 @@ class Authorization extends Component {
 			this.setState({ authUser: this.props.auth.authUser });
 		}
 
-		firebase.auth.onAuthStateChanged(authUser => {
-			if (!authCondition(authUser)) {
-				this.props.history.push('/signin');
-			}
-		});
+		// Check authUser against authCondition
+		if (
+			this.props.auth &&
+			!authCondition(this.props.auth.authUser)
+		) {
+			this.props.history.push('/');
+		}
 	};
 
 	componentWillReceiveProps = nextProps => {
@@ -54,6 +57,9 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-	connect(mapStateToProps),
+	connect(
+		mapStateToProps,
+		{ setCurrentUser }
+	),
 	withRouter
 )(Authorization);
