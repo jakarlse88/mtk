@@ -2,7 +2,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import CommonLinks from './CommonLinks';
 import InfoDropdownContent from './InfoDropdownContent';
@@ -12,8 +12,6 @@ import {
 	loginUser,
 	logoutUser
 } from '../../actions/authActions';
-
-import Authorization from '../common/Authorization';
 
 import M from 'materialize-css';
 

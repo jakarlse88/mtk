@@ -35,7 +35,7 @@ class SignIn extends Component {
 	};
 
 	render() {
-		const { email, password, error } = this.state;
+		const { email, password } = this.state;
 
 		const isInvalid = email === '' || password === '';
 

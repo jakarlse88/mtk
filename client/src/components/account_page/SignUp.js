@@ -143,8 +143,11 @@ class SignUp extends Component {
 	}
 }
 
+SignUp.propTypes = {
+	errors: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
-	auth: state.auth,
 	errors: state.errors
 });
 
